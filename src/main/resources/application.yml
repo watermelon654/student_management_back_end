@@ -3,11 +3,11 @@ server:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 spring:
-#  数据库连接，还没有建立数据库
+#  数据库连接,连接到阿里云服务器上的数据库
   datasource:
-    url: jdbc:mysql://39.101.65.178:3306/clap
-    username:
-    password:
+    url: jdbc:mysql://39.101.65.178:3306/stu_mgmt
+    username: stu_mgmt
+    password: cWf2DdxmNzKzEJ2C
     driver-class-name: com.mysql.cj.jdbc.Driver
   hikari:
     minimum-idle: 5
