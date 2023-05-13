@@ -6,7 +6,7 @@ public class GradeDO extends SheetDO {
     /**
      * GPA
      */
-    private float gpa;
+    //private float gpa;
 
     /**
      * 备注

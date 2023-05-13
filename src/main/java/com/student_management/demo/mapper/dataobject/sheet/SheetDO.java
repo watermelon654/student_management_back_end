@@ -31,7 +31,7 @@ public class SheetDO {
     private Integer status;
 
     /**
-     * 评分
+     * 评分/gpa/志愿时长
      */
     private Float score;
 }
