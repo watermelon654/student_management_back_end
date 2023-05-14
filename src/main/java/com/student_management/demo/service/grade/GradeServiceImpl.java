@@ -6,13 +6,15 @@ import com.student_management.demo.controller.grade.vo.GradeImportRespVO;
 import com.student_management.demo.convert.grade.GradeConvert;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.mysql.grade.GradeMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
-
+@Service("gradeService")
+@Slf4j
 public class GradeServiceImpl implements GradeService{
     @Resource
     private GradeMapper gradeMapper;

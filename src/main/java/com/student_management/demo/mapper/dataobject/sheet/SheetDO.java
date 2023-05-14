@@ -33,5 +33,5 @@ public class SheetDO {
     /**
      * 评分/gpa/志愿时长
      */
-    private Float score;
+    //private Float score;
 }

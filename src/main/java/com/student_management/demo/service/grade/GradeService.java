@@ -4,9 +4,9 @@ import com.student_management.demo.controller.grade.vo.GradeCreateReqVO;
 import com.student_management.demo.controller.grade.vo.GradeImportExcelVO;
 import com.student_management.demo.controller.grade.vo.GradeImportRespVO;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 public interface GradeService {
 
     /**

@@ -22,11 +22,26 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 
+		<!--Lombok-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.14</version>
+			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.4.2.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.4.2.Final</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -82,15 +97,25 @@
 			<artifactId>mybatis-plus-extension</artifactId>
 			<version>3.5.3.1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct</artifactId>
-			<version>1.5.3.Final</version>
-		</dependency>
 		<!--<dependency>-->
-		<!--	<groupId>com.baomidou</groupId>-->
-		<!--	<artifactId>mybatis-plus-boot-starter</artifactId>-->
-		<!--	<version>3.5.2.7-SNAPSHOT</version>-->
+		<!--	<groupId>org.mapstruct</groupId>-->
+		<!--	<artifactId>mapstruct</artifactId>-->
+		<!--	<version>1.5.3.Final</version>-->
+		<!--</dependency>-->
+
+		<!--mapstruct convert-->
+		<!--mapStruct依赖 高性能对象映射-->
+		<!--mapstruct核心-->
+		<!--<dependency>-->
+		<!--	<groupId>org.mapstruct</groupId>-->
+		<!--	<artifactId>mapstruct</artifactId>-->
+		<!--	<version>1.5.0.Beta1</version>-->
+		<!--</dependency>-->
+		<!--&lt;!&ndash;mapstruct编译&ndash;&gt;-->
+		<!--<dependency>-->
+		<!--	<groupId>org.mapstruct</groupId>-->
+		<!--	<artifactId>mapstruct-processor</artifactId>-->
+		<!--	<version>1.5.0.Beta1</version>-->
 		<!--</dependency>-->
 
 		<!--easyEXCEL-->
@@ -139,6 +164,22 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.5.0.Beta1</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
