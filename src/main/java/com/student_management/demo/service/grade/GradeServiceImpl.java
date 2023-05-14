@@ -5,7 +5,9 @@ import com.student_management.demo.controller.grade.vo.GradeImportExcelVO;
 import com.student_management.demo.controller.grade.vo.GradeImportRespVO;
 import com.student_management.demo.convert.grade.GradeConvert;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
+import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.mysql.grade.GradeMapper;
+import com.student_management.demo.mapper.mysql.student.StudentMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,10 @@ import java.util.List;
 public class GradeServiceImpl implements GradeService{
     @Resource
     private GradeMapper gradeMapper;
+
+    @Resource
+    private StudentMapper studentMapper;
+
 
     /**
      * 批量导入GPA，如果已经存在则强制更新
@@ -35,14 +41,24 @@ public class GradeServiceImpl implements GradeService{
         }
         //对每一个表项检查
         importGrade.forEach(grade -> {
-            // 判断如果不存在，在进行插入
-            GradeDO existGrade = gradeMapper.selectGradeByNum(grade.getStu_num());
+            // 判断是否在学生信息表stu_info中，在进行插入
+            StudentDO existStu = studentMapper.selectStudentByNum(grade.getStu_num());
+            if (existStu == null) {
+                // 如果学生表中不存在，在学生表中插入记录
+                studentMapper.insertStudentBasicInfo(grade.getStu_name(),grade.getStu_num());
+            }
+            // 获取stu_id，判断是否在学生成绩表grade中，在进行插入
+            existStu = studentMapper.selectStudentByNum(grade.getStu_num());
+            GradeDO existGrade = gradeMapper.selectGradeByStuNum(grade.getStu_num());
             if (existGrade == null) {
-                gradeMapper.insert(GradeConvert.INSTANCE.convert(grade));
+                // 如果在成绩表中不存在，在成绩表插入记录
+                GradeDO createGrade = GradeConvert.INSTANCE.convert(grade);
+                createGrade.setStu_id(existStu.getId());
+                gradeMapper.insert(createGrade);
                 respVO.getCreateGradenames().add(grade.getStu_name());
                 return;
             }
-            // 如果存在，更新
+            // 如果存在，更新成绩表中的记录
             GradeDO updateGrade = GradeConvert.INSTANCE.convert(grade);
             updateGrade.setId(existGrade.getId());
             gradeMapper.updateById(updateGrade);
@@ -51,22 +67,5 @@ public class GradeServiceImpl implements GradeService{
         return respVO;
     }
 
-    /**
-     * 学生端查看成绩
-     * @param reqVO 学生信息
-     * @return
-     */
-    @Override
-    public GradeDO searchGrade(GradeCreateReqVO reqVO) {
-        return gradeMapper.selectGradeByNum(reqVO.getStu_num());
-    }
 
-    /**
-     * 评委老师修改GPA信息
-     * @param reqVO 用户信息
-     */
-    @Override
-    public void updateGrade(GradeCreateReqVO reqVO) {
-
-    }
 }

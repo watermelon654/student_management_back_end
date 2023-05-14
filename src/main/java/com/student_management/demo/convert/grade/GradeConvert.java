@@ -14,14 +14,5 @@ public interface GradeConvert {
     GradeConvert INSTANCE = Mappers.getMapper(GradeConvert.class);
     GradeDO convert(GradeCreateReqVO bean);
     GradeCreateReqVO convert(GradeDO bean);
-
-    //@Mappings(
-    //        {
-    //                @Mapping(target = "id", defaultValue = "0l"),
-    //                @Mapping(target = "stu_id", defaultValue = ""),
-    //                @Mapping(target = "note", defaultValue = ""),
-    //                @Mapping(target = "status", defaultValue = "0")
-    //        }
-    //)
     GradeDO convert(GradeImportExcelVO grade);
 }
