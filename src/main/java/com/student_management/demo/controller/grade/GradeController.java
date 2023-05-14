@@ -17,7 +17,7 @@ import java.io.InputStream;
 import java.util.List;
 
 @RestController
-@RequestMapping("/grade/")
+@RequestMapping("/api/grade/")
 public class GradeController {
     GradeService service;
 
