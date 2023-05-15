@@ -1,14 +1,16 @@
 package com.student_management.demo.controller.grade.vo;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+
 /**
- * 用户 Excel 导入 VO
+ * GPA Excel 导入 VO
  */
 @Data
 @Builder
@@ -26,5 +28,10 @@ public class GradeImportExcelVO {
     @ExcelProperty("GPA")
     private float gpa;
 
+    /**
+     * id
+     */
+    @ExcelProperty("id")
+    private Long id;
 }
 
