@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.student_management.demo.mapper.mysql.student.ScienceMapper">
+    <insert id="insert" parameterType="com.student_management.demo.mapper.dataobject.science.ScienceDO">
+        INSERT INTO Science(stu_id,stu_num,stu_name,title,director,constitution,level,time,result,score,status)
+        VALUES (#{stuId},#{stuNum},#{stuName},#{title},#{director},#{constitution},#{level},#{time},#{result},#{score},#{status})
+    </insert>
+</mapper>
