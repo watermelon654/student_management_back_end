@@ -1,0 +1,138 @@
+2023-05-15 20:36:39 [main] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 18.0.2.1 on LAPTOP-DV4VCE2D with PID 19024 (D:\SecondMajor\第二学期\敏捷开发\测评\fork-1\student_management_back_end\target\classes started by zy1024 in D:\SecondMajor\第二学期\敏捷开发\测评\fork-1\student_management_back_end)
+2023-05-15 20:36:39 [main] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-15 20:36:45 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 28080 (http)
+2023-05-15 20:36:45 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-15 20:36:45 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-15 20:36:46 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-15 20:36:46 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6918 ms
+2023-05-15 20:36:50 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 28080 (http) with context path ''
+2023-05-15 20:36:51 [main] INFO  c.s.demo.DemoApplication - Started DemoApplication in 13.879 seconds (JVM running for 18.866)
+2023-05-15 20:37:52 [http-nio-28080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-15 20:37:52 [http-nio-28080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-05-15 20:37:52 [http-nio-28080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-05-15 20:41:25 [http-nio-28080-exec-9] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is com.alibaba.excel.exception.ExcelAnalysisException: java.lang.ExceptionInInitializerError] with root cause
+java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not "opens java.lang" to unnamed module @4f9a3314
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:200)
+	at java.base/java.lang.reflect.Method.setAccessible(Method.java:194)
+	at net.sf.cglib.core.ReflectUtils$2.run(ReflectUtils.java:56)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318)
+	at net.sf.cglib.core.ReflectUtils.<clinit>(ReflectUtils.java:46)
+	at net.sf.cglib.core.KeyFactory$Generator.generateClass(KeyFactory.java:166)
+	at net.sf.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25)
+	at net.sf.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:216)
+	at net.sf.cglib.core.KeyFactory$Generator.create(KeyFactory.java:144)
+	at net.sf.cglib.core.KeyFactory.create(KeyFactory.java:116)
+	at net.sf.cglib.core.KeyFactory.create(KeyFactory.java:108)
+	at net.sf.cglib.beans.BeanMap$Generator.<clinit>(BeanMap.java:64)
+	at net.sf.cglib.beans.BeanMap.create(BeanMap.java:56)
+	at com.alibaba.excel.read.listener.ModelBuildEventListener.buildUserModel(ModelBuildEventListener.java:130)
+	at com.alibaba.excel.read.listener.ModelBuildEventListener.invoke(ModelBuildEventListener.java:38)
+	at com.alibaba.excel.read.listener.ModelBuildEventListener.invoke(ModelBuildEventListener.java:28)
+	at com.alibaba.excel.read.processor.DefaultAnalysisEventProcessor.dealData(DefaultAnalysisEventProcessor.java:100)
+	at com.alibaba.excel.read.processor.DefaultAnalysisEventProcessor.endRow(DefaultAnalysisEventProcessor.java:47)
+	at com.alibaba.excel.analysis.v07.handlers.RowTagHandler.endElement(RowTagHandler.java:47)
+	at com.alibaba.excel.analysis.v07.handlers.sax.XlsxRowHandler.endElement(XlsxRowHandler.java:89)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.endElement(AbstractSAXParser.java:618)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanEndElement(XMLDocumentFragmentScannerImpl.java:1728)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2899)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:605)
+	at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:542)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:889)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:825)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1224)
+	at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:637)
+	at com.alibaba.excel.analysis.v07.XlsxSaxAnalyser.parseXmlSource(XlsxSaxAnalyser.java:178)
+	at com.alibaba.excel.analysis.v07.XlsxSaxAnalyser.execute(XlsxSaxAnalyser.java:201)
+	at com.alibaba.excel.analysis.ExcelAnalyserImpl.analysis(ExcelAnalyserImpl.java:115)
+	at com.alibaba.excel.ExcelReader.readAll(ExcelReader.java:162)
+	at com.alibaba.excel.read.builder.ExcelReaderBuilder.doReadAllSync(ExcelReaderBuilder.java:211)
+	at com.student_management.demo.utils.excel.ExcelUtils.read(ExcelUtils.java:45)
+	at com.student_management.demo.controller.grade.GradeController.importUserExcel(GradeController.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:577)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:696)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:779)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:891)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1784)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-05-15 20:42:55 [main] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 1.8.0_201 on LAPTOP-DV4VCE2D with PID 4552 (D:\SecondMajor\第二学期\敏捷开发\测评\fork-1\student_management_back_end\target\classes started by zy1024 in D:\SecondMajor\第二学期\敏捷开发\测评\fork-1\student_management_back_end)
+2023-05-15 20:42:55 [main] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-15 20:43:03 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 28080 (http)
+2023-05-15 20:43:03 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-15 20:43:03 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-15 20:43:04 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-15 20:43:04 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 9036 ms
+2023-05-15 20:43:11 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 28080 (http) with context path ''
+2023-05-15 20:43:12 [main] INFO  c.s.demo.DemoApplication - Started DemoApplication in 18.271 seconds (JVM running for 21.816)
+2023-05-15 23:03:28 [main] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 1.8.0_201 on LAPTOP-DV4VCE2D with PID 22792 (D:\SecondMajor\第二学期\敏捷开发\测评\fork-1\student_management_back_end\target\classes started by zy1024 in D:\SecondMajor\第二学期\敏捷开发\测评\fork-1\student_management_back_end)
+2023-05-15 23:03:28 [main] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-15 23:03:34 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 28080 (http)
+2023-05-15 23:03:34 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-15 23:03:34 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-15 23:03:35 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-15 23:03:35 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 7012 ms
+2023-05-15 23:03:39 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 28080 (http) with context path ''
+2023-05-15 23:03:40 [main] INFO  c.s.demo.DemoApplication - Started DemoApplication in 12.813 seconds (JVM running for 15.536)
+2023-05-15 23:04:02 [http-nio-28080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-15 23:04:02 [http-nio-28080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-05-15 23:04:02 [http-nio-28080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 6 ms
+2023-05-15 23:53:07 [main] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 1.8.0_201 on LAPTOP-DV4VCE2D with PID 18236 (D:\SecondMajor\第二学期\敏捷开发\测评\fork-1\student_management_back_end\target\classes started by zy1024 in D:\SecondMajor\第二学期\敏捷开发\测评\fork-1\student_management_back_end)
+2023-05-15 23:53:07 [main] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-15 23:53:16 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 28080 (http)
+2023-05-15 23:53:17 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-15 23:53:17 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-15 23:53:18 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-15 23:53:18 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 10721 ms
+2023-05-15 23:53:25 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 28080 (http) with context path ''
+2023-05-15 23:53:26 [main] INFO  c.s.demo.DemoApplication - Started DemoApplication in 21.181 seconds (JVM running for 24.444)
+2023-05-15 23:53:26 [http-nio-28080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-15 23:53:26 [http-nio-28080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-05-15 23:53:26 [http-nio-28080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2023-05-15 23:54:11 [http-nio-28080-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character (']' (code 93)): expected a value; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character (']' (code 93)): expected a value<EOL> at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 28, column: 2]]
+2023-05-15 23:57:47 [http-nio-28080-exec-9] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character (']' (code 93)): expected a value; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character (']' (code 93)): expected a value<EOL> at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 28, column: 2]]
+2023-05-15 23:57:58 [http-nio-28080-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character (']' (code 93)): expected a value; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character (']' (code 93)): expected a value<EOL> at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 28, column: 2]]
+2023-05-15 23:58:42 [main] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 1.8.0_201 on LAPTOP-DV4VCE2D with PID 21352 (D:\SecondMajor\第二学期\敏捷开发\测评\fork-1\student_management_back_end\target\classes started by zy1024 in D:\SecondMajor\第二学期\敏捷开发\测评\fork-1\student_management_back_end)
+2023-05-15 23:58:42 [main] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-15 23:58:48 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 28080 (http)
+2023-05-15 23:58:48 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-15 23:58:48 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-05-15 23:58:49 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-15 23:58:49 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6403 ms
+2023-05-15 23:58:53 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 28080 (http) with context path ''
+2023-05-15 23:58:53 [main] INFO  c.s.demo.DemoApplication - Started DemoApplication in 12.305 seconds (JVM running for 15.456)
