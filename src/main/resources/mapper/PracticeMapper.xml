@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.student_management.demo.mapper.mysql.practice.PracticeMapper">
+    <insert id="insertPractice" parameterType="com.student_management.demo.mapper.dataobject.practice.PracticeDO">
+        INSERT INTO Practice(stu_id,stu_num,stu_name,title,director,constitution,content,time,result,score,status)
+        VALUES (#{stuId},#{stuNum},#{stuName},#{title},#{director},#{constitution},#{content},#{time},#{result},#{score},#{status})
+    </insert>
+</mapper>
