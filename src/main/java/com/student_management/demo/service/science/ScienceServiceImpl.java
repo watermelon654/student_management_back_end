@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -44,20 +45,26 @@ public class ScienceServiceImpl implements ScienceService{
             // 获取stu_id，判断是否在学生成绩表Science中，在进行插入
             existStu = studentMapper.selectStudentByNum(Science.getStu_num());
             ScienceDO existScience = scienceMapper.selectScienceByStuNum(Science.getStu_num());
-            if (existScience == null) {
+//            if (existScience == null) {
                 // 如果在成绩表中不存在，在成绩表插入记录
                 ScienceDO createScience = ScienceConvert.INSTANCE.convert(Science);
                 createScience.setStu_id(existStu.getId());
                 scienceMapper.insert(createScience);
                 respVO.getCreateSciencenames().add(Science.getStu_name());
-                return;
-            }
-            // 如果存在，更新成绩表中的记录
-            ScienceDO updateScience = ScienceConvert.INSTANCE.convert(Science);
-            updateScience.setId(existScience.getId());
-            scienceMapper.updateById(updateScience);
-            respVO.getUpdateSciencenames().add(Science.getStu_name());
+//                return;
+//            }
+//            // 如果存在，更新成绩表中的记录
+//            ScienceDO updateScience = ScienceConvert.INSTANCE.convert(Science);
+//            updateScience.setId(existScience.getId());
+//            scienceMapper.updateById(updateScience);
+//            respVO.getUpdateSciencenames().add(Science.getStu_name());
         });
         return respVO;
     }
+    @Override
+    public List<ScienceDO> getList(Collection<Long> ids) {
+        System.out.println(scienceMapper.selectBatchIds(ids));
+        return scienceMapper.selectBatchIds(ids);
+    }
+
 }
