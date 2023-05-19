@@ -1,8 +1,12 @@
-package com.student_management.demo.mapper.dataobject.stuff;
+package com.student_management.demo.mapper.dataobject.staff;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.student_management.demo.mapper.dataobject.user.UserDo;
+import lombok.Data;
 
-public class StuffDO extends UserDo {
+@Data
+@TableName(value="staff_info")//数据库表名
+public class StaffDO extends UserDo {
 
     /**
      * id

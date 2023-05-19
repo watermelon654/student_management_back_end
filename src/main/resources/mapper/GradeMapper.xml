@@ -3,7 +3,7 @@
 
 <mapper namespace="com.student_management.demo.mapper.mysql.student.StudentMapper">
     <!--example-->
-    <!--&lt;!&ndash;  插入成绩表项  &ndash;&gt;-->
+    <!--  插入成绩表项  -->
     <!--<insert id="insert" parameterType="com.student_management.demo.mapper.dataobject.grade.GradeDO">-->
     <!--    INSERT INTO grade (stu_id, stu_num, stu_name, gpa, status, note) VALUES (#{stu_id}, #{stu_num},# {stu_name}, #{gpa}, #{status}, #{note})-->
     <!--</insert>-->
