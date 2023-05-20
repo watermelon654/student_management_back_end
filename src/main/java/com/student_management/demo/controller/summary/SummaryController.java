@@ -39,7 +39,7 @@ public class SummaryController {
 
     @Resource
     private StudentMapper1 studentMapper1;
-    
+
     @Resource
     private SummaryService service;
 

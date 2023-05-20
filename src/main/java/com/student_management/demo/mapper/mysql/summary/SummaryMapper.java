@@ -15,6 +15,7 @@ import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
 @Mapper
 @Repository
 public interface SummaryMapper extends BaseMapper<SummaryDO> {
+
     //    /**
 //     * 按照学号查询学生id
 //     * @param num

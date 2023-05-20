@@ -3,15 +3,18 @@ package com.student_management.demo.controller.science;
 import com.student_management.demo.CommonResult;
 import com.student_management.demo.controller.science.vo.ScienceImportReqVO;
 import com.student_management.demo.controller.science.vo.ScienceImportRespVO;
+import com.student_management.demo.controller.science.vo.ScienceRespVO;
+import com.student_management.demo.convert.science.ScienceConvert;
+import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import com.student_management.demo.service.science.ScienceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -33,6 +36,15 @@ public class ScienceController {
 
         ScienceImportRespVO respVO = service.importRecord(userList);
         return CommonResult.success(respVO);
+    }
+
+
+    @GetMapping("/list")
+    @ApiOperation("获得科研情况列表")
+    @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
+    public CommonResult<List<ScienceRespVO>> getList(@RequestParam("ids") Collection<Long> ids) {
+        List<ScienceDO> list = service.getList(ids);
+        return CommonResult.success(ScienceConvert.INSTANCE.convertList(list));
     }
 
 }
