@@ -17,7 +17,7 @@ public interface PracticeMapper extends BaseMapper<PracticeDO>{
     default PracticeDO selectPracticeByStuNum(String stu_num) {
         QueryWrapper<PracticeDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stu_num", stu_num);
+        wrapper.eq("stuNum", stu_num);
         return selectOne(wrapper);
     }
 
@@ -29,8 +29,8 @@ public interface PracticeMapper extends BaseMapper<PracticeDO>{
     default PracticeDO selectPracticeByStuId(Long stu_id) {
         QueryWrapper<PracticeDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stu_id", stu_id);
+        wrapper.eq("stuId", stu_id);
         return selectOne(wrapper);
     }
-    int insertPractice(Long stuId,Long stuNum,String stuName, String title,String director,String constitution,String content,String time,String result, int score,int status);
+    int insertPractice(Long stuId,String stuNum,String stuName, String title,String director,String constitution,String content,String time,String result, int score,int status);
 }

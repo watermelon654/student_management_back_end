@@ -20,10 +20,10 @@ import lombok.experimental.Accessors;
 public class GradeImportExcelVO {
 
     @ExcelProperty("学号")
-    private String stu_num;
+    private String stuNum;
 
     @ExcelProperty("姓名")
-    private String stu_name;
+    private String stuName;
 
     @ExcelProperty("GPA")
     private float gpa;

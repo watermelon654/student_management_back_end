@@ -17,7 +17,7 @@ public interface ServiceMapper extends BaseMapper<ServiceDO>{
     default ServiceDO selectServiceByStuNum(String stu_num) {
         QueryWrapper<ServiceDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stu_num", stu_num);
+        wrapper.eq("stuNum", stu_num);
         return selectOne(wrapper);
     }
 
@@ -29,8 +29,8 @@ public interface ServiceMapper extends BaseMapper<ServiceDO>{
     default ServiceDO selectServiceByStuId(Long stu_id) {
         QueryWrapper<ServiceDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stu_id", stu_id);
+        wrapper.eq("stuId", stu_id);
         return selectOne(wrapper);
     }
-    int insertService(Long stuId,Long stuNum,String stuName, String title,String director,String constitution,String content,String time,String result, int score,int status);
+    int insertService(Long stuId,String stuNum,String stuName, String title,String director,String constitution,String content,String time,String result, int score,int status);
 }

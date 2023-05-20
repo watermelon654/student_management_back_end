@@ -42,27 +42,27 @@ public class VolunteerServiceImpl implements VolunteerService {
         //对每一个表项检查
         importVolunteer.forEach(volunteer -> {
             // 判断是否在学生信息表stu_info中，在进行插入
-            StudentDO existStu = studentMapper.selectStudentByNum(volunteer.getStu_num());
+            StudentDO existStu = studentMapper.selectStudentByNum(volunteer.getStuNum());
             if (existStu == null) {
                 // 如果学生表中不存在，在学生表中插入记录
-                studentMapper.insertStudentBasicInfo(volunteer.getStu_name(),volunteer.getStu_num());
+                studentMapper.insertStudentBasicInfo(volunteer.getStuName(),volunteer.getStuNum());
             }
             // 获取stu_id，判断是否在学生成绩表grade中，在进行插入
-            existStu = studentMapper.selectStudentByNum(volunteer.getStu_num());
-            VolunteerDO existVolunteer = volunteerMapper.selectVolunteerByStuNum(volunteer.getStu_num());
+            existStu = studentMapper.selectStudentByNum(volunteer.getStuNum());
+            VolunteerDO existVolunteer = volunteerMapper.selectVolunteerByStuNum(volunteer.getStuNum());
             if (existVolunteer == null) {
                 // 如果在成绩表中不存在，在成绩表插入记录
                 VolunteerDO createVolunteer = VolunteerConvert.INSTANCE.convert(volunteer);
-                createVolunteer.setStu_id(existStu.getId());
+                createVolunteer.setStuId(existStu.getId());
                 volunteerMapper.insert(createVolunteer);
-                respVO.getCreateVolunteernames().add(volunteer.getStu_name());
+                respVO.getCreateVolunteernames().add(volunteer.getStuName());
                 return;
             }
             // 如果存在，更新成绩表中的记录
             VolunteerDO updateVolunteer = VolunteerConvert.INSTANCE.convert(volunteer);
             updateVolunteer.setId(existVolunteer.getId());
             volunteerMapper.updateById(updateVolunteer);
-            respVO.getUpdateVolunteernames().add(volunteer.getStu_name());
+            respVO.getUpdateVolunteernames().add(volunteer.getStuName());
         });
         return respVO;
     }

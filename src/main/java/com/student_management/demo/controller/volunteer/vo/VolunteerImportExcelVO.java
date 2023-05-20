@@ -19,10 +19,10 @@ import lombok.experimental.Accessors;
 public class VolunteerImportExcelVO {
 
     @ExcelProperty("学号")
-    private String stu_num;
+    private String stuNum;
 
     @ExcelProperty("姓名")
-    private String stu_name;
+    private String stuName;
 
     @ExcelProperty("服务时长")
     private int time;

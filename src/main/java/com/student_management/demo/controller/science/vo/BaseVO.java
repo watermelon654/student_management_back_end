@@ -7,13 +7,13 @@ import lombok.Data;
 public class BaseVO {
 
     @Schema(description = "学生ID",example = "16153")
-    private Long stu_id;
+    private Long stuId;
 
     @Schema(description = "学生学号")
-    private String stu_num;
+    private String stuNum;
 
     @Schema(description = "学生姓名",example = "芋艿")
-    private String stu_name;
+    private String stuName;
 
     @Schema(description = "项目名称")
     private String title;

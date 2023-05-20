@@ -41,27 +41,27 @@ public class GradeServiceImpl implements GradeService{
         //对每一个表项检查
         importGrade.forEach(grade -> {
             // 判断是否在学生信息表stu_info中，在进行插入
-            StudentDO existStu = studentMapper.selectStudentByNum(grade.getStu_num());
+            StudentDO existStu = studentMapper.selectStudentByNum(grade.getStuNum());
             if (existStu == null) {
                 // 如果学生表中不存在，在学生表中插入记录
-                studentMapper.insertStudentBasicInfo(grade.getStu_name(),grade.getStu_num());
+                studentMapper.insertStudentBasicInfo(grade.getStuName(),grade.getStuNum());
             }
             // 获取stu_id，判断是否在学生成绩表grade中，在进行插入
-            existStu = studentMapper.selectStudentByNum(grade.getStu_num());
-            GradeDO existGrade = gradeMapper.selectGradeByStuNum(grade.getStu_num());
+            existStu = studentMapper.selectStudentByNum(grade.getStuNum());
+            GradeDO existGrade = gradeMapper.selectGradeByStuNum(grade.getStuNum());
             if (existGrade == null) {
                 // 如果在成绩表中不存在，在成绩表插入记录
                 GradeDO createGrade = GradeConvert.INSTANCE.convert(grade);
-                createGrade.setStu_id(existStu.getId());
+                createGrade.setStuId(existStu.getId());
                 gradeMapper.insert(createGrade);
-                respVO.getCreateGradenames().add(grade.getStu_name());
+                respVO.getCreateGradenames().add(grade.getStuName());
                 return;
             }
             // 如果存在，更新成绩表中的记录
             GradeDO updateGrade = GradeConvert.INSTANCE.convert(grade);
             updateGrade.setId(existGrade.getId());
             gradeMapper.updateById(updateGrade);
-            respVO.getUpdateGradenames().add(grade.getStu_name());
+            respVO.getUpdateGradenames().add(grade.getStuName());
         });
         return respVO;
     }

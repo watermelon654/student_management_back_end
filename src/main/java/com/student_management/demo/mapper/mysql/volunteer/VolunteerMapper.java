@@ -17,7 +17,7 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
     default VolunteerDO selectVolunteerByStuNum(String stu_num) {
         QueryWrapper<VolunteerDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stu_num", stu_num);
+        wrapper.eq("stuNum", stu_num);
         return selectOne(wrapper);
     }
 
@@ -29,7 +29,7 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
     default VolunteerDO selectVolunteerByStuId(Long stu_id) {
         QueryWrapper<VolunteerDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stu_id", stu_id);
+        wrapper.eq("stuId", stu_id);
         return selectOne(wrapper);
     }
 

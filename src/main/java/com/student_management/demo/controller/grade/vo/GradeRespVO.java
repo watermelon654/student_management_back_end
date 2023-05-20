@@ -8,12 +8,12 @@ public class GradeRespVO {
     /**
      * 学号
      */
-    private Long stu_num;
+    private Long stuNum;
 
     /**
      * 姓名
      */
-    private String stu_name;
+    private String stuName;
 
     /**
      * 评价状态

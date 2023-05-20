@@ -36,28 +36,28 @@ public class PracticeServiceImpl implements PracticeService{
         //对每一个表项检查
         importPractice.forEach(Practice -> {
             // 判断是否在学生信息表stu_info中，在进行插入
-            StudentDO existStu = studentMapper.selectStudentByNum(Practice.getStu_num());
+            StudentDO existStu = studentMapper.selectStudentByNum(Practice.getStuNum());
             if (existStu == null) {
                 // 如果学生表中不存在，在学生表中插入记录
-                studentMapper.insertStudentBasicInfo(Practice.getStu_name(),Practice.getStu_num());
+                studentMapper.insertStudentBasicInfo(Practice.getStuName(),Practice.getStuNum());
             }
             // 获取stu_id，判断是否在学生成绩表Science中，在进行插入
-            existStu = studentMapper.selectStudentByNum(Practice.getStu_num());
-            PracticeDO existPractice = practiceMapper.selectPracticeByStuNum(Practice.getStu_num());
+            existStu = studentMapper.selectStudentByNum(Practice.getStuNum());
+            PracticeDO existPractice = practiceMapper.selectPracticeByStuNum(Practice.getStuNum());
             if (existPractice == null) {
                 // 如果在成绩表中不存在，在成绩表插入记录
                 PracticeDO createPractice = PracticeConvert.INSTANCE.convert(Practice);
-                createPractice.setStu_id(existStu.getId());
-                practiceMapper.insertPractice(createPractice.getStu_id(), createPractice.getStu_num(),createPractice.getStu_name(), createPractice.getTitle(),createPractice.getDirector(),createPractice.getConstitution(),createPractice.getContent(),createPractice.getTime(),createPractice.getResult(),createPractice.getScore(),createPractice.getStatus());
+                createPractice.setStuId(existStu.getId());
+                practiceMapper.insertPractice(createPractice.getStuId(), createPractice.getStuNum(),createPractice.getStuName(), createPractice.getTitle(),createPractice.getDirector(),createPractice.getConstitution(),createPractice.getContent(),createPractice.getTime(),createPractice.getResult(),createPractice.getScore(),createPractice.getStatus());
                 System.out.println(createPractice);
-                respVO.getCreatePracticenames().add(Practice.getStu_name());
+                respVO.getCreatePracticenames().add(Practice.getStuName());
                 return;
             }
             // 如果存在，更新成绩表中的记录
             PracticeDO updatePractice = PracticeConvert.INSTANCE.convert(Practice);
             updatePractice.setId(existPractice.getId());
             practiceMapper.updateById(updatePractice);
-            respVO.getUpdatePracticenames().add(Practice.getStu_name());
+            respVO.getUpdatePracticenames().add(Practice.getStuName());
         });
         return respVO;
     }

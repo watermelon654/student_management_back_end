@@ -19,15 +19,15 @@ public class SummaryDO {
     /**
      * 学生ID
      */
-    private Long stu_id;
+    private Long stuId;
     /**
      * 学生学号
      */
-    private String stu_num;
+    private String stuNum;
     /**
      * 学生姓名
      */
-    private String stu_name;
+    private String stuName;
     /**
      * 学生GPA
      */

@@ -17,7 +17,7 @@ public interface ScienceMapper extends BaseMapper<ScienceDO>{
     default ScienceDO selectScienceByStuNum(String stu_num) {
         QueryWrapper<ScienceDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stu_num", stu_num);
+        wrapper.eq("stuNum", stu_num);
         return selectOne(wrapper);
     }
 
@@ -29,7 +29,7 @@ public interface ScienceMapper extends BaseMapper<ScienceDO>{
     default ScienceDO selectScienceByStuId(Long stu_id) {
         QueryWrapper<ScienceDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stu_id", stu_id);
+        wrapper.eq("stuId", stu_id);
         return selectOne(wrapper);
     }
 

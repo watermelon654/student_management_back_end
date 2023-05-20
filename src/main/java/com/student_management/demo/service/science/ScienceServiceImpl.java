@@ -37,20 +37,20 @@ public class ScienceServiceImpl implements ScienceService{
         //对每一个表项检查
         importScience.forEach(Science -> {
             // 判断是否在学生信息表stu_info中，在进行插入
-            StudentDO existStu = studentMapper.selectStudentByNum(Science.getStu_num());
+            StudentDO existStu = studentMapper.selectStudentByNum(Science.getStuNum());
             if (existStu == null) {
                 // 如果学生表中不存在，在学生表中插入记录
-                studentMapper.insertStudentBasicInfo(Science.getStu_name(),Science.getStu_num());
+                studentMapper.insertStudentBasicInfo(Science.getStuName(),Science.getStuNum());
             }
             // 获取stu_id，判断是否在学生成绩表Science中，在进行插入
-            existStu = studentMapper.selectStudentByNum(Science.getStu_num());
-            ScienceDO existScience = scienceMapper.selectScienceByStuNum(Science.getStu_num());
+            existStu = studentMapper.selectStudentByNum(Science.getStuNum());
+            ScienceDO existScience = scienceMapper.selectScienceByStuNum(Science.getStuNum());
 //            if (existScience == null) {
                 // 如果在成绩表中不存在，在成绩表插入记录
                 ScienceDO createScience = ScienceConvert.INSTANCE.convert(Science);
-                createScience.setStu_id(existStu.getId());
+                createScience.setStuId(existStu.getId());
                 scienceMapper.insert(createScience);
-                respVO.getCreateSciencenames().add(Science.getStu_name());
+                respVO.getCreateSciencenames().add(Science.getStuName());
 //                return;
 //            }
 //            // 如果存在，更新成绩表中的记录

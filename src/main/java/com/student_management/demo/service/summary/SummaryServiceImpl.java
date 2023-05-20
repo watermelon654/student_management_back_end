@@ -15,7 +15,6 @@ import org.springframework.validation.annotation.Validated;
 import javax.annotation.Resource;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -42,27 +41,27 @@ public class SummaryServiceImpl implements SummaryService {
         //对每一个表项检查
         importSummary.forEach(Summary -> {
             // 判断是否在学生信息表stu_info中，在进行插入
-            StudentDO existStu = studentMapper.selectStudentByNum(Summary.getStu_num());
+            StudentDO existStu = studentMapper.selectStudentByNum(Summary.getStuNum());
             if (existStu == null) {
                 // 如果学生表中不存在，在学生表中插入记录
-                studentMapper.insertStudentBasicInfo(Summary.getStu_name(),Summary.getStu_num());
+                studentMapper.insertStudentBasicInfo(Summary.getStuName(),Summary.getStuNum());
             }
 //             获取stu_id，判断是否在学生成绩表Summary中，在进行插入
-            existStu = studentMapper.selectStudentByNum(Summary.getStu_num());
-            SummaryDO existSummary = summaryMapper.selectSummaryByStuNum(Summary.getStu_num());
+            existStu = studentMapper.selectStudentByNum(Summary.getStuNum());
+            SummaryDO existSummary = summaryMapper.selectSummaryByStuNum(Summary.getStuNum());
             if (existSummary == null) {
 //             如果在成绩表中不存在，在成绩表插入记录
             SummaryDO createSummary = SummaryConvert.INSTANCE.convert(Summary);
-            createSummary.setStu_id(existStu.getId());
+            createSummary.setStuId(existStu.getId());
             summaryMapper.insert(createSummary);
-            respVO.getCreateSummarynames().add(Summary.getStu_name());
+            respVO.getCreateSummarynames().add(Summary.getStuName());
                 return;
             }
             // 如果存在，更新成绩表中的记录
             SummaryDO updateSummary = SummaryConvert.INSTANCE.convert(Summary);
             updateSummary.setId(existSummary.getId());
             summaryMapper.updateById(updateSummary);
-            respVO.getUpdateSummarynames().add(Summary.getStu_name());
+            respVO.getUpdateSummarynames().add(Summary.getStuName());
         });
         return respVO;
     }

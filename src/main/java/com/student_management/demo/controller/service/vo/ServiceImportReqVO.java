@@ -16,11 +16,11 @@ import lombok.experimental.Accessors;
 @ApiModel(description = "骨干服务表导入请求")
 public class ServiceImportReqVO {
     @ApiModelProperty(value = "学生ID", required = true, example = "1")
-    private Long stu_id;
+    private Long stuId;
     @ApiModelProperty(value = "学生学号", required = true, example = "2200022123")
-    private String stu_num;
+    private String stuNum;
     @ApiModelProperty(value = "学生姓名", required = true, example = "张三")
-    private String stu_name;
+    private String stuName;
     @ApiModelProperty(value = "岗位名称", required = true, example = "智能餐厅管理系统")
     private String title;
     @ApiModelProperty(value = "所在岗位负责人", required = true, example = "李四")

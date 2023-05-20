@@ -36,28 +36,28 @@ public class ServiceServiceImpl implements ServiceService{
         //对每一个表项检查
         importService.forEach(Service -> {
             // 判断是否在学生信息表stu_info中，在进行插入
-            StudentDO existStu = studentMapper.selectStudentByNum(Service.getStu_num());
+            StudentDO existStu = studentMapper.selectStudentByNum(Service.getStuNum());
             if (existStu == null) {
                 // 如果学生表中不存在，在学生表中插入记录
-                studentMapper.insertStudentBasicInfo(Service.getStu_name(),Service.getStu_num());
+                studentMapper.insertStudentBasicInfo(Service.getStuName(),Service.getStuNum());
             }
             // 获取stu_id，判断是否在学生成绩表Science中，在进行插入
-            existStu = studentMapper.selectStudentByNum(Service.getStu_num());
-            ServiceDO existService = serviceMapper.selectServiceByStuNum(Service.getStu_num());
+            existStu = studentMapper.selectStudentByNum(Service.getStuNum());
+            ServiceDO existService = serviceMapper.selectServiceByStuNum(Service.getStuNum());
             if (existService == null) {
                 // 如果在成绩表中不存在，在成绩表插入记录
                 ServiceDO createService = ServiceConvert.INSTANCE.convert(Service);
-                createService.setStu_id(existStu.getId());
-                serviceMapper.insertService(createService.getStu_id(), createService.getStu_num(),createService.getStu_name(), createService.getTitle(),createService.getDirector(),createService.getConstitution(),createService.getContent(),createService.getTime(),createService.getResult(),createService.getScore(),createService.getStatus());
+                createService.setStuId(existStu.getId());
+                serviceMapper.insertService(createService.getStuId(), createService.getStuNum(),createService.getStuName(), createService.getTitle(),createService.getDirector(),createService.getConstitution(),createService.getContent(),createService.getTime(),createService.getResult(),createService.getScore(),createService.getStatus());
                 System.out.println(createService);
-                respVO.getCreateServicenames().add(Service.getStu_name());
+                respVO.getCreateServicenames().add(Service.getStuName());
                 return;
             }
             // 如果存在，更新成绩表中的记录
             ServiceDO updateService = ServiceConvert.INSTANCE.convert(Service);
             updateService.setId(existService.getId());
             serviceMapper.updateById(updateService);
-            respVO.getUpdateServicenames().add(Service.getStu_name());
+            respVO.getUpdateServicenames().add(Service.getStuName());
         });
         return respVO;
     }

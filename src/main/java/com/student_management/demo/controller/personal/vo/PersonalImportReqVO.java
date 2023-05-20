@@ -16,11 +16,11 @@ import lombok.experimental.Accessors;
 @ApiModel(description = "个人学年总结表导入请求")
 public class PersonalImportReqVO {
     @ApiModelProperty(value = "学生ID", required = true, example = "1")
-    private Long stu_id;
+    private Long stuId;
     @ApiModelProperty(value = "学生学号", required = true, example = "2200022123")
-    private String stu_num;
+    private String stuNum;
     @ApiModelProperty(value = "学生姓名", required = true, example = "张三")
-    private String stu_name;
+    private String stuName;
     @ApiModelProperty(value = "学习情况总结", required = true, example = "我的学习情况良好")
     private String school;
     @ApiModelProperty(value = "社会实践总结", required = true, example = "我的社会实践总结情况良好")

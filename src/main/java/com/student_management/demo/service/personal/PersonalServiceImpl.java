@@ -36,27 +36,27 @@ public class PersonalServiceImpl implements PersonalService {
         //对每一个表项检查
         importPersonal.forEach(Personal -> {
             // 判断是否在学生信息表stu_info中，在进行插入
-            StudentDO existStu = studentMapper.selectStudentByNum(Personal.getStu_num());
+            StudentDO existStu = studentMapper.selectStudentByNum(Personal.getStuNum());
             if (existStu == null) {
                 // 如果学生表中不存在，在学生表中插入记录
-                studentMapper.insertStudentBasicInfo(Personal.getStu_name(),Personal.getStu_num());
+                studentMapper.insertStudentBasicInfo(Personal.getStuName(),Personal.getStuNum());
             }
             // 获取stu_id，判断是否在学生成绩表Personal中，在进行插入
-            existStu = studentMapper.selectStudentByNum(Personal.getStu_num());
-            PersonalDO existPersonal = personalMapper.selectPersonalByStuNum(Personal.getStu_num());
+            existStu = studentMapper.selectStudentByNum(Personal.getStuNum());
+            PersonalDO existPersonal = personalMapper.selectPersonalByStuNum(Personal.getStuNum());
             if (existPersonal == null) {
                 // 如果在成绩表中不存在，在成绩表插入记录
                 PersonalDO createPersonal = PersonalConvert.INSTANCE.convert(Personal);
-                createPersonal.setStu_id(existStu.getId());
+                createPersonal.setStuId(existStu.getId());
                 personalMapper.insert(createPersonal);
-                respVO.getCreatePersonalnames().add(Personal.getStu_name());
+                respVO.getCreatePersonalnames().add(Personal.getStuName());
                 return;
             }
             // 如果存在，更新成绩表中的记录
             PersonalDO updatePersonal = PersonalConvert.INSTANCE.convert(Personal);
             updatePersonal.setId(existPersonal.getId());
             personalMapper.updateById(updatePersonal);
-            respVO.getUpdatePersonalnames().add(Personal.getStu_name());
+            respVO.getUpdatePersonalnames().add(Personal.getStuName());
         });
         return respVO;
     }

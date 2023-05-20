@@ -7,7 +7,7 @@ public class GradeCreateReqVO {
     /**
      * 学号
      */
-    private String stu_num;
+    private String stuNum;
 
     /**
      * token

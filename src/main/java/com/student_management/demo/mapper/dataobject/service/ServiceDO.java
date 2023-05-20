@@ -18,17 +18,17 @@ public class ServiceDO {
     /**
      * 学生id
      */
-    private Long stu_id;
+    private Long stuId;
 
     /**
      * 学号
      */
-    private Long stu_num;
+    private String stuNum;
 
     /**
      * 姓名
      */
-    private String stu_name;
+    private String stuName;
 
     /**
      * 评价状态

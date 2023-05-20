@@ -2,7 +2,6 @@ package com.student_management.demo.mapper.mysql.student;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.student_management.demo.controller.summary.vo.SummaryVO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
