@@ -53,36 +53,36 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
     }
 
 
-    /**
-     * 查询所有评分，根据学生id集合
-     * @param num
-     * @return
-     */
-    default List<SummaryVO> selectSummary(List<Long> list) {
-
-        QueryWrapper<SummaryVO> wrapper = new QueryWrapper<>();
-        wrapper.in("stu_id",list);
-
-        return selectList(wrapper);
-    }
-
-
-    default int update(SummaryVO summaryVO) {
-        QueryWrapper<SummaryVO> wrapper = new QueryWrapper<>();
-        wrapper.eq("stu_num",summaryVO.getStuNum());
-
-        return update(summaryVO,wrapper);
-    }
-
-
-
-    /**
-     * 插入学生基本信息用于生成学生id
-     * @param name 姓名
-     * @param num 学号
-     * @return
-     */
-    int insertStudentBasicInfo(String name, String num);
+//    /**
+//     * 查询所有评分，根据学生id集合
+//     * @param num
+//     * @return
+//     */
+//    default List<SummaryVO> selectSummary(List<Long> list) {
+//
+//        QueryWrapper<SummaryVO> wrapper = new QueryWrapper<>();
+//        wrapper.in("stu_id",list);
+//
+//        return selectList(wrapper);
+//    }
+//
+//
+//    default int update(SummaryVO summaryVO) {
+//        QueryWrapper<SummaryVO> wrapper = new QueryWrapper<>();
+//        wrapper.eq("stu_num",summaryVO.getStuNum());
+//
+//        return update(summaryVO,wrapper);
+//    }
+//
+//
+//
+//    /**
+//     * 插入学生基本信息用于生成学生id
+//     * @param name 姓名
+//     * @param num 学号
+//     * @return
+//     */
+//    int insertStudentBasicInfo(String name, String num);
 
 
 }
