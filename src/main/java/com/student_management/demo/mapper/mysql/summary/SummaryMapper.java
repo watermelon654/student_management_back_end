@@ -12,11 +12,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
-
 @Mapper
 @Repository
-public interface SummaryMapper extends BaseMapper<SummaryVO> {
-//    /**
+public interface SummaryMapper extends BaseMapper<SummaryDO> {
+    //    /**
 //     * 按照学号查询学生id
 //     * @param num
 //     * @return
