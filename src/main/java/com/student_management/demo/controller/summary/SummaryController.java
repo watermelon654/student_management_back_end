@@ -28,7 +28,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/summary/")
 @Api(tags = "summary表相关接口")
-@Api(tags = "EasyExcel")
 public class SummaryController {
 
     @Resource
@@ -57,52 +56,52 @@ public class SummaryController {
 
     }
 
-    @RequestMapping("/selectbystatus")
-    public CommonResult<List<SummaryVO>> selectall() throws IOException {
-
-
-        List<Long> longs = studentMapper.selectStudentbystatus();
-
-        List<SummaryVO> summaryVOS = summaryMapper.selectSummary(longs);
-
-
-        return CommonResult.success(summaryVOS);
-
-    }
-
-
-
-    @RequestMapping("/selectbystatus1")
-    public CommonResult<List<SummaryVO>> selectall1() throws IOException {
-
-
-        List<Long> longs = studentMapper.selectStudentbystatus1();
-
-        List<SummaryVO> summaryVOS = summaryMapper.selectSummary(longs);
-
-
-        return CommonResult.success(summaryVOS);
-
-    }
-
-
-    @RequestMapping("/update")
-    public CommonResult<List<SummaryVO>> update(@RequestBody SummaryVO summary) throws IOException {
-
-        summaryMapper.update(summary);
-
-
-        StudentDO studentDO = studentMapper.selectStudentByNum(summary.getStuNum());
-
-        studentDO.setStatus(0);
-
-        int a = studentMapper.updateStu(studentDO);
-
-
-
-        return CommonResult.success(null);
-
-    }
+//    @RequestMapping("/selectbystatus")
+//    public CommonResult<List<SummaryVO>> selectall() throws IOException {
+//
+//
+//        List<Long> longs = studentMapper.selectStudentbystatus();
+//
+//        List<SummaryVO> summaryVOS = summaryMapper.selectSummary(longs);
+//
+//
+//        return CommonResult.success(summaryVOS);
+//
+//    }
+//
+//
+//
+//    @RequestMapping("/selectbystatus1")
+//    public CommonResult<List<SummaryVO>> selectall1() throws IOException {
+//
+//
+//        List<Long> longs = studentMapper.selectStudentbystatus1();
+//
+//        List<SummaryVO> summaryVOS = summaryMapper.selectSummary(longs);
+//
+//
+//        return CommonResult.success(summaryVOS);
+//
+//    }
+//
+//
+//    @RequestMapping("/update")
+//    public CommonResult<List<SummaryVO>> update(@RequestBody SummaryVO summary) throws IOException {
+//
+//        summaryMapper.update(summary);
+//
+//
+//        StudentDO studentDO = studentMapper.selectStudentByNum(summary.getStuNum());
+//
+//        studentDO.setStatus(0);
+//
+//        int a = studentMapper.updateStu(studentDO);
+//
+//
+//
+//        return CommonResult.success(null);
+//
+//    }
 
 
 
