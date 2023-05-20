@@ -85,6 +85,4 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
     int insertStudentBasicInfo(String name, String num);
 
 
-
-
 }

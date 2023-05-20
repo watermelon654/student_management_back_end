@@ -1,15 +1,16 @@
-package com.student_management.demo.mapper.dataobject.student;
 
-import com.baomidou.mybatisplus.annotation.TableField;
+package com.student_management.demo.controller.stu.vo;
+
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.student_management.demo.mapper.dataobject.user.UserDo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @TableName(value="stu_info")//数据库表名
-public class StudentDO extends UserDo {
+public class StudentVo{
+
+
 
 
     /**
@@ -46,20 +47,17 @@ public class StudentDO extends UserDo {
     /**
      * 学年 ID
      */
-
-    private Long yearId;
+    private Long year_id;
 
     /**
      * 专业 ID
      */
-
-    private Long majorId;
+    private Long major_id;
 
     /**
      * 班级 ID
      */
-
-    private Long classId;
+    private Long class_id;
 
 
 
@@ -70,4 +68,3 @@ public class StudentDO extends UserDo {
     private Integer status;
 
 }
-
