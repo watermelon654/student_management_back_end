@@ -1,6 +1,15 @@
 package com.student_management.demo.controller.summary;
 
 import com.student_management.demo.CommonResult;
+import com.student_management.demo.controller.summary.vo.SummaryVO;
+import com.student_management.demo.mapper.dataobject.student.StudentDO;
+import com.student_management.demo.mapper.mysql.student.StudentMapper;
+import com.student_management.demo.mapper.mysql.student.StudentMapper1;
+import com.student_management.demo.mapper.mysql.summary.SummaryMapper;
+import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.student_management.demo.controller.summary.vo.SummaryImportReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportRespVO;
 import com.student_management.demo.controller.summary.vo.*;
@@ -12,11 +21,25 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
+import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/summary/")
 @Api(tags = "summary表相关接口")
+@Api(tags = "EasyExcel")
 public class SummaryController {
+
+    @Resource
+    private StudentMapper studentMapper;
+
+    @Resource
+    private SummaryMapper summaryMapper;
+
+    @Resource
+    private StudentMapper1 studentMapper1;
+
     @Resource
     private SummaryService service;
 
@@ -34,65 +57,53 @@ public class SummaryController {
 
     }
 
+    @RequestMapping("/selectbystatus")
+    public CommonResult<List<SummaryVO>> selectall() throws IOException {
 
-//    @PostMapping("/create")
-//    @ApiOperation("创建学生评分")
-//    public CommonResult<Long> create(@Valid @RequestBody SummaryCreateReqVO createReqVO) {
-//        return CommonResult.success(service.create(createReqVO));
-//    }
-//
-//    @PutMapping("/update")
-//    @ApiOperation("更新学生评分")
-//    public CommonResult<Boolean> update(@Valid @RequestBody SummaryUpdateReqVO updateReqVO) {
-//        service.update(updateReqVO);
-//        return CommonResult.success(true);
-//    }
 
-//    @DeleteMapping("/delete")
-//    @Operation(summary = "删除学生评分")
-//    @Parameter(name = "id", description = "编号", required = true)
-//    @PreAuthorize("@ss.hasPermission('summary::delete')")
-//    public CommonResult<Boolean> delete(@RequestParam("id") Long id) {
-//        Service.delete(id);
-//        return success(true);
-//    }
-//
-//    @GetMapping("/get")
-//    @Operation(summary = "获得学生评分")
-//    @Parameter(name = "id", description = "编号", required = true, example = "1024")
-//    @PreAuthorize("@ss.hasPermission('summary::query')")
-//    public CommonResult<RespVO> get(@RequestParam("id") Long id) {
-//        DO  = Service.get(id);
-//        return success(Convert.INSTANCE.convert());
-//    }
-//
-//    @GetMapping("/list")
-//    @Operation(summary = "获得学生评分列表")
-//    @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
-//    @PreAuthorize("@ss.hasPermission('summary::query')")
-//    public CommonResult<List<RespVO>> getList(@RequestParam("ids") Collection<Long> ids) {
-//        List<DO> list = Service.getList(ids);
-//        return success(Convert.INSTANCE.convertList(list));
-//    }
-//
-//    @GetMapping("/page")
-//    @Operation(summary = "获得学生评分分页")
-//    @PreAuthorize("@ss.hasPermission('summary::query')")
-//    public CommonResult<PageResult<RespVO>> getPage(@Valid PageReqVO pageVO) {
-//        PageResult<DO> pageResult = Service.getPage(pageVO);
-//        return success(Convert.INSTANCE.convertPage(pageResult));
-//    }
-//
-//    @GetMapping("/export-excel")
-//    @Operation(summary = "导出学生评分 Excel")
-//    @PreAuthorize("@ss.hasPermission('summary::export')")
-//    @OperateLog(type = EXPORT)
-//    public void exportExcel(@Valid ExportReqVO exportReqVO,
-//                            HttpServletResponse response) throws IOException {
-//        List<DO> list = Service.getList(exportReqVO);
-//        // 导出 Excel
-//        List<ExcelVO> datas = Convert.INSTANCE.convertList02(list);
-//        ExcelUtils.write(response, "学生评分.xls", "数据", ExcelVO.class, datas);
-//    }
+        List<Long> longs = studentMapper.selectStudentbystatus();
+
+        List<SummaryVO> summaryVOS = summaryMapper.selectSummary(longs);
+
+
+        return CommonResult.success(summaryVOS);
+
+    }
+
+
+
+    @RequestMapping("/selectbystatus1")
+    public CommonResult<List<SummaryVO>> selectall1() throws IOException {
+
+
+        List<Long> longs = studentMapper.selectStudentbystatus1();
+
+        List<SummaryVO> summaryVOS = summaryMapper.selectSummary(longs);
+
+
+        return CommonResult.success(summaryVOS);
+
+    }
+
+
+    @RequestMapping("/update")
+    public CommonResult<List<SummaryVO>> update(@RequestBody SummaryVO summary) throws IOException {
+
+        summaryMapper.update(summary);
+
+
+        StudentDO studentDO = studentMapper.selectStudentByNum(summary.getStuNum());
+
+        studentDO.setStatus(0);
+
+        int a = studentMapper.updateStu(studentDO);
+
+
+
+        return CommonResult.success(null);
+
+    }
+
+
 
 }
