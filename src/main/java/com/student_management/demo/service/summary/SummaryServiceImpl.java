@@ -1,9 +1,13 @@
 package com.student_management.demo.service.summary;
 
 import cn.hutool.core.collection.CollUtil;
+import com.student_management.demo.controller.summary.vo.SummaryBaseVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportRespVO;
+import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
+import com.student_management.demo.convert.grade.GradeConvert;
 import com.student_management.demo.convert.summary.SummaryConvert;
+import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
@@ -65,20 +69,19 @@ public class SummaryServiceImpl implements SummaryService {
         });
         return respVO;
     }
-//    @Override
-//    public void create(SummaryCreateReqVO createReqVO) {
-//        SummaryDO  = SummaryConvert.INSTANCE.convert(createReqVO);
-//        mapper.insert();
-//        // 返回
-//        return .getId();
-//    }
-//
-//    @Override
-//    public void update(SummaryUpdateReqVO updateReqVO) {
-//        // 校验存在
-////        validateExists(updateReqVO.getId());
-//        // 更新
-//        SummaryDO updateObj = SummaryConvert.INSTANCE.convert(updateReqVO);
-//        mapper.updateById(updateObj);
-//    }
+
+    /**
+     * 根据状态挑选学生列表
+     * @param status
+     * @return
+     */
+    @Override
+    public SummarySelectListRespVO selectListByStatus(boolean status) {
+        List<SummaryDO> listdo = summaryMapper.selectListByStatus(status);
+        SummarySelectListRespVO respVO = new SummarySelectListRespVO();
+        List<SummaryBaseVO> listvo= SummaryConvert.INSTANCE.convertList2(listdo);
+        respVO.setSummarylist(listvo);
+        return respVO;
+    }
+
 }

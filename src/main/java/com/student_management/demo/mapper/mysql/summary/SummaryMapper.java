@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
+
+import java.util.List;
+
 @Mapper
 @Repository
 public interface SummaryMapper extends BaseMapper<SummaryDO> {
@@ -32,6 +35,13 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
         //查询条件
         wrapper.eq("stuId", stu_id);
         return selectOne(wrapper);
+    }
+
+    default List<SummaryDO> selectListByStatus(boolean status) {
+        QueryWrapper<SummaryDO> wrapper = new QueryWrapper<>();
+        //查询条件
+        wrapper.eq("status", status);
+        return selectList(wrapper);
     }
 
 }

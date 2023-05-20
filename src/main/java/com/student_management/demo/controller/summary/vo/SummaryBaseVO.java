@@ -36,4 +36,6 @@ public class SummaryBaseVO {
 
     @Schema(description = "学生个人学年总结")
     private Integer per;
+    @Schema(description = "状态")
+    private boolean status;
 }

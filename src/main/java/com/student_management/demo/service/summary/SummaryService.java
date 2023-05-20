@@ -10,20 +10,6 @@ import java.util.List;
 public interface SummaryService {
     SummaryImportRespVO importRecord(List<SummaryImportReqVO> userList);
 
+    SummarySelectListRespVO selectListByStatus(boolean status);
 
-
-    /**
-     * 创建学生评分
-     *
-     * @param createReqVO 创建信息
-     * @return 编号
-     */
-//    Long create(@Valid SummaryCreateReqVO createReqVO);
-
-    /**
-     * 更新学生评分
-     *
-     * @param updateReqVO 更新信息
-     */
-//    void update(@Valid SummaryUpdateReqVO updateReqVO);
 }

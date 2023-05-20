@@ -52,4 +52,8 @@ public class SummaryDO {
      * 学生个人学年总结
      */
     private Integer per;
+    /**
+     * 状态
+     */
+    private boolean status;
 }

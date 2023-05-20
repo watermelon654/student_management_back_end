@@ -1,6 +1,7 @@
 package com.student_management.demo.controller.summary;
 
 import com.student_management.demo.CommonResult;
+import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper1;
 import com.student_management.demo.mapper.mysql.summary.SummaryMapper;
@@ -23,32 +24,24 @@ import java.util.List;
 public class SummaryController {
 
     @Resource
-    private StudentMapper studentMapper;
-
-    @Resource
-    private SummaryMapper summaryMapper;
-
-    @Resource
-    private StudentMapper1 studentMapper1;
-
-    @Resource
     private SummaryService service;
 
     @ApiOperation("成绩表上传接口")
     @PostMapping("/import")
-    // CommonResult<SummaryImportRespVO>
     public CommonResult<SummaryImportRespVO> importSummarySheet(@RequestBody List<SummaryImportReqVO> userList) {
-//        console.log(reqVO)
         System.out.println(userList);
-//        List<SummaryImportReqVO> userList = ExcelUtils.read(file,GradeImportExcelVO.class);
-//        GradeImportRespVO respVO = service.importGradeList(userList);
 
         SummaryImportRespVO respVO = service.importRecord(userList);
         return CommonResult.success(respVO);
 
     }
-
-
-
+    @ApiOperation("根据状态挑选学生")
+    @PostMapping("/selectList")
+    public CommonResult<SummarySelectListRespVO> selectList(@RequestParam Integer flag) {
+        if (flag == 0)
+            return CommonResult.success(service.selectListByStatus(false));
+        else
+            return CommonResult.success(service.selectListByStatus(true));
+    }
 
 }
