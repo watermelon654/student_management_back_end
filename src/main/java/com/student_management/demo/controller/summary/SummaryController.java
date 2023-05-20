@@ -96,7 +96,7 @@ public class SummaryController {
 
         studentDO.setStatus(0);
 
-            int a = studentMapper.updateStu(studentDO);
+        int a = studentMapper.updateStu(studentDO);
 
 
 
