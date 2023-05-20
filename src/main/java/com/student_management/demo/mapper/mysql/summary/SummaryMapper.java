@@ -12,7 +12,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
-
+@Mapper
+@Repository
 public interface SummaryMapper extends BaseMapper<SummaryDO> {
 
     //    /**
