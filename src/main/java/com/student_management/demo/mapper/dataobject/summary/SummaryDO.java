@@ -56,4 +56,5 @@ public class SummaryDO {
      * 状态
      */
     private boolean status;
+
 }

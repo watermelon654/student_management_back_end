@@ -61,13 +61,5 @@ public class StudentDO extends UserDo {
 
     private Long classId;
 
-
-
-    /**
-     * 评价状态
-     *
-     * */
-    private Integer status;
-
 }
 

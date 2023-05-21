@@ -26,7 +26,7 @@ public class GradeController {
      * @throws IOException
      */
     @PostMapping("/upload")
-    public CommonResult<GradeImportRespVO> importUserExcel(@RequestPart(value = "file") MultipartFile file) throws IOException {
+    public CommonResult<GradeImportRespVO> importGradeExcel(@RequestPart(value = "file") MultipartFile file) throws IOException {
             List<GradeImportExcelVO> userList = ExcelUtils.read(file,GradeImportExcelVO.class);
             GradeImportRespVO respVO = service.importGradeList(userList);
             // 检查上传文件是否为空文件

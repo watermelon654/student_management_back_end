@@ -2,9 +2,6 @@ package com.student_management.demo.controller.summary;
 
 import com.student_management.demo.CommonResult;
 import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
-import com.student_management.demo.mapper.mysql.student.StudentMapper;
-import com.student_management.demo.mapper.mysql.student.StudentMapper1;
-import com.student_management.demo.mapper.mysql.summary.SummaryMapper;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +26,7 @@ public class SummaryController {
     @ApiOperation("成绩表上传接口")
     @PostMapping("/import")
     public CommonResult<SummaryImportRespVO> importSummarySheet(@RequestBody List<SummaryImportReqVO> userList) {
-        System.out.println(userList);
-
+        //System.out.println(userList);
         SummaryImportRespVO respVO = service.importRecord(userList);
         return CommonResult.success(respVO);
 
@@ -43,5 +39,7 @@ public class SummaryController {
         else
             return CommonResult.success(service.selectListByStatus(true));
     }
+
+
 
 }

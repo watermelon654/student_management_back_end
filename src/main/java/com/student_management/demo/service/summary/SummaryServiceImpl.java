@@ -77,11 +77,32 @@ public class SummaryServiceImpl implements SummaryService {
      */
     @Override
     public SummarySelectListRespVO selectListByStatus(boolean status) {
+        refreshStatus();
         List<SummaryDO> listdo = summaryMapper.selectListByStatus(status);
         SummarySelectListRespVO respVO = new SummarySelectListRespVO();
         List<SummaryBaseVO> listvo= SummaryConvert.INSTANCE.convertList2(listdo);
         respVO.setSummarylist(listvo);
         return respVO;
+    }
+
+    /**
+     * 更新状态为false的表项
+     * @param
+     * @return
+     */
+    private void refreshStatus() {
+        //检查每个状态为false的表项是否有更新
+        List<SummaryDO> listdo = summaryMapper.selectListByStatus(false);
+        listdo.forEach(summary -> {
+            if (summary.getGpa() != null && summary.getPer() != null &&
+                    summary.getSer() != null && summary.getSci() != null &&
+                    summary.getPra() != null && summary.getVol() != null) {
+                summary.setStatus(true);
+                //更新表项状态
+                summaryMapper.updateById(summary);
+            }
+        });
+
     }
 
 }

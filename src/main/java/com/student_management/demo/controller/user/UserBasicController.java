@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 @Slf4j
 public class UserBasicController {
     @Resource
-    private StudentBasicService studentService;
+    private StudentBasicService studentBasicService;
     @Resource
     private StaffBasicService staffService;
     @Autowired
@@ -35,7 +35,7 @@ public class UserBasicController {
             return CommonResult.success(staffService.getBasicInfo(num, true)) ;
         } else if (role.equals("f")){
             //学生
-            return CommonResult.success(studentService.getBasicInfo(num, false)) ;
+            return CommonResult.success(studentBasicService.getBasicInfo(num, false)) ;
         } else {
             return CommonResult.error(501,"角色参数有误！");
         }

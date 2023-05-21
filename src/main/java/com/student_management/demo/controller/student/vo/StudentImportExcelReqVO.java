@@ -1,6 +1,7 @@
 
-package com.student_management.demo.controller.stu.vo;
+package com.student_management.demo.controller.student.vo;
 
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,63 +9,49 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @TableName(value="stu_info")//数据库表名
-public class StudentVo{
-
-
-
-
-    /**
-     * id
-     */
-    private Long id;
+public class StudentImportExcelReqVO {
 
     /**
      * 学号
      */
+    @ExcelProperty("ID")
     private String num;
 
     /**
      * 姓名
      */
+    @ExcelProperty("name")
     private String name;
 
     /**
      * 性别
-     *
      */
+    @ExcelProperty("sex")
     private Integer sex;
 
     /**
      * 邮箱
      */
+    @ExcelProperty("mailbox")
     private String email;
 
     /**
-     * 加密后的密码
+     * 学年ID
      */
-    private String passwd;
-
-    /**
-     * 学年 ID
-     */
-    private Long year_id;
+    @ExcelProperty("year")
+    private Long yearId;
 
     /**
      * 专业 ID
      */
-    private Long major_id;
+    @ExcelProperty("major")
+    private Long majorId;
 
     /**
      * 班级 ID
      */
-    private Long class_id;
+    @ExcelProperty("class")
+    private Long classId;
 
-
-
-    /**
-     * 评价状态
-     *
-     * */
-    private Integer status;
 
 }
