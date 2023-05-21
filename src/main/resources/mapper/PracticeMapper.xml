@@ -3,7 +3,7 @@
 
 <mapper namespace="com.student_management.demo.mapper.mysql.practice.PracticeMapper">
     <insert id="insertPractice" parameterType="com.student_management.demo.mapper.dataobject.practice.PracticeDO">
-        INSERT INTO Practice(stu_id,stu_num,stu_name,title,director,constitution,content,time,result,score,status)
-        VALUES (#{stuId},#{stuNum},#{stuName},#{title},#{director},#{constitution},#{content},#{time},#{result},#{score},#{status})
+        INSERT INTO Practice(stuId,stuNum,stuName,title,director,constitution,content,time,result,score,status)
+        VALUES (#{stuId},#{stuNum},#{stuName},#{title},#{director},#{constitution},#{content},#{time},#{result},<if test='score != null'>#{score}</if>,#{status})
     </insert>
 </mapper>
