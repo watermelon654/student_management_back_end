@@ -44,7 +44,7 @@ public class ScienceServiceImpl implements ScienceService{
             }
             // 获取stu_id，判断是否在学生成绩表Science中，在进行插入
             existStu = studentMapper.selectStudentByNum(Science.getStuNum());
-            ScienceDO existScience = scienceMapper.selectScienceByStuNum(Science.getStuNum());
+            // ScienceDO existScience = scienceMapper.selectScienceByStuNum(Science.getStuNum());
 //            if (existScience == null) {
                 // 如果在成绩表中不存在，在成绩表插入记录
                 ScienceDO createScience = ScienceConvert.INSTANCE.convert(Science);
