@@ -5,6 +5,7 @@ import com.student_management.demo.controller.personal.vo.PersonalImportReqVO;
 import com.student_management.demo.controller.personal.vo.PersonalImportRespVO;
 import com.student_management.demo.convert.personal.PersonalConvert;
 import com.student_management.demo.mapper.dataobject.personal.PersonalDO;
+import com.student_management.demo.mapper.dataobject.personal.PersonalDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.mysql.personal.PersonalMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -59,5 +61,11 @@ public class PersonalServiceImpl implements PersonalService {
             respVO.getUpdatePersonalnames().add(Personal.getStuName());
         });
         return respVO;
+    }
+
+    @Override
+    public List<PersonalDO> getList(Collection<Long> ids) {
+        System.out.println(personalMapper.selectBatchIds(ids));
+        return personalMapper.selectBatchIds(ids);
     }
 }
