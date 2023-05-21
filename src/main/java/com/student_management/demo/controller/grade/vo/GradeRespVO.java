@@ -15,11 +15,11 @@ public class GradeRespVO {
      */
     private String stuName;
 
-    /**
-     * 评价状态
-     *
-     */
-    private Integer status;
+//    /**
+//     * 评价状态
+//     *
+//     */
+//    private Integer status;
     /**
      * GPA
      */

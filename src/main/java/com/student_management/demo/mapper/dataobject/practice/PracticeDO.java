@@ -45,5 +45,7 @@ public class PracticeDO {
     private String time;
     private Integer score;
 
+
+
     private String result;
 }

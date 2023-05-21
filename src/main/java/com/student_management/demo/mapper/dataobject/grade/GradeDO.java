@@ -23,30 +23,34 @@ public class GradeDO {
     /**
      * 学号
      */
-    private Long stuNum;
+    private String stuNum;
 
     /**
      * 姓名
      */
     private String stuName;
 
-    /**
-     * 评价状态
-     * 0：未确认(default)
-     * 1：已确认
-     * 2：有误
-     */
-    private Integer status=0;
+//    /**
+//     * 评价状态
+//     * 0：未确认(default)
+//     * 1：已确认
+//     * 2：有误
+//     */
+//    private Integer status=0;
 
     /**
      * GPA
      */
     private float gpa;
 
-    /**
-     * 备注
-     */
-    private String note;
+//    /**
+//     * 备注
+//     */
+//    private String note;
 
+    /**
+     * 打分
+     */
+    private Integer score;
 
 }

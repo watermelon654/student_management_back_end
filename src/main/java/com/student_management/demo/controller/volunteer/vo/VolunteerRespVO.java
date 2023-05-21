@@ -15,11 +15,11 @@ public class VolunteerRespVO {
      */
     private String stuName;
 
-    /**
-     * 评价状态
-     *
-     */
-    private Integer status;
+//    /**
+//     * 评价状态
+//     *
+//     */
+//    private Integer status;
     /**
      * 服务时长
      */

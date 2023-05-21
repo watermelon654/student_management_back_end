@@ -2,9 +2,16 @@ package com.student_management.demo.controller.grade;
 import com.student_management.demo.CommonResult;
 import com.student_management.demo.controller.grade.vo.GradeImportExcelVO;
 import com.student_management.demo.controller.grade.vo.GradeImportRespVO;
+import com.student_management.demo.controller.grade.vo.GradeRespVO;
+import com.student_management.demo.controller.grade.vo.GradeSelectListRespVO;
+import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
+import com.student_management.demo.controller.volunteer.vo.VolunteerSelectListRespVO;
+import com.student_management.demo.mapper.dataobject.grade.GradeDO;
+import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import com.student_management.demo.service.grade.GradeService;
 import com.student_management.demo.utils.excel.ExcelUtils;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,4 +42,45 @@ public class GradeController {
             return CommonResult.success(respVO);
     }
 
+    @ApiOperation("选择全部学生")
+    @PostMapping("/selectListAll")
+    public CommonResult<GradeSelectListRespVO> selectListAll() {
+        return CommonResult.success(service.selectAllStudents());
+    }
+
+    @PostMapping("/{stuNum}/update-score")
+    @ApiOperation("根据学号更新评分接口")
+    public CommonResult<String> updateScoreByStuNum(
+            @PathVariable("stuNum") String stuNum,
+            @RequestParam("score") Integer score
+    ) {
+        System.out.println("in the method");
+        try {
+            GradeDO grade = new GradeDO();
+            grade.setStuNum(stuNum);
+            grade.setScore(score);
+            boolean success = service.updateResult(grade);
+
+            if (success) {
+                return CommonResult.success("评分更新成功");
+            } else {
+                return CommonResult.error(404, "找不到指定的记录");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return CommonResult.error(500, "评分更新失败");
+        }
+    }
+
+    @PostMapping("/{stuId}/get-grade-info")
+    @ApiOperation("根据学生ID获取学生信息接口")
+    public CommonResult<GradeRespVO> getInfoByStuId(@PathVariable("stuId") Long stuId) {
+        try {
+            GradeRespVO info = service.getInfoByStuId(stuId);
+            return CommonResult.success(info);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return CommonResult.error(500, "获取学生信息失败");
+        }
+    }
 }
