@@ -73,7 +73,6 @@ public class VolunteerController {
             @PathVariable("stuNum") String stuNum,
             @RequestParam("score") Integer score
     ) {
-        System.out.println("in the method");
         try {
             VolunteerDO volunteer = new VolunteerDO();
             volunteer.setStuNum(stuNum);
