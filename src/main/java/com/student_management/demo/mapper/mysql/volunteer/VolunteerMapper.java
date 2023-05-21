@@ -5,6 +5,8 @@ import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
@@ -32,5 +34,10 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
         wrapper.eq("stuId", stu_id);
         return selectOne(wrapper);
     }
+
+    default List<VolunteerDO> selectAllStudents() {
+        return selectList(null);
+    }
+
 
 }

@@ -47,4 +47,9 @@ public class VolunteerDO {
      * 备注
      */
     //private String note;
+
+    /**
+     * 打分
+     */
+    private Integer score;
 }

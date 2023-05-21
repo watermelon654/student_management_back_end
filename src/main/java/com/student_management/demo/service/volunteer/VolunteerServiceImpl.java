@@ -1,7 +1,10 @@
 package com.student_management.demo.service.volunteer;
 import cn.hutool.core.collection.CollUtil;
+import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
+import com.student_management.demo.controller.volunteer.vo.VolunteerBaseVO;
 import com.student_management.demo.controller.volunteer.vo.VolunteerImportExcelVO;
 import com.student_management.demo.controller.volunteer.vo.VolunteerImportRespVO;
+import com.student_management.demo.controller.volunteer.vo.VolunteerSelectListRespVO;
 import com.student_management.demo.convert.volunteer.VolunteerConvert;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -50,20 +54,35 @@ public class VolunteerServiceImpl implements VolunteerService {
             // 获取stu_id，判断是否在学生成绩表grade中，在进行插入
             existStu = studentMapper.selectStudentByNum(volunteer.getStuNum());
             VolunteerDO existVolunteer = volunteerMapper.selectVolunteerByStuNum(volunteer.getStuNum());
-            if (existVolunteer == null) {
+//            if (existVolunteer == null) {
                 // 如果在成绩表中不存在，在成绩表插入记录
                 VolunteerDO createVolunteer = VolunteerConvert.INSTANCE.convert(volunteer);
                 createVolunteer.setStuId(existStu.getId());
                 volunteerMapper.insert(createVolunteer);
                 respVO.getCreateVolunteernames().add(volunteer.getStuName());
-                return;
-            }
+//                return;
+//            }
             // 如果存在，更新成绩表中的记录
-            VolunteerDO updateVolunteer = VolunteerConvert.INSTANCE.convert(volunteer);
-            updateVolunteer.setId(existVolunteer.getId());
-            volunteerMapper.updateById(updateVolunteer);
-            respVO.getUpdateVolunteernames().add(volunteer.getStuName());
+//            VolunteerDO updateVolunteer = VolunteerConvert.INSTANCE.convert(volunteer);
+//            updateVolunteer.setId(existVolunteer.getId());
+//            volunteerMapper.updateById(updateVolunteer);
+//            respVO.getUpdateVolunteernames().add(volunteer.getStuName());
         });
+        return respVO;
+    }
+
+    @Override
+    public List<VolunteerDO> getList(Collection<Long> ids) {
+        System.out.println(volunteerMapper.selectBatchIds(ids));
+        return volunteerMapper.selectBatchIds(ids);
+    }
+
+    @Override
+    public VolunteerSelectListRespVO selectAllStudents() {
+        List<VolunteerDO> listdo = volunteerMapper.selectAllStudents();
+        VolunteerSelectListRespVO respVO = new VolunteerSelectListRespVO();
+        List<VolunteerBaseVO> listvo = VolunteerConvert.INSTANCE.convertList2(listdo);
+        respVO.setVolunteerlist(listvo);
         return respVO;
     }
 
