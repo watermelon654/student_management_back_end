@@ -1,10 +1,7 @@
 package com.student_management.demo.service.volunteer;
 import cn.hutool.core.collection.CollUtil;
 import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerBaseVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerImportExcelVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerImportRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerSelectListRespVO;
+import com.student_management.demo.controller.volunteer.vo.*;
 import com.student_management.demo.convert.volunteer.VolunteerConvert;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
@@ -71,12 +68,17 @@ public class VolunteerServiceImpl implements VolunteerService {
         return respVO;
     }
 
-    @Override
-    public List<VolunteerDO> getList(Collection<Long> ids) {
-        System.out.println(volunteerMapper.selectBatchIds(ids));
-        return volunteerMapper.selectBatchIds(ids);
-    }
+//    @Override
+//    public List<VolunteerDO> getList(Collection<Long> ids) {
+//        System.out.println(volunteerMapper.selectBatchIds(ids));
+//        return volunteerMapper.selectBatchIds(ids);
+//    }
 
+    /**
+     * 获得全体学生志愿服务时长列表
+     *
+     * @return 全体学生志愿服务时长列表
+     */
     @Override
     public VolunteerSelectListRespVO selectAllStudents() {
         List<VolunteerDO> listdo = volunteerMapper.selectAllStudents();
@@ -86,9 +88,23 @@ public class VolunteerServiceImpl implements VolunteerService {
         return respVO;
     }
 
+    /**
+     * 打分结果
+     *
+     * @param volunteer
+     * @return 打分结果，true表示打分成功，false表示打分失败
+     */
     public boolean updateResult(VolunteerDO volunteer) {
-        System.out.println(volunteerMapper.updateByStuNum(volunteer));
         return volunteerMapper.updateByStuNum(volunteer) > 0;
     }
 
+    /**
+     * 根据学生id获取当前学生志愿服务时长信息
+     *
+     * @param stuId
+     * @return 当前学生志愿服务时长信息
+     */
+    public VolunteerRespVO getInfoByStuId(Long stuId) {
+        return volunteerMapper.getInfoByStuId(stuId);
+    }
 }

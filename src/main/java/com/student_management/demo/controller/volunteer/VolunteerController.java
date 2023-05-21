@@ -44,17 +44,17 @@ public class VolunteerController {
         return CommonResult.success(respVO);
     }
 
-    /**
-     * 获得志愿服务时长列表
-     * @param ids
-     */
-    @GetMapping("/list")
-    @ApiOperation("获得志愿服务时长列表")
-    @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
-    public CommonResult<List<VolunteerRespVO>> getList(@RequestParam("ids") Collection<Long> ids) {
-        List<VolunteerDO> list = service.getList(ids);
-        return CommonResult.success(VolunteerConvert.INSTANCE.convertList(list));
-    }
+//    /**
+//     * 获得志愿服务时长列表
+//     * @param ids
+//     */
+//    @GetMapping("/list")
+//    @ApiOperation("获得志愿服务时长列表")
+//    @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
+//    public CommonResult<List<VolunteerRespVO>> getList(@RequestParam("ids") Collection<Long> ids) {
+//        List<VolunteerDO> list = service.getList(ids);
+//        return CommonResult.success(VolunteerConvert.INSTANCE.convertList(list));
+//    }
 
     @ApiOperation("选择全部学生")
     @PostMapping("/selectListAll")
@@ -86,5 +86,15 @@ public class VolunteerController {
         }
     }
 
-
+    @PostMapping("/{stuId}/get-volunteer-info")
+    @ApiOperation("根据学生ID获取学生信息接口")
+    public CommonResult<VolunteerRespVO> getInfoByStuId(@PathVariable("stuId") Long stuId) {
+        try {
+            VolunteerRespVO info = service.getInfoByStuId(stuId);
+            return CommonResult.success(info);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return CommonResult.error(500, "获取学生信息失败");
+        }
+    }
 }
