@@ -35,7 +35,7 @@ public class GradeController {
      * @param file
      * @throws IOException
      */
-    @PostMapping("/upload")
+    @PostMapping("/import")
     public CommonResult<GradeImportRespVO> importGradeExcel(@RequestPart(value = "file") MultipartFile file) throws IOException {
             List<GradeImportExcelVO> userList = ExcelUtils.read(file,GradeImportExcelVO.class);
             GradeImportRespVO respVO = service.importGradeList(userList);
