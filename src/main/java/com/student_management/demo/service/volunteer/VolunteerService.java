@@ -32,4 +32,6 @@ public interface VolunteerService {
      * @return 全体学生志愿服务时长列表
      */
     VolunteerSelectListRespVO selectAllStudents();
+
+    boolean updateResult(VolunteerDO volunteer);
 }

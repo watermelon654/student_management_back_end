@@ -86,5 +86,9 @@ public class VolunteerServiceImpl implements VolunteerService {
         return respVO;
     }
 
+    public boolean updateResult(VolunteerDO volunteer) {
+        System.out.println(volunteerMapper.updateByStuNum(volunteer));
+        return volunteerMapper.updateByStuNum(volunteer) > 0;
+    }
 
 }

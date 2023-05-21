@@ -62,4 +62,29 @@ public class VolunteerController {
         return CommonResult.success(service.selectAllStudents());
     }
 
+    @PostMapping("/{stuNum}/update-score")
+    @ApiOperation("根据学号更新评分接口")
+    public CommonResult<String> updateScoreByStuNum(
+            @PathVariable("stuNum") String stuNum,
+            @RequestParam("score") Integer score
+    ) {
+        System.out.println("in the method");
+        try {
+            VolunteerDO volunteer = new VolunteerDO();
+            volunteer.setStuNum(stuNum);
+            volunteer.setScore(score);
+            boolean success = service.updateResult(volunteer);
+
+            if (success) {
+                return CommonResult.success("评分更新成功");
+            } else {
+                return CommonResult.error(404, "找不到指定的记录");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return CommonResult.error(500, "评分更新失败");
+        }
+    }
+
+
 }

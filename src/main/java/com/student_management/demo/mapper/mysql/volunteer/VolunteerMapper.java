@@ -39,5 +39,5 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
         return selectList(null);
     }
 
-
+    int updateByStuNum(VolunteerDO volunteer);
 }
