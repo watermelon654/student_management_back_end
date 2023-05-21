@@ -4,14 +4,14 @@ import com.student_management.demo.controller.grade.vo.GradeImportExcelVO;
 import com.student_management.demo.controller.grade.vo.GradeImportRespVO;
 import com.student_management.demo.controller.grade.vo.GradeRespVO;
 import com.student_management.demo.controller.grade.vo.GradeSelectListRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerSelectListRespVO;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
-import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
+import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
 import com.student_management.demo.service.grade.GradeService;
+import com.student_management.demo.service.summary.SummaryService;
 import com.student_management.demo.utils.excel.ExcelUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +26,9 @@ import java.util.List;
 public class GradeController {
     @Resource
     private GradeService service;
+
+    @Resource
+    private SummaryService summaryService;
 
     /**
      * 上传GPA excel表格
@@ -54,7 +57,6 @@ public class GradeController {
             @PathVariable("stuNum") String stuNum,
             @RequestParam("score") Integer score
     ) {
-        System.out.println("in the method");
         try {
             GradeDO grade = new GradeDO();
             grade.setStuNum(stuNum);
@@ -62,6 +64,10 @@ public class GradeController {
             boolean success = service.updateResult(grade);
 
             if (success) {
+                SummaryDO summary = new SummaryDO();
+                summary.setStuNum(stuNum);
+                summary.setGpa(score);
+                summaryService.updateGpaByStuNum(summary);
                 return CommonResult.success("评分更新成功");
             } else {
                 return CommonResult.error(404, "找不到指定的记录");

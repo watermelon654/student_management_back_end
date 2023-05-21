@@ -20,10 +20,10 @@ public class SummaryBaseVO {
     private String stuName;
 
     @Schema(description = "学生GPA")
-    private Double gpa;
+    private Integer gpa;
 
     @Schema(description = "学生志愿")
-    private Double vol;
+    private Integer vol;
 
     @Schema(description = "学生科研")
     private Integer sci;

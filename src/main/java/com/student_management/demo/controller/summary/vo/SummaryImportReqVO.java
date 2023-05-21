@@ -22,10 +22,10 @@ public class SummaryImportReqVO {
     @ApiModelProperty(value = "学生姓名", required = true, example = "张三")
     private String stuName;
     @ApiModelProperty(value = "学生GPA", required = true, example = "3.0")
-    private Double gpa;
+    private Integer gpa;
 
     @ApiModelProperty(value = "学生志愿", required = true, example = "40")
-    private Double vol;
+    private Integer vol;
 
     @ApiModelProperty(value = "学生科研", required = true, example = "9")
     private Integer sci;

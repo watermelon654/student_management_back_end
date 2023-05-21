@@ -7,7 +7,7 @@
     <!--<insert id="insert" parameterType="com.student_management.demo.mapper.dataobject.grade.GradeDO">-->
     <!--    INSERT INTO grade (stu_id, stu_num, stu_name, gpa, status, note) VALUES (#{stu_id}, #{stu_num},# {stu_name}, #{gpa}, #{status}, #{note})-->
     <!--</insert>-->
-    <!--  更新当前学生打分  -->
+    <!--  更新当前学生打分：更新grade表的score字段-->
     <insert id="updateByStuNum" parameterType="com.student_management.demo.mapper.dataobject.grade.GradeDO">
         UPDATE grade
         SET score = #{score}

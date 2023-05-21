@@ -7,7 +7,9 @@ import com.student_management.demo.controller.volunteer.vo.VolunteerImportRespVO
 import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
 import com.student_management.demo.controller.volunteer.vo.VolunteerSelectListRespVO;
 import com.student_management.demo.convert.volunteer.VolunteerConvert;
+import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
+import com.student_management.demo.service.summary.SummaryService;
 import com.student_management.demo.service.volunteer.VolunteerService;
 import com.student_management.demo.utils.excel.ExcelUtils;
 import io.swagger.annotations.Api;
@@ -27,6 +29,9 @@ import java.util.List;
 public class VolunteerController {
     @Resource
     private VolunteerService service;
+
+    @Resource
+    private SummaryService summaryService;
 
     /**
      * 上传志愿服务 excel表格
@@ -76,6 +81,10 @@ public class VolunteerController {
             boolean success = service.updateResult(volunteer);
 
             if (success) {
+                SummaryDO summary = new SummaryDO();
+                summary.setStuNum(stuNum);
+                summary.setVol(score);
+                summaryService.updateVolByStuNum(summary);
                 return CommonResult.success("评分更新成功");
             } else {
                 return CommonResult.error(404, "找不到指定的记录");

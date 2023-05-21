@@ -105,4 +105,14 @@ public class SummaryServiceImpl implements SummaryService {
 
     }
 
+    @Override
+    public int updateGpaByStuNum(SummaryDO summary) {
+        return summaryMapper.updateGpaByStuNum(summary);
+    }
+
+    @Override
+    public int updateVolByStuNum(SummaryDO summary) {
+        return summaryMapper.updateVolByStuNum(summary);
+    }
+
 }

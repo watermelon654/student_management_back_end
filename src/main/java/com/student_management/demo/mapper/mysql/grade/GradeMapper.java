@@ -55,6 +55,7 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
      */
     int updateByStuNum(GradeDO grade);
 
+
     /**
      * 根据学生id获取当前学生志愿服务时长信息
      *

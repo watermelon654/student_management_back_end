@@ -31,11 +31,11 @@ public class SummaryDO {
     /**
      * 学生GPA
      */
-    private Double gpa;
+    private Integer gpa;
     /**
      * 学生志愿
      */
-    private Double vol;
+    private Integer vol;
     /**
      * 学生科研
      */
