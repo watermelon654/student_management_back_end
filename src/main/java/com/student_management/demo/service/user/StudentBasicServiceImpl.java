@@ -20,6 +20,7 @@ public class StudentBasicServiceImpl implements StudentBasicService{
         respVO.setUsername(studentDO.getName());
         respVO.setNum(studentDO.getNum());
         respVO.setRole(role);
+        respVO.setId(studentDO.getId());
         return respVO;
     }
 

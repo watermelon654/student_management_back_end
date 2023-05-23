@@ -21,6 +21,7 @@ public class StaffBasicServiceImpl implements StaffBasicService{
         respVO.setUsername(staffDO.getName());
         respVO.setNum(staffDO.getNum());
         respVO.setRole(role);
+        respVO.setId(staffDO.getId());
         return respVO;
     }
 }
