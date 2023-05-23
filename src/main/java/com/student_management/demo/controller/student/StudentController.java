@@ -29,7 +29,7 @@ public class StudentController {
      * @param file
      * @throws IOException
      */
-    @PostMapping("/upload")
+    @PostMapping("/import")
     public CommonResult<StudentImportRespVO> importStudentExcel(@RequestPart(value = "file") MultipartFile file) throws IOException {
         List<StudentImportExcelReqVO> studentList = ExcelUtils.read(file, StudentImportExcelReqVO.class);
         StudentImportRespVO respVO = studentService.importStudentList(studentList);
