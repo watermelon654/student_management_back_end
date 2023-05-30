@@ -1,7 +1,7 @@
 
 package com.student_management.demo.controller.student;
 
-import com.student_management.demo.CommonResult;
+import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.student.vo.StudentImportExcelReqVO;
 import com.student_management.demo.controller.student.vo.StudentImportRespVO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;

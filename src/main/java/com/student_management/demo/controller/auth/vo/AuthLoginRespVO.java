@@ -1,11 +1,13 @@
 package com.student_management.demo.controller.auth.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
 public class AuthLoginRespVO {
 
     @Schema(description = "用户角色", required = true, example = "false")
@@ -23,7 +25,7 @@ public class AuthLoginRespVO {
     //@Schema(description = "过期时间", required = true)
     //private LocalDateTime expiresTime;
 
-    private boolean isFailure = false;//是否发生错误
-    private String errorInfo;//错误信息
+    //private boolean isFailure = false;//是否发生错误
+    //private String errorInfo;//错误信息
 
 }

@@ -39,14 +39,4 @@ public class StaffDO extends UserDo {
      */
     private String passwd;
 
-    /**
-     * 职位
-     */
-    private String job;
-
-    /**
-     * 级别
-     */
-    private Long level;
-
 }

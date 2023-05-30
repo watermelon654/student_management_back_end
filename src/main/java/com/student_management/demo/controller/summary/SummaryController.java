@@ -1,6 +1,6 @@
 package com.student_management.demo.controller.summary;
 
-import com.student_management.demo.CommonResult;
+import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +26,6 @@ public class SummaryController {
     @ApiOperation("成绩表上传接口")
     @PostMapping("/import")
     public CommonResult<SummaryImportRespVO> importSummarySheet(@RequestBody List<SummaryImportReqVO> userList) {
-        //System.out.println(userList);
         SummaryImportRespVO respVO = service.importRecord(userList);
         return CommonResult.success(respVO);
 
@@ -34,10 +33,9 @@ public class SummaryController {
     @ApiOperation("根据状态挑选学生")
     @PostMapping("/selectList")
     public CommonResult<SummarySelectListRespVO> selectList(@RequestParam Integer flag) {
-        if (flag == 0)
-            return CommonResult.success(service.selectListByStatus(false));
-        else
-            return CommonResult.success(service.selectListByStatus(true));
+            return flag == 0 ?
+                    CommonResult.success(service.selectListByStatus(false)) :
+                    CommonResult.success(service.selectListByStatus(true));
     }
 
 

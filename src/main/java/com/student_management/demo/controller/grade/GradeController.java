@@ -1,5 +1,5 @@
 package com.student_management.demo.controller.grade;
-import com.student_management.demo.CommonResult;
+import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.grade.vo.GradeImportExcelVO;
 import com.student_management.demo.controller.grade.vo.GradeImportRespVO;
 import com.student_management.demo.controller.grade.vo.GradeRespVO;
@@ -11,7 +11,6 @@ import com.student_management.demo.service.summary.SummaryService;
 import com.student_management.demo.utils.excel.ExcelUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
