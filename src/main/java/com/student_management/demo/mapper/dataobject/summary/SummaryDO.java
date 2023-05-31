@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
+import java.sql.Timestamp;
+
 @TableName("summary")
 @Data
 @ToString(callSuper = true)
@@ -56,5 +58,10 @@ public class SummaryDO {
      * 状态
      */
     private boolean status;
+
+    /**
+     * 更新时间
+     */
+    private Timestamp updateTime;
 
 }

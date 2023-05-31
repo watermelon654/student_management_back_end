@@ -1,6 +1,6 @@
 package com.student_management.demo.controller.science;
 
-import com.student_management.demo.CommonResult;
+import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.science.vo.ScienceImportReqVO;
 import com.student_management.demo.controller.science.vo.ScienceImportRespVO;
 import com.student_management.demo.controller.science.vo.ScienceRespVO;
@@ -9,7 +9,6 @@ import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import com.student_management.demo.service.science.ScienceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.web.bind.annotation.*;
 

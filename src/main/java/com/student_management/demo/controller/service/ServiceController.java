@@ -1,6 +1,6 @@
 package com.student_management.demo.controller.service;
 
-import com.student_management.demo.CommonResult;
+import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.service.vo.ServiceRespVO;
 import com.student_management.demo.controller.service.vo.ServiceImportReqVO;
 import com.student_management.demo.controller.service.vo.ServiceImportRespVO;

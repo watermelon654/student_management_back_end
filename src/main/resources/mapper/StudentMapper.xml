@@ -7,5 +7,22 @@
         INSERT INTO stu_info (num, name) VALUES (#{num},#{name})
     </insert>
 
+    <select id="selectClassNameById" parameterType="Long" resultType="String">
+        SELECT b.name
+        FROM stu_info a JOIN class b ON a.classId = b.id
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="selectYearNameById" parameterType="Long" resultType="String">
+        SELECT b.name
+        FROM stu_info a JOIN effectiveyear b ON a.yearId = b.id
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="selectMajorNameById" parameterType="Long" resultType="String">
+        SELECT b.name
+        FROM stu_info a JOIN major b ON a.majorId = b.id
+        WHERE a.id = #{id}
+    </select>
 
 </mapper>

@@ -79,9 +79,11 @@ public class SummaryServiceImpl implements SummaryService {
     public SummarySelectListRespVO selectListByStatus(boolean status) {
         refreshStatus();
         List<SummaryDO> listdo = summaryMapper.selectListByStatus(status);
+        if (listdo.size() == 0){
+            return null;
+        }
         SummarySelectListRespVO respVO = new SummarySelectListRespVO();
-        List<SummaryBaseVO> listvo= SummaryConvert.INSTANCE.convertList2(listdo);
-        respVO.setSummarylist(listvo);
+        respVO.setSummarylist(listdo);
         return respVO;
     }
 

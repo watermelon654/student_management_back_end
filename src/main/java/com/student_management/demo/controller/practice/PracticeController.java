@@ -1,6 +1,6 @@
 package com.student_management.demo.controller.practice;
 
-import com.student_management.demo.CommonResult;
+import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.practice.vo.PracticeImportReqVO;
 import com.student_management.demo.controller.practice.vo.PracticeImportRespVO;
 import com.student_management.demo.controller.practice.vo.PracticeRespVO;

@@ -1,4 +1,4 @@
-package com.student_management.demo;
+package com.student_management.demo.common;
 
 import lombok.Data;
 

@@ -4,10 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Data
 public class SummaryBaseVO {
-    @Schema(description = "学生ID", example = "13470")
+    @Schema(description = "学生ID", example = "1")
     @NotNull(message = "学生ID不能为空")
     private Long stuId;
 
@@ -38,4 +39,6 @@ public class SummaryBaseVO {
     private Integer per;
     @Schema(description = "状态")
     private boolean status;
+    @Schema(description = "更新时间")
+    private Timestamp updateTime;
 }

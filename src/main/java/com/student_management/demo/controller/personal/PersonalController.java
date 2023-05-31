@@ -1,9 +1,8 @@
 package com.student_management.demo.controller.personal;
 
-import com.student_management.demo.CommonResult;
+import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.personal.vo.PersonalImportRespVO;
 import com.student_management.demo.controller.personal.vo.PersonalImportReqVO;
-import com.student_management.demo.controller.personal.vo.PersonalImportRespVO;
 import com.student_management.demo.controller.personal.vo.PersonalRespVO;
 import com.student_management.demo.convert.personal.PersonalConvert;
 import com.student_management.demo.mapper.dataobject.personal.PersonalDO;

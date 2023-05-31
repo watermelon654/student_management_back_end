@@ -1,5 +1,6 @@
 package com.student_management.demo.mapper.dataobject.user;
 
+import com.student_management.demo.utils.enu.SexEnum;
 import lombok.Data;
 
 /**
@@ -24,8 +25,9 @@ public class UserDo {
     private String name;
 
     /**
-     * 性别
+     * 用户性别
      *
+     * 枚举类 {@link SexEnum}
      */
     private Integer sex;
 

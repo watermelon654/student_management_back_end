@@ -1,56 +1,62 @@
+package com.student_management.demo.mapper.dataobject.student;
 
-package com.student_management.demo.controller.student.vo;
-
-import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.student_management.demo.utils.enu.SexEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 @Data
 @NoArgsConstructor
-public class StudentImportExcelReqVO {
+public class StudentBasicDO {
+    /**
+     * id
+     */
+    private Long id;
 
     /**
      * 学号
      */
-    @ExcelProperty("num")
     private String num;
 
     /**
      * 姓名
      */
-    @ExcelProperty("name")
     private String name;
 
     /**
-     * 性别
+     * 用户性别
+     *
+     * 枚举类 {@link SexEnum}
      */
-    @ExcelProperty("sex")
-    private String sex;
+    private Integer sex;
 
     /**
      * 邮箱
      */
-    @ExcelProperty("email")
     private String email;
-
     /**
-     * 学年
+     * 学年名
      */
-    @ExcelProperty("year")
+
     private String yearName;
 
     /**
-     * 专业
+     * 专业名
      */
-    @ExcelProperty("major")
+
     private String majorName;
 
     /**
-     * 班级
+     * 学苑名
      */
-    @ExcelProperty("class")
+
     private String className;
 
+    /**
+     * 更新时间
+     */
+
+    private Timestamp updateTime;
 
 }

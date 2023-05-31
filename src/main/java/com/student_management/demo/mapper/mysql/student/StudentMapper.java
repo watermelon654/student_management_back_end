@@ -24,75 +24,17 @@ public interface StudentMapper extends BaseMapper<StudentDO> {
         return selectOne(wrapper);
     }
 
-
-
-
     /**
      * 查询所有学生
-     * @param num
+     * @param
      * @return
      */
     default List<StudentDO> selectStudent() {
         QueryWrapper<StudentDO> wrapper = new QueryWrapper<>();
-        //查询条件
-//        wrapper.eq("num", num);
+        //查询条件：未被删除的记录
+        wrapper.eq("isDel", 0);
         return selectList(wrapper);
     }
-
-    /**
-     * 查询所有学生
-     * @param num
-     * @return
-     */
-    default List<Long> selectStudentbystatus() {
-        List<Long> idList = new ArrayList<>();
-        QueryWrapper<StudentDO> wrapper = new QueryWrapper<>();
-        wrapper.eq("status","0");
-        //查询条件
-//        wrapper.eq("num", num);
-        List<StudentDO> studentDOS = selectList(wrapper);
-
-        if (studentDOS.size() != 0 ){
-
-            for (StudentDO studentDO : studentDOS) {
-                Long getid = studentDO.getId();
-                idList.add(getid);
-            }
-
-        }
-        return idList;
-
-    }
-
-
-    default List<Long> selectStudentbystatus1() {
-        List<Long> idList = new ArrayList<>();
-        QueryWrapper<StudentDO> wrapper = new QueryWrapper<>();
-        wrapper.eq("status","1");
-        //查询条件
-//        wrapper.eq("num", num);
-        List<StudentDO> studentDOS = selectList(wrapper);
-
-        if (studentDOS.size() != 0 ){
-
-            for (StudentDO studentDO : studentDOS) {
-                Long getid = studentDO.getId();
-                idList.add(getid);
-            }
-
-        }
-        return idList;
-
-    }
-
-    default int updateStu (StudentDO studentDO){
-        QueryWrapper<StudentDO> wrapper = new QueryWrapper<>();
-        wrapper.eq("id",studentDO.getId());
-        return update(studentDO,wrapper);
-    }
-
-
-
 
     /**
      * 插入学生基本信息用于生成学生id
@@ -102,17 +44,25 @@ public interface StudentMapper extends BaseMapper<StudentDO> {
      */
     int insertStudentBasicInfo(String name,String num);
 
+    /**
+     * 根据学生id获取学年名
+     * @param id
+     * @return
+     */
+    String selectYearNameById(Long id);
 
+    /**
+     * 根据学生id获取专业名
+     * @param id
+     * @return
+     */
+    String selectMajorNameById(Long id);
 
-
-
-    default void deleteByIds(List<Long> idList) {
-        deleteBatchIds(idList);
-    }
-
-
-
-
-
+    /**
+     * 根据学生id获取学苑名
+     * @param id
+     * @return
+     */
+    String selectClassNameById(Long id);
 
 }
