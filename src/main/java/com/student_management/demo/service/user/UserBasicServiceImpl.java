@@ -38,16 +38,20 @@ public class UserBasicServiceImpl implements UserBasicService {
             permissions.add(urp.getPermissionId());
         }
         String name;
+        String num;
         boolean isStudent = roles.contains(1L);
         if (isStudent){//检查角色中是否有学生
             StudentDO studentDO = studentMapper.selectById(id);
             name = studentDO.getName();
+            num = studentDO.getNum();
         } else {
             StaffDO staffDO = staffMapper.selectById(id);
             name = staffDO.getName();
+            num = staffDO.getNum();
         }
         // 将角色和权限信息存储到Redis中
         redisService.setValue("user_name_" + id, name);
+        redisService.setValue("user_num_" + id, num);
         redisService.setValue("user_roles_" + id, roles.toString());
         redisService.setValue("user_roles_" + id, roles.toString());
 

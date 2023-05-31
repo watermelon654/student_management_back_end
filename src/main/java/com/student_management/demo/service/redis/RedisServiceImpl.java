@@ -18,7 +18,6 @@ public class RedisServiceImpl implements RedisService {
 
 
     public void setValue(String key,String value) {
-
         redisTemplate.opsForValue().set(key, value);
     }
 

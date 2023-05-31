@@ -40,6 +40,7 @@ public class StudentServiceImpl implements StudentService{
             if (existStu == null) {
                 // 如果学生表中不存在，在学生表中插入记录
                 StudentDO createStudent = StudentConvert.INSTANCE.convert(student);
+                System.out.println(createStudent);
                 studentMapper.insert(createStudent);
                 respVO.getCreatesStudentnames().add(student.getName());
             } else {
