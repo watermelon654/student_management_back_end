@@ -25,7 +25,7 @@ public class UserBasicController {
     @GetMapping("/profile/get")
     public CommonResult<UserBasicRespVO> getUserProfile(@RequestHeader("Authorization") String authHeader) {
         String token = authHeader.substring(7);
-        String username = jwtTokenUtil.getUsernameFromToken(token);//学号/职工号
+        String username = jwtTokenUtil.getUsernameFromToken(token);//id,且学生和老师id不会重复
         Long id = Long.parseLong(username);
         return CommonResult.success(userBasicService.getBasicInfo(id));
     }

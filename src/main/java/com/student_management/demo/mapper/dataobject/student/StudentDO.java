@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.student_management.demo.mapper.dataobject.user.UserDo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.student_management.demo.utils.enu.SexEnum;
+import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
@@ -28,8 +30,9 @@ public class StudentDO extends UserDo {
     private String name;
 
     /**
-     * 性别
+     * 用户性别
      *
+     * 枚举类 {@link SexEnum}
      */
     private Integer sex;
 
@@ -60,6 +63,36 @@ public class StudentDO extends UserDo {
      */
 
     private Long classId;
+
+    /**
+     * 创建者id
+     */
+
+    private Long createUserId;
+
+    /**
+     * 创建时间
+     */
+
+    private Timestamp createTime;
+
+    /**
+     * 更新者id
+     */
+    
+    private Long updateUserId;
+
+    /**
+     * 更新时间
+     */
+
+    private Timestamp updateTime;
+
+    /**
+     * 是否删除
+     */
+
+    private Boolean isDel;
 
 }
 

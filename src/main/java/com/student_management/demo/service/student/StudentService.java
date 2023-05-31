@@ -4,6 +4,7 @@ import com.student_management.demo.controller.grade.vo.GradeImportExcelVO;
 import com.student_management.demo.controller.grade.vo.GradeImportRespVO;
 import com.student_management.demo.controller.student.vo.StudentImportExcelReqVO;
 import com.student_management.demo.controller.student.vo.StudentImportRespVO;
+import com.student_management.demo.mapper.dataobject.student.StudentBasicDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface StudentService {
      * @param importGrade     导入学生信息列表
      * @return 导入结果
      */
-    StudentImportRespVO importStudentList(List<StudentImportExcelReqVO> importGrade);
+    StudentImportRespVO importStudentList(List<StudentImportExcelReqVO> importGrade, String id);
 
-    List<StudentDO> selectALLList();
+    List<StudentBasicDO> selectALLList();
 }

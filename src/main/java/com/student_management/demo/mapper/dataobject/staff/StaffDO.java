@@ -2,6 +2,7 @@ package com.student_management.demo.mapper.dataobject.staff;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.student_management.demo.mapper.dataobject.user.UserDo;
+import com.student_management.demo.utils.enu.SexEnum;
 import lombok.Data;
 
 @Data
@@ -24,8 +25,9 @@ public class StaffDO extends UserDo {
     private String name;
 
     /**
-     * 性别
+     * 用户性别
      *
+     * 枚举类 {@link SexEnum}
      */
     private Integer sex;
 
@@ -38,5 +40,18 @@ public class StaffDO extends UserDo {
      * 加密后的密码
      */
     private String passwd;
+
+    /**
+     * 创建者id
+     */
+
+    private Long createUserId;
+
+    /**
+     * 更新者id
+     */
+
+    private Long updateUserId;
+
 
 }

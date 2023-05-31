@@ -39,7 +39,7 @@ public class UserBasicServiceImpl implements UserBasicService {
         }
         String name;
         String num;
-        boolean isStudent = roles.contains(1L);
+        boolean isStudent = roles.contains(1l);
         if (isStudent){//检查角色中是否有学生
             StudentDO studentDO = studentMapper.selectById(id);
             name = studentDO.getName();

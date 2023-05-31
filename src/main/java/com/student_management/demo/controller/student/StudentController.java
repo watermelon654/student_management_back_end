@@ -4,10 +4,13 @@ package com.student_management.demo.controller.student;
 import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.student.vo.StudentImportExcelReqVO;
 import com.student_management.demo.controller.student.vo.StudentImportRespVO;
+import com.student_management.demo.mapper.dataobject.student.StudentBasicDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.service.student.StudentService;
 import com.student_management.demo.utils.excel.ExcelUtils;
+import com.student_management.demo.utils.token.JwtTokenUtil;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +25,8 @@ public class StudentController {
 
     @Resource
     private StudentService studentService;
-
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     /**
      * 上传GPA excel表格
@@ -30,13 +34,11 @@ public class StudentController {
      * @throws IOException
      */
     @PostMapping("/import")
-    public CommonResult<StudentImportRespVO> importStudentExcel(@RequestPart(value = "file") MultipartFile file) throws IOException {
+    public CommonResult<StudentImportRespVO> importStudentExcel(@RequestHeader("Authorization") String authHeader, @RequestPart(value = "file") MultipartFile file) throws IOException {
+        String token = authHeader.substring(7);
+        String id = jwtTokenUtil.getUsernameFromToken(token);//学号/职工号
         List<StudentImportExcelReqVO> studentList = ExcelUtils.read(file, StudentImportExcelReqVO.class);
-        StudentImportRespVO respVO = studentService.importStudentList(studentList);
-        // 检查上传文件是否为空文件
-        if (respVO.isEmpty())
-            return CommonResult.error(500, "文件内容为空！");
-        return CommonResult.success(respVO);
+        return CommonResult.success(studentService.importStudentList(studentList, id));
     }
 
 
@@ -46,7 +48,7 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping("/selectall")
-    public CommonResult<List<StudentDO>> selectall() {
+    public CommonResult<List<StudentBasicDO>> selectall() {
         return CommonResult.success(studentService.selectALLList());
     }
 

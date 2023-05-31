@@ -12,15 +12,12 @@ import java.util.Map;
 @Builder
 public class StudentImportRespVO {
     @Schema(description = "创建成功的学生数组", required = true)
-    private List<String> createsStudentnames;
+    private List<String> createsStudentNames;
 
     @Schema(description = "更新成功的学生数组", required = true)
-    private List<String> updateStudentnames;
+    private List<String> updateStudentNames;
 
     @Schema(description = "导入失败的学生集合,key 为用户名，value 为失败原因", required = true)
-    private Map<String, String> failureStudentnames;
+    private Map<String, String> failureStudentNames;
 
-    @Builder.Default
-    @Schema(description = "学生数组是否为空", required = true)
-    private boolean isEmpty = false;
 }

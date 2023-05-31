@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Data
 public class SummaryBaseVO {
@@ -38,4 +39,6 @@ public class SummaryBaseVO {
     private Integer per;
     @Schema(description = "状态")
     private boolean status;
+    @Schema(description = "更新时间")
+    private Timestamp updateTime;
 }
