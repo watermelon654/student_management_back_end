@@ -16,4 +16,6 @@ public interface SummaryService {
     int updateGpaByStuNum(SummaryDO summary);
 
     int updateVolByStuNum(SummaryDO summary);
+
+    SummarySelectListRespVO selectAllList();
 }

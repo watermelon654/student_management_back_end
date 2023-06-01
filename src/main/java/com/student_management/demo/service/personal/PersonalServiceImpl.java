@@ -6,6 +6,7 @@ import com.student_management.demo.controller.personal.vo.PersonalImportRespVO;
 import com.student_management.demo.convert.personal.PersonalConvert;
 import com.student_management.demo.mapper.dataobject.personal.PersonalDO;
 import com.student_management.demo.mapper.dataobject.personal.PersonalDO;
+import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.mysql.personal.PersonalMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
@@ -67,5 +68,9 @@ public class PersonalServiceImpl implements PersonalService {
     public List<PersonalDO> getList(Collection<Long> ids) {
         System.out.println(personalMapper.selectBatchIds(ids));
         return personalMapper.selectBatchIds(ids);
+    }
+
+    public List<PersonalDO> getAllList() {
+        return personalMapper.selectAllList();
     }
 }

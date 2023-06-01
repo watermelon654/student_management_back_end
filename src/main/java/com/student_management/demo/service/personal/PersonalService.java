@@ -17,4 +17,6 @@ public interface PersonalService {
      * @return 科研情况列表
      */
     List<PersonalDO> getList(Collection<Long> ids);
+
+    List<PersonalDO> getAllList();
 }

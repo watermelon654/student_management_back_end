@@ -33,8 +33,5 @@ public class ScienceImportReqVO {
     private String time;
     @ApiModelProperty(value = "项目成果", required = true, example = "该项目获得2019年省级信息技术大赛三等奖")
     private String result;
-    @ApiModelProperty(value = "分数", required = true, example = "8")
-    private Integer score;
-    @ApiModelProperty(value = "状态", required = true, example = "1")
-    private Integer status;
+
 }
