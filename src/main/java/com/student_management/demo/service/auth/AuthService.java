@@ -3,7 +3,7 @@ package com.student_management.demo.service.auth;
 import com.student_management.demo.controller.auth.vo.AuthLoginReqVO;
 import com.student_management.demo.controller.auth.vo.AuthLoginRespVO;
 
-public interface AdminAuthService {
+public interface AuthService {
 
     /**
      * 登录验证
