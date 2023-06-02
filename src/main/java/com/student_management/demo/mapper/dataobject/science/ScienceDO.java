@@ -30,19 +30,10 @@ public class ScienceDO {
      */
     private String stuName;
 
-    /**
-     * 评价状态
-     * 0：未确认(default)
-     * 1：已确认
-     * 2：有误
-     */
-    private Integer status=0;
-
     private String title;
     private String director;
     private String constitution;
     private Integer level;
     private String time;
     private String result;
-    private Integer score;
 }

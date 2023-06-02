@@ -46,4 +46,11 @@ public class ScienceController {
         return CommonResult.success(ScienceConvert.INSTANCE.convertList(list));
     }
 
+    @GetMapping("/getAllList")
+    @ApiOperation("获得科研情况所有列表")
+    public CommonResult<List<ScienceRespVO>> getAllList() {
+        List<ScienceDO> list = service.getAllList();
+        return CommonResult.success(ScienceConvert.INSTANCE.convertList(list));
+    }
+
 }

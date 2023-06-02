@@ -3,8 +3,11 @@ package com.student_management.demo.mapper.mysql.personal;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.student_management.demo.mapper.dataobject.personal.PersonalDO;
+import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -31,5 +34,10 @@ public interface PersonalMapper extends BaseMapper<PersonalDO> {
         //查询条件
         wrapper.eq("stuId", stu_id);
         return selectOne(wrapper);
+    }
+
+    default List<PersonalDO> selectAllList() {
+        QueryWrapper<PersonalDO> wrapper = new QueryWrapper<>();
+        return selectList(wrapper);
     }
 }

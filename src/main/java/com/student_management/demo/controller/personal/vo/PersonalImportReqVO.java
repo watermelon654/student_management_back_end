@@ -27,8 +27,5 @@ public class PersonalImportReqVO {
     private String society;
     @ApiModelProperty(value = "自我评价", required = true, example = "我认真学习，积极参与")
     private String self;
-    @ApiModelProperty(value = "分数", required = true, example = "8")
-    private Integer score;
-    @ApiModelProperty(value = "状态", required = true, example = "1")
-    private Integer status;
+
 }
