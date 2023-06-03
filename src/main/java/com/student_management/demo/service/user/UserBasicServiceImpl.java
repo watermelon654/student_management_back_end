@@ -34,7 +34,7 @@ public class UserBasicServiceImpl implements UserBasicService {
         map.put("id", id);
         map.put("name",  redisService.getValue("user_name_" + id));
         map.put("num", redisService.getValue("user_num_" + id));
-
+        return map;
     }
 
 
