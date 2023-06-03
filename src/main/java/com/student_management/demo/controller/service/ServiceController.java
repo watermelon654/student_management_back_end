@@ -1,10 +1,13 @@
 package com.student_management.demo.controller.service;
 
 import com.student_management.demo.common.CommonResult;
+import com.student_management.demo.controller.science.vo.ScienceRespVO;
 import com.student_management.demo.controller.service.vo.ServiceRespVO;
 import com.student_management.demo.controller.service.vo.ServiceImportReqVO;
 import com.student_management.demo.controller.service.vo.ServiceImportRespVO;
+import com.student_management.demo.convert.science.ScienceConvert;
 import com.student_management.demo.convert.service.ServiceConvert;
+import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import com.student_management.demo.mapper.dataobject.service.ServiceDO;
 import com.student_management.demo.service.service.ServiceService;
 import io.swagger.annotations.Api;
@@ -42,6 +45,14 @@ public class ServiceController {
     @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
     public CommonResult<List<ServiceRespVO>> getList(@RequestParam("ids") Collection<Long> ids) {
         List<ServiceDO> list = service.getList(ids);
+        return CommonResult.success(ServiceConvert.INSTANCE.convertList(list));
+    }
+
+
+    @GetMapping("/getAllList")
+    @ApiOperation("获得骨干服务岗位情况所有列表")
+    public CommonResult<List<ServiceRespVO>> getAllList() {
+        List<ServiceDO> list = service.getAllList();
         return CommonResult.success(ServiceConvert.INSTANCE.convertList(list));
     }
 

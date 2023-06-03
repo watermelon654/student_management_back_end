@@ -33,8 +33,5 @@ public class PracticeImportReqVO {
     private String time;
     @ApiModelProperty(value = "结果", required = true, example = "100")
     private String result;
-    @ApiModelProperty(value = "分数", required = true, example = "8")
-    private Integer score;
-    @ApiModelProperty(value = "状态", required = true, example = "1")
-    private Integer status;
+
 }

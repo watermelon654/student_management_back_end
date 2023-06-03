@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.student_management.demo.controller.service.vo.ServiceImportReqVO;
 import com.student_management.demo.controller.service.vo.ServiceImportRespVO;
 import com.student_management.demo.convert.service.ServiceConvert;
+import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import com.student_management.demo.mapper.dataobject.service.ServiceDO;
 import com.student_management.demo.mapper.dataobject.service.ServiceDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
@@ -50,7 +51,7 @@ public class ServiceServiceImpl implements ServiceService{
                 // 如果在成绩表中不存在，在成绩表插入记录
                 ServiceDO createService = ServiceConvert.INSTANCE.convert(Service);
                 createService.setStuId(existStu.getId());
-                serviceMapper.insertService(createService.getStuId(), createService.getStuNum(),createService.getStuName(), createService.getTitle(),createService.getDirector(),createService.getConstitution(),createService.getContent(),createService.getTime(),createService.getResult(),createService.getScore(),createService.getStatus());
+                serviceMapper.insertService(createService.getStuId(), createService.getStuNum(),createService.getStuName(), createService.getTitle(),createService.getDirector(),createService.getConstitution(),createService.getContent(),createService.getTime(),createService.getResult());
                 System.out.println(createService);
                 respVO.getCreateServicenames().add(Service.getStuName());
                 return;
@@ -68,4 +69,13 @@ public class ServiceServiceImpl implements ServiceService{
         System.out.println(serviceMapper.selectBatchIds(ids));
         return serviceMapper.selectBatchIds(ids);
     }
+
+    @Override
+    public List<ServiceDO> getAllList() {
+        return serviceMapper.selectAllList();
+    }
+
+
+
+
 }

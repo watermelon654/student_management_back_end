@@ -3,7 +3,7 @@
 
 <mapper namespace="com.student_management.demo.mapper.mysql.service.ServiceMapper">
     <insert id="insertService" parameterType="com.student_management.demo.mapper.dataobject.service.ServiceDO">
-        INSERT INTO service(stuID,stuNum,stuName,title,director,constitution,content,time,result,score,status)
-        VALUES (#{stuId},#{stuNum},#{stuName},#{title},#{director},#{constitution},#{content},#{time},#{result},#{score},#{status})
+        INSERT INTO service(stuID,stuNum,stuName,title,director,constitution,content,time,result)
+        VALUES (#{stuId},#{stuNum},#{stuName},#{title},#{director},#{constitution},#{content},#{time},#{result})
     </insert>
 </mapper>
