@@ -69,13 +69,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             System.out.println("username=" + username);
             System.out.println("permissionsString=" + permissionsString);
         } catch (ExpiredJwtException e) {
-            throw exception(TOKEN_EXPIRED);
+            request.setAttribute("filterError", TOKEN_EXPIRED);
+            request.getRequestDispatcher("/error/jwt").forward(request, response);
+            return;
+            //throw exception(TOKEN_EXPIRED);
         } catch (MalformedJwtException e) {
-            throw exception(ERROR_TOKEN_DATA);
+            request.setAttribute("filterError", ERROR_TOKEN_DATA);
+            request.getRequestDispatcher("/error/jwt").forward(request, response);
+            return;
+            //throw exception(ERROR_TOKEN_DATA);
         } catch (SignatureException e) {
-            throw exception(ERROR_TOKEN_SIGNATURE);
+            request.setAttribute("filterError", ERROR_TOKEN_SIGNATURE);
+            request.getRequestDispatcher("/error/jwt").forward(request, response);
+            return;
+            //throw exception(ERROR_TOKEN_SIGNATURE);
         } catch (Throwable e) {
-            throw exception(ERROR_TOKEN);
+            request.setAttribute("filterError", ERROR_TOKEN);
+            request.getRequestDispatcher("/error/jwt").forward(request, response);
+            return;
+            //throw exception(ERROR_TOKEN);
         }
 
         // 将此前从JWT中读取到的permissionsString（JSON字符串）转换成Collection<? extends GrantedAuthority>

@@ -48,7 +48,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 "/doc.html",  // 从本行开始，以下是新增
                 "/**/*.js",
                 "/**/*.css",
-                "/swagger-resources",
+                "/swagger-resources/**",
+                "/swagger-ui/**",
                 "/v2/api-docs",
                 "/favicon.ico"
         };

@@ -16,6 +16,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(ServerException.class)
     public CommonResult<ServerException> handleCustomException(ServerException ex) {
+        System.out.println("捕捉到错误信息！"+ex.getMessage());
         //返回错误信息
         return CommonResult.error(ex.getCode(), ex.getMessage());
     }
