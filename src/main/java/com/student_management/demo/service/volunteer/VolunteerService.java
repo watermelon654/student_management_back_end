@@ -43,11 +43,11 @@ public interface VolunteerService {
     boolean updateResult(VolunteerDO volunteer);
 
     /**
-     * 根据学生id获取当前学生志愿服务时长信息
+     * 根据学生学号获取当前学生志愿服务时长信息
      *
-     * @param stuId
+     * @param stuNum
      * @return 当前学生志愿服务时长信息
      */
-    VolunteerRespVO getInfoByStuId(Long stuId);
+    VolunteerRespVO getInfoByStuNum(String stuNum);
 
 }

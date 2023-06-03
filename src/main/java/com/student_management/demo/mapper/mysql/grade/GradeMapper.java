@@ -57,10 +57,10 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
 
 
     /**
-     * 根据学生id获取当前学生志愿服务时长信息
+     * 根据学生学号获取当前学生GPA信息
      *
      * @param stuNum
-     * @return 学号。姓名。gpa
+     * @return 学号，姓名，gpa
      */
     GradeRespVO getInfoByStuNum(String stuNum);
 }

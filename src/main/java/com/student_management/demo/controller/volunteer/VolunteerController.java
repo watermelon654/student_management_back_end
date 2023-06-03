@@ -1,6 +1,7 @@
 package com.student_management.demo.controller.volunteer;
 
 import com.student_management.demo.common.CommonResult;
+import com.student_management.demo.controller.grade.vo.GradeRespVO;
 import com.student_management.demo.controller.volunteer.vo.VolunteerImportExcelVO;
 import com.student_management.demo.controller.volunteer.vo.VolunteerImportRespVO;
 import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
@@ -10,8 +11,11 @@ import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import com.student_management.demo.service.summary.SummaryService;
 import com.student_management.demo.service.volunteer.VolunteerService;
 import com.student_management.demo.utils.excel.ExcelUtils;
+import com.student_management.demo.utils.token.JwtTokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +33,9 @@ public class VolunteerController {
     @Resource
     private SummaryService summaryService;
 
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
     /**
      * 上传志愿服务 excel表格
      * @param file
@@ -44,18 +51,6 @@ public class VolunteerController {
             return CommonResult.error(500, "文件内容为空！");
         return CommonResult.success(respVO);
     }
-
-//    /**
-//     * 获得志愿服务时长列表
-//     * @param ids
-//     */
-//    @GetMapping("/list")
-//    @ApiOperation("获得志愿服务时长列表")
-//    @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
-//    public CommonResult<List<VolunteerRespVO>> getList(@RequestParam("ids") Collection<Long> ids) {
-//        List<VolunteerDO> list = service.getList(ids);
-//        return CommonResult.success(VolunteerConvert.INSTANCE.convertList(list));
-//    }
 
     @ApiOperation("选择全部学生")
     @PostMapping("/selectListAll")
@@ -90,11 +85,15 @@ public class VolunteerController {
         }
     }
 
-    @PostMapping("/get-volunteer-info")
-    @ApiOperation("根据学生ID获取学生信息接口")
-    public CommonResult<VolunteerRespVO> getInfoByStuId(@PathVariable("stuId") Long stuId) {
+    @GetMapping("/get-volunteer-info")
+    @PreAuthorize("hasAuthority('/user/profile/get')")
+    @ApiOperation("根据token获取学生学号，之后获取学生志愿服务时长信息")
+    public CommonResult<VolunteerRespVO> getInfoByStuNum(@RequestHeader("Authorization") String authHeader) {
         try {
-            VolunteerRespVO info = service.getInfoByStuId(stuId);
+            String stuNum = jwtTokenUtil.getUsernameFromToken(authHeader);//id,且学生和老师id不会重复
+            System.out.println("/get-volunteer-info:stuNum:" + stuNum);
+            VolunteerRespVO info = service.getInfoByStuNum(stuNum);
+            System.out.println(info);
             return CommonResult.success(info);
         } catch (Exception e) {
             e.printStackTrace();

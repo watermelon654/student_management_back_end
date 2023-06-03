@@ -95,10 +95,10 @@ public class GradeServiceImpl implements GradeService{
     }
 
     /**
-     * 根据学生id获取当前学生志愿服务时长信息
+     * 根据学生学号获取当前学生GPA信息
      *
      * @param stuNum
-     * @return 当前学生志愿服务时长信息
+     * @return 当前学生GPA信息
      */
     public GradeRespVO getInfoByStuNum(String stuNum) {
         return gradeMapper.getInfoByStuNum(stuNum);
