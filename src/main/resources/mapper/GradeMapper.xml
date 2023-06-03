@@ -15,10 +15,10 @@
     </insert>
 
     <!--  查询当前学生学号、姓名、GPA  -->
-    <select id="getInfoByStuId" parameterType="java.lang.Long" resultType="com.student_management.demo.controller.grade.vo.GradeRespVO">
+    <select id="getInfoByStuNum" parameterType="java.lang.String" resultType="com.student_management.demo.controller.grade.vo.GradeRespVO">
         SELECT stuNum, stuName, gpa
         FROM grade
-        WHERE stuId = #{stuId}
+        WHERE stuNum = #{stuNum}
     </select>
 
 </mapper>

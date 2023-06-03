@@ -4,13 +4,18 @@ import com.student_management.demo.controller.grade.vo.GradeImportExcelVO;
 import com.student_management.demo.controller.grade.vo.GradeImportRespVO;
 import com.student_management.demo.controller.grade.vo.GradeRespVO;
 import com.student_management.demo.controller.grade.vo.GradeSelectListRespVO;
+import com.student_management.demo.controller.user.vo.UserBasicRespVO;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
+import com.student_management.demo.mapper.mysql.grade.GradeMapper;
 import com.student_management.demo.service.grade.GradeService;
 import com.student_management.demo.service.summary.SummaryService;
 import com.student_management.demo.utils.excel.ExcelUtils;
+import com.student_management.demo.utils.token.JwtTokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +33,9 @@ public class GradeController {
 
     @Resource
     private SummaryService summaryService;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     /**
      * 上传GPA excel表格
@@ -77,11 +85,16 @@ public class GradeController {
         }
     }
 
-    @PostMapping("/{stuId}/get-grade-info")
+    @GetMapping("/get-grade-info")
+    @PreAuthorize("hasAuthority('/user/profile/get')")
     @ApiOperation("根据学生ID获取学生信息接口")
-    public CommonResult<GradeRespVO> getInfoByStuId(@PathVariable("stuId") Long stuId) {
+    public CommonResult<GradeRespVO> getInfoByStuNum(@RequestHeader("Authorization") String authHeader) {
+        //return CommonResult.success(userBasicService.getBasicInfo(username));
         try {
-            GradeRespVO info = service.getInfoByStuId(stuId);
+            String stuNum = jwtTokenUtil.getUsernameFromToken(authHeader);//id,且学生和老师id不会重复
+            System.out.println("/get-grade-info:stuNum:" + stuNum);
+            GradeRespVO info = service.getInfoByStuNum(stuNum);
+            System.out.println(info);
             return CommonResult.success(info);
         } catch (Exception e) {
             e.printStackTrace();

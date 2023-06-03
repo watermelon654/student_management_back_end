@@ -33,8 +33,8 @@ public interface GradeService {
     /**
      * 根据学生id获取当前学生志愿服务时长信息
      *
-     * @param stuId
+     * @param stuNum
      * @return 当前学生志愿服务时长信息
      */
-    GradeRespVO getInfoByStuId(Long stuId);
+    GradeRespVO getInfoByStuNum(String stuNum);
 }

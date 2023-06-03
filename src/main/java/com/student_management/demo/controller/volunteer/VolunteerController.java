@@ -90,7 +90,7 @@ public class VolunteerController {
         }
     }
 
-    @PostMapping("/{stuId}/get-volunteer-info")
+    @PostMapping("/get-volunteer-info")
     @ApiOperation("根据学生ID获取学生信息接口")
     public CommonResult<VolunteerRespVO> getInfoByStuId(@PathVariable("stuId") Long stuId) {
         try {
