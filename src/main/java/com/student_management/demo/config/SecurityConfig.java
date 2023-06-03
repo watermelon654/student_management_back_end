@@ -58,7 +58,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").anonymous()
                 .anyRequest().authenticated()//所有请求都要经过授权
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);;
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // 注册处理JWT的过滤器
         // 此过滤器必须在Spring Security处理登录的过滤器之前
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
