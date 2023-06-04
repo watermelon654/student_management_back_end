@@ -65,20 +65,20 @@ public class GradeController {
             @RequestParam("score") Integer score
     ) {
         try {
-            GradeDO grade = new GradeDO();
-            grade.setStuNum(stuNum);
-            grade.setScore(score);
-            boolean success = service.updateResult(grade);
-
-            if (success) {
+//            GradeDO grade = new GradeDO();
+//            grade.setStuNum(stuNum);
+//            grade.setScore(score);
+//            boolean success = service.updateResult(grade);
+//
+//            if (success) {
                 SummaryDO summary = new SummaryDO();
                 summary.setStuNum(stuNum);
                 summary.setGpa(score);
                 summaryService.updateGpaByStuNum(summary);
                 return CommonResult.success("评分更新成功");
-            } else {
+            /*} else {
                 return CommonResult.error(404, "找不到指定的记录");
-            }
+            }*/
         } catch (Exception e) {
             e.printStackTrace();
             return CommonResult.error(500, "评分更新失败");
