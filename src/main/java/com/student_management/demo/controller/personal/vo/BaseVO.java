@@ -23,6 +23,9 @@ public class BaseVO {
 
     @Schema(description = "自我评价",example = "很好")
     private String self;
-
+    @Schema(description = "创建者id")
+    private Long createUserId;
+    @Schema(description = "更新者id")
+    private Long updateUserId;
 
 }

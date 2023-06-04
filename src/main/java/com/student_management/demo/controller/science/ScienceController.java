@@ -7,6 +7,7 @@ import com.student_management.demo.controller.science.vo.ScienceRespVO;
 import com.student_management.demo.convert.science.ScienceConvert;
 import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import com.student_management.demo.service.science.ScienceService;
+import com.student_management.demo.service.user.UserBasicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/science/")
@@ -24,12 +26,23 @@ public class ScienceController {
     @Resource
     private ScienceService service;
 
+    @Resource
+    private UserBasicService userBasicService;
     @ApiOperation("科研表上传接口")
     @PostMapping("/import")
     // CommonResult<ScienceImportRespVO>
-    public CommonResult<ScienceImportRespVO> importScienceSheet(@RequestBody List<ScienceImportReqVO> userList) {
-//        console.log(reqVO)
-        System.out.println(userList);
+    public CommonResult<ScienceImportRespVO> importScienceSheet(@RequestHeader("Authorization") String authHeader,@RequestBody List<ScienceImportReqVO> userList) {
+        String token = authHeader.substring(7);
+        Map<String,String> map = userBasicService.getCurrentUserInfo(token);
+
+        for (ScienceImportReqVO user : userList) {
+            user.setStuId(Long.parseLong(map.get("id")));
+            user.setStuName(map.get("name"));
+            user.setStuNum(map.get("num"));
+            user.setCreateUserId(Long.parseLong(map.get("id")));
+            user.setUpdateUserId(Long.parseLong(map.get("id")));
+        }
+
 //        List<ScienceImportReqVO> userList = ExcelUtils.read(file,GradeImportExcelVO.class);
 //        GradeImportRespVO respVO = service.importGradeList(userList);
 

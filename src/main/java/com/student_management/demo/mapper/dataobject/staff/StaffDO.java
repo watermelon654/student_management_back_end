@@ -10,21 +10,6 @@ import lombok.Data;
 public class StaffDO extends UserDo {
 
     /**
-     * id
-     */
-    private Long id;
-
-    /**
-     * 职工号/学号
-     */
-    private String num;
-
-    /**
-     * 姓名
-     */
-    private String name;
-
-    /**
      * 用户性别
      *
      * 枚举类 {@link SexEnum}
@@ -35,11 +20,6 @@ public class StaffDO extends UserDo {
      * 邮箱
      */
     private String email;
-
-    /**
-     * 加密后的密码
-     */
-    private String passwd;
 
     /**
      * 创建者id

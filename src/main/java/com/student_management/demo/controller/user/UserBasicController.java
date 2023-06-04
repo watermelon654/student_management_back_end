@@ -6,6 +6,7 @@ import com.student_management.demo.service.user.UserBasicService;
 import com.student_management.demo.utils.token.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +24,12 @@ public class UserBasicController {
     private JwtTokenUtil jwtTokenUtil;
 
     @GetMapping("/profile/get")
+    @PreAuthorize("hasAuthority('/user/profile/get')")
     public CommonResult<UserBasicRespVO> getUserProfile(@RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.substring(7);
-        String username = jwtTokenUtil.getUsernameFromToken(token);//id,且学生和老师id不会重复
-        Long id = Long.parseLong(username);
-        return CommonResult.success(userBasicService.getBasicInfo(id));
+        System.out.println("=================getUserProfile=================");
+        String username = jwtTokenUtil.getUsernameFromToken(authHeader);//id,且学生和老师id不会重复
+        System.out.println(username);
+        return CommonResult.success(userBasicService.getBasicInfo(username));
     }
 
 }

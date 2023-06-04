@@ -114,11 +114,18 @@
 			<artifactId>easyexcel-core</artifactId>
 			<version>3.2.1</version>
 		</dependency>
+		<!--spring security-->
+		<!--<dependency>-->
+		<!--	<groupId>org.springframework.security</groupId>-->
+		<!--	<artifactId>spring-security-core</artifactId>-->
+		<!--	<version>5.7.7</version>-->
+		<!--</dependency>-->
+		<!-- Spring Boot Security：处理认证与授权 -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-			<version>5.7.7</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
@@ -144,6 +151,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<!--过滤器与拦截器-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 	</dependencies>
