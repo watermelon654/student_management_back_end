@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.student_management.demo.mapper.mysql.user.UserMapper">
+    <select id="selectUserInfoByUserNum"  parameterType="String" resultMap="LoginInfoResultMap">
+        SELECT a.id,a.num,a.name,a.passwd,a.isDel,b.roleId,d.path FROM stu_info a JOIN user_role b ON a.id = b.userId JOIN permission_role c ON b.roleId = c.roleId JOIN permission d ON c.permissionId =d.id
+        WHERE a.num = #{num}
+        UNION
+        SELECT a.id,a.num,a.name,a.passwd,a.isDel,b.roleId,d.path FROM staff_info a JOIN user_role b ON a.id = b.userId JOIN permission_role c ON b.roleId = c.roleId JOIN permission d ON c.permissionId =d.id
+        WHERE a.num = #{num}
+    </select>
+    <resultMap id="LoginInfoResultMap" type="com.student_management.demo.mapper.dataobject.user.UserPermissionDO">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="num" property="num" />
+        <result column="passwd" property="passwd" />
+        <result column="idDel" property="isDel" />
+        <collection property="roles" ofType="java.lang.Long">
+            <!-- 以下配置类似在Java中执行 new String("/pms/product/read") -->
+            <constructor>
+                <arg column="roleId" />
+            </constructor>
+        </collection>
+        <collection property="permissions" ofType="java.lang.String">
+            <constructor>
+                <arg column="path" />
+            </constructor>
+        </collection>
+    </resultMap>
+</mapper>

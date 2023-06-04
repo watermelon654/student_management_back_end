@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserRolePermissionDO {
-    private Long userId;
-    private Long roleId;
-    private Long permissionId;
+@NoArgsConstructor
+public class UserPermissionDO extends UserDo{
+    private List<Long> roles;
+    private List<String> permissions;
 }
