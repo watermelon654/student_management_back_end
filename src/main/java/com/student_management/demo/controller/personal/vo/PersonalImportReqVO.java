@@ -28,4 +28,9 @@ public class PersonalImportReqVO {
     @ApiModelProperty(value = "自我评价", required = true, example = "我认真学习，积极参与")
     private String self;
 
+    @ApiModelProperty(value = "创建者id", required = true, example = "1")
+    private Long createUserId;
+    @ApiModelProperty(value = "更新者id", required = true, example = "1")
+    private Long updateUserId;
+
 }

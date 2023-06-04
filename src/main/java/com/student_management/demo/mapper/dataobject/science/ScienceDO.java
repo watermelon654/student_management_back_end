@@ -36,4 +36,7 @@ public class ScienceDO {
     private Integer level;
     private String time;
     private String result;
+
+    private Long createUserId;
+    private Long updateUserId;
 }
