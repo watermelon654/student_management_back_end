@@ -1,6 +1,5 @@
 package com.student_management.demo.mapper.dataobject.student;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.student_management.demo.mapper.dataobject.user.UserDo;
 import lombok.Data;
@@ -13,22 +12,6 @@ import java.sql.Timestamp;
 @TableName(value="stu_info")//数据库表名
 public class StudentDO extends UserDo {
 
-
-    /**
-     * id
-     */
-    private Long id;
-
-    /**
-     * 学号
-     */
-    private String num;
-
-    /**
-     * 姓名
-     */
-    private String name;
-
     /**
      * 用户性别
      *
@@ -40,11 +23,6 @@ public class StudentDO extends UserDo {
      * 邮箱
      */
     private String email;
-
-    /**
-     * 加密后的密码
-     */
-    private String passwd;
 
     /**
      * 学年 ID
@@ -88,11 +66,6 @@ public class StudentDO extends UserDo {
 
     private Timestamp updateTime;
 
-    /**
-     * 是否删除
-     */
-
-    private Boolean isDel;
 
 }
 
