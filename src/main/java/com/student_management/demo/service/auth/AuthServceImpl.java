@@ -48,18 +48,15 @@ public class AuthServceImpl implements AuthService {
             String token = jwtTokenUtil.generateToken(authenticate,reqVO.getUsername());
             // 返回JWT数据
             return new AuthLoginRespVO(token);
-        } catch (InternalAuthenticationServiceException e) {
-            // Jedis连接失败
-             throw exception(JEDIS_CONNECTION_FAILED);
         } catch (BadCredentialsException e) {
             // 密码验证失败
             throw exception(AUTH_LOGIN_BAD_CREDENTIALS);
         }
-        catch (AuthenticationException e) {
-            // 其他情况
-            e.printStackTrace();
-            throw exception(AUTHENTICATION_FAILED);
-        }
+        //catch (AuthenticationException e) {
+        //    // 其他情况
+        //    e.printStackTrace();
+        //    throw exception(AUTHENTICATION_FAILED);
+        //}
     }
 
 
