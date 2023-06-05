@@ -28,10 +28,10 @@ public class UserBasicServiceImpl implements UserBasicService {
      * @param token
      * @return
      */
-    protected HashMap<String,String> getCurrentUserInfo(String token){
+    public HashMap<String,String> getCurrentUserInfo(String token){
         String id = jwtTokenUtil.getUsernameFromToken(token);//id,且学生和老师id不会重复
         HashMap<String,String> map = new HashMap<>();
-        map.put("id", id);
+        map.put("id", redisService.getValue("user_id_" + id));
         map.put("name",  redisService.getValue("user_name_" + id));
         map.put("num", redisService.getValue("user_num_" + id));
         return map;

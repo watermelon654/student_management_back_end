@@ -30,17 +30,10 @@ public class PersonalDO {
      */
     private String stuName;
 
-    /**
-     * 评价状态
-     * 0：未确认(default)
-     * 1：已确认
-     * 2：有误
-     */
-    private Integer status=0;
+
 
     private String school;
     private String society;
     private String self;
 
-    private Integer score;
 }
