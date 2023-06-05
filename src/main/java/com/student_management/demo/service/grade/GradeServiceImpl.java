@@ -11,6 +11,7 @@ import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import com.student_management.demo.mapper.mysql.grade.GradeMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
+import com.student_management.demo.mapper.mysql.summary.SummaryMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,9 @@ public class GradeServiceImpl implements GradeService{
 
     @Resource
     private StudentMapper studentMapper;
+
+    @Resource
+    private SummaryMapper summaryMapper;
 
 
     /**
@@ -79,28 +83,52 @@ public class GradeServiceImpl implements GradeService{
     public GradeSelectListRespVO selectAllStudents() {
         List<GradeDO> listdo = gradeMapper.selectAllStudents();
         GradeSelectListRespVO respVO = new GradeSelectListRespVO();
-        List<GradeBaseVO> listvo = GradeConvert.INSTANCE.convertList2(listdo);
+        List<GradeBaseVO> listvo = convertList(listdo);
         respVO.setGradelist(listvo);
         return respVO;
     }
 
-    /**
-     * 打分结果
-     *
-     * @param grade
-     * @return 打分结果，true表示打分成功，false表示打分失败
-     */
-    public boolean updateResult(GradeDO grade) {
-        return gradeMapper.updateByStuNum(grade) > 0;
-    }
+//    /**
+//     * 打分结果
+//     *
+//     * @param grade
+//     * @return 打分结果，true表示打分成功，false表示打分失败
+//     */
+//    public boolean updateResult(GradeDO grade) {
+//        return gradeMapper.updateByStuNum(grade) > 0;
+//    }
 
     /**
-     * 根据学生学号获取当前学生GPA信息
+     * 根据学生学号获取当前学生学号、姓名、GPA
      *
      * @param stuNum
-     * @return 当前学生GPA信息
+     * @return 当前学号、姓名、GPA
      */
     public GradeRespVO getInfoByStuNum(String stuNum) {
         return gradeMapper.getInfoByStuNum(stuNum);
+    }
+
+    /**
+     * 将GradeDO复制给GradeBaseVO并添加score
+     *
+     * @param listdo
+     * @return listvo
+     */
+    public List<GradeBaseVO> convertList(List<GradeDO> listdo) {
+        List<GradeBaseVO> listvo = new ArrayList<>();
+        for (GradeDO gradeDO : listdo) {
+            GradeBaseVO vo = new GradeBaseVO();
+            vo.setStuNum(gradeDO.getStuNum());
+            vo.setStuName(gradeDO.getStuName());
+            vo.setGpa(gradeDO.getGpa());
+
+            // 从summary表中获取score数据
+            Integer score = summaryMapper.getGpaScoreByStuNum(gradeDO.getStuNum());
+            System.out.println("score:" + score);
+            vo.setScore(score);
+
+            listvo.add(vo);
+        }
+        return listvo;
     }
 }

@@ -20,7 +20,6 @@ public interface VolunteerConvert {
     VolunteerCreateReqVO convert(VolunteerDO bean);
     VolunteerDO convert(VolunteerImportExcelVO grade);
 
-    List<VolunteerRespVO> convertList(List<VolunteerDO> list);
+    //List<VolunteerRespVO> convertList(List<VolunteerDO> list);
 
-    List<VolunteerBaseVO> convertList2(List<VolunteerDO> list);
 }
