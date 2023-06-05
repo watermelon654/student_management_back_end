@@ -33,10 +33,4 @@ public class BaseVO {
     @Schema(description = "项目结果")
     private String result;
 
-    @Schema(description = "评分")
-    private Integer score;
-
-    @Schema(description = "状态", example = "1")
-    private Integer status;
-
 }

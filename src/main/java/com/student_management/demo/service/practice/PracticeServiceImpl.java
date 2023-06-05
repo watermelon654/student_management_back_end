@@ -6,6 +6,7 @@ import com.student_management.demo.controller.practice.vo.PracticeImportRespVO;
 import com.student_management.demo.convert.practice.PracticeConvert;
 import com.student_management.demo.mapper.dataobject.practice.PracticeDO;
 import com.student_management.demo.mapper.dataobject.practice.PracticeDO;
+import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.mysql.practice.PracticeMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
@@ -51,7 +52,7 @@ public class PracticeServiceImpl implements PracticeService{
                 PracticeDO createPractice = PracticeConvert.INSTANCE.convert(Practice);
                 createPractice.setStuId(existStu.getId());
 
-                practiceMapper.insertPractice(createPractice.getStuId(), createPractice.getStuNum(),createPractice.getStuName(), createPractice.getTitle(),createPractice.getDirector(),createPractice.getConstitution(),createPractice.getContent(),createPractice.getTime(),createPractice.getResult(),createPractice.getScore(),createPractice.getStatus());
+                practiceMapper.insertPractice(createPractice.getStuId(), createPractice.getStuNum(),createPractice.getStuName(), createPractice.getTitle(),createPractice.getDirector(),createPractice.getConstitution(),createPractice.getContent(),createPractice.getTime(),createPractice.getResult());
                // System.out.println(createPractice);
                 respVO.getCreatePracticenames().add(Practice.getStuName());
 //                return;
@@ -70,4 +71,11 @@ public class PracticeServiceImpl implements PracticeService{
         System.out.println(practiceMapper.selectBatchIds(ids));
         return practiceMapper.selectBatchIds(ids);
     }
+
+    @Override
+    public List<PracticeDO> getAllList() {
+        return practiceMapper.selectAllList();
+    }
+
+
 }
