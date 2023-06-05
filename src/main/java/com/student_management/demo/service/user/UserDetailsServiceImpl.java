@@ -45,6 +45,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("转换得到UserDetails=" + userDetails);
 
         //将信息存入redis中
+        redisService.setValue("user_id_" + username, userPermissionDO.getId() + "");
         redisService.setValue("user_name_" + username, userPermissionDO.getName());
         redisService.setValue("user_num_" + username, userPermissionDO.getNum());
         redisService.setValue("user_role_" + username, String.valueOf(userPermissionDO.getRoles().contains(1l)));
