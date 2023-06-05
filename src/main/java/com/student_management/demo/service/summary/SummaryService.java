@@ -13,6 +13,8 @@ public interface SummaryService {
 
     SummarySelectListRespVO selectListByStatus(boolean status);
 
+    SummarySelectListRespVO selectAllList();
+
     boolean updateGpaByStuNum(SummaryDO summary);
 
     boolean updateVolByStuNum(SummaryDO summary);
