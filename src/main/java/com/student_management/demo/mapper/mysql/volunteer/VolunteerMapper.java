@@ -60,4 +60,6 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
      * @return 学号，姓名，志愿服务时长
      */
     VolunteerRespVO getInfoByStuNum(String stuNum);
+
+    Integer getVolScoreByStuNum(String stuNum);
 }

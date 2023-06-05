@@ -15,4 +15,11 @@
         FROM volunteer
         WHERE stuNum = #{stuNum}
     </select>
+
+    <!--  根据学号查询当前学生志愿服务时长打分  -->
+    <select id="getVolScoreByStuNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT vol
+        FROM summary
+        WHERE stuNum = #{stuNum}
+    </select>
 </mapper>

@@ -63,4 +63,6 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
      * @return 学号，姓名，gpa
      */
     GradeRespVO getInfoByStuNum(String stuNum);
+
+    Integer getGpaScoreByStuNum(String stuNum);
 }

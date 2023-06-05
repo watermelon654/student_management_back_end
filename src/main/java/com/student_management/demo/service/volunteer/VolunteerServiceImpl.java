@@ -123,7 +123,7 @@ public class VolunteerServiceImpl implements VolunteerService {
             vo.setTime(volunteerDO.getTime());
 
             // 从summary表中获取score数据
-            Integer score = summaryMapper.getVolScoreByStuNum(volunteerDO.getStuNum());
+            Integer score = volunteerMapper.getVolScoreByStuNum(volunteerDO.getStuNum());
             System.out.println("score:" + score);
             vo.setScore(score);
 
