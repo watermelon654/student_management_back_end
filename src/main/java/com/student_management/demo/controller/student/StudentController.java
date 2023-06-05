@@ -11,6 +11,7 @@ import com.student_management.demo.utils.excel.ExcelUtils;
 import com.student_management.demo.utils.token.JwtTokenUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +35,7 @@ public class StudentController {
      * @throws IOException
      */
     @PostMapping("/import")
+    @PreAuthorize("hasAuthority('/api/stu/import')")
     public CommonResult<StudentImportRespVO> importStudentExcel(@RequestHeader("Authorization") String authHeader, @RequestPart(value = "file") MultipartFile file) throws IOException {
         String token = authHeader.substring(7);
         String id = jwtTokenUtil.getUsernameFromToken(token);//学号/职工号
@@ -48,6 +50,7 @@ public class StudentController {
      * @throws IOException
      */
     @RequestMapping("/selectall")
+    @PreAuthorize("hasAuthority('/api/stu/selectall')")
     public CommonResult<List<StudentBasicDO>> selectall() {
         return CommonResult.success(studentService.selectALLList());
     }

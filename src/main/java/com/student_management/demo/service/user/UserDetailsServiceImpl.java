@@ -4,7 +4,6 @@ import com.student_management.demo.mapper.dataobject.user.UserPermissionDO;
 import com.student_management.demo.mapper.mysql.user.UserMapper;
 import com.student_management.demo.service.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -40,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .accountLocked(false)
                 .disabled(userPermissionDO.isDel())
                 .credentialsExpired(false)
-                .authorities(userPermissionDO.getPermissions().toArray(new String[] {}))
+                .authorities(userPermissionDO.getUrls().toArray(new String[] {}))
                 .build();
         System.out.println("转换得到UserDetails=" + userDetails);
 
@@ -49,7 +48,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         redisService.setValue("user_name_" + username, userPermissionDO.getName());
         redisService.setValue("user_num_" + username, userPermissionDO.getNum());
         redisService.setValue("user_role_" + username, String.valueOf(userPermissionDO.getRoles().contains(1l)));
-        redisService.setValue("user_permission_" + username, userPermissionDO.getPermissions().toString());
+        for (Long roleId:userPermissionDO.getRoles()) {
+            redisService.addList("user_roles_" + username, String.valueOf(roleId));
+        }
+        redisService.setValue("user_permission_" + username, userPermissionDO.getUrls().toString());
         return userDetails;
     }
 

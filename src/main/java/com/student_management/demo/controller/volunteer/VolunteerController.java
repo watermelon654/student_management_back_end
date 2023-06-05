@@ -43,6 +43,7 @@ public class VolunteerController {
      */
     @PostMapping("/import")
     @ApiOperation("志愿服务时长上传接口")
+    @PreAuthorize("hasAuthority('/api/volunteer/import')")
     public CommonResult<VolunteerImportRespVO> importUserExcel(@RequestPart(value = "file") MultipartFile file) throws IOException {
         List<VolunteerImportExcelVO> userList = ExcelUtils.read(file,VolunteerImportExcelVO.class);
         VolunteerImportRespVO respVO = service.importVolunteerList(userList);
@@ -54,12 +55,14 @@ public class VolunteerController {
 
     @ApiOperation("选择全部学生")
     @PostMapping("/selectListAll")
+    @PreAuthorize("hasAuthority('/api/volunteer/selectListAll')")
     public CommonResult<VolunteerSelectListRespVO> selectListAll() {
         return CommonResult.success(service.selectAllStudents());
     }
 
     @PostMapping("/{stuNum}/update-score")
     @ApiOperation("根据学号更新评分接口")
+    @PreAuthorize("hasAuthority('/api/volunteer/{stuNum}/update-score')")
     public CommonResult<String> updateScoreByStuNum(
             @PathVariable("stuNum") String stuNum,
             @RequestParam("score") Integer score
@@ -86,7 +89,7 @@ public class VolunteerController {
     }
 
     @GetMapping("/get-volunteer-info")
-    @PreAuthorize("hasAuthority('/user/profile/get')")
+    @PreAuthorize("hasAuthority('/api/volunteer/get-volunteer-info')")
     @ApiOperation("根据token获取学生学号，之后获取学生志愿服务时长信息")
     public CommonResult<VolunteerRespVO> getInfoByStuNum(@RequestHeader("Authorization") String authHeader) {
         try {

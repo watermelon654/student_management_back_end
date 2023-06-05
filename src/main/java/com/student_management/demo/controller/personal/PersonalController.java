@@ -15,6 +15,7 @@ import com.student_management.demo.service.user.UserBasicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -32,6 +33,7 @@ public class PersonalController {
     private UserBasicService userBasicService;
     @ApiOperation("个人学年总结表上传接口")
     @PostMapping("/import")
+    @PreAuthorize("hasAuthority('/api/personal/import')")
     public CommonResult<PersonalImportRespVO> importPersonalSheet(@RequestHeader("Authorization") String authHeader,@RequestBody List<PersonalImportReqVO> userList) {
         String token = authHeader.substring(7);
         Map<String,String> map = userBasicService.getCurrentUserInfo(token);
@@ -49,6 +51,7 @@ public class PersonalController {
 
     @GetMapping("/list")
     @ApiOperation("获得个人学年总结列表")
+    @PreAuthorize("hasAuthority('/api/personal/list')")
     @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
     public CommonResult<List<PersonalRespVO>> getList(@RequestParam("ids") Collection<Long> ids) {
         List<PersonalDO> list = service.getList(ids);
@@ -57,6 +60,7 @@ public class PersonalController {
 
     @GetMapping("/getAllList")
     @ApiOperation("获得个人学年总结所有列表")
+    @PreAuthorize("hasAuthority('/api/personal/getAllList')")
     public CommonResult<List<PersonalRespVO>> getAllList() {
         List<PersonalDO> list = service.getAllList();
         return CommonResult.success(PersonalConvert.INSTANCE.convertList(list));
