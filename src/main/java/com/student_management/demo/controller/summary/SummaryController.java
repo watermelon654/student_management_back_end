@@ -38,6 +38,12 @@ public class SummaryController {
                     CommonResult.success(service.selectListByStatus(true));
     }
 
+    @ApiOperation("选取所有学生summary数据")
+    @GetMapping("/selectAllList")
+    public CommonResult<SummarySelectListRespVO> selectAllList() {
+        return CommonResult.success(service.selectAllList());
+    }
+
 
 
 }

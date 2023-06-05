@@ -1,42 +1,37 @@
-package com.student_management.demo.controller.service.vo;
+package com.student_management.demo.controller.practice.vo;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 @Data
-public class BaseVO {
-
-    @Schema(description = "学生ID",example = "16153")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Accessors(chain = false)
+@ApiModel(description = "社会实践表导入请求")
+public class PracticeImportReqVO {
+    @ApiModelProperty(value = "学生ID", required = true, example = "1")
     private Long stuId;
-
-    @Schema(description = "学生学号")
+    @ApiModelProperty(value = "学生学号", required = true, example = "2200022123")
     private String stuNum;
-
-    @Schema(description = "学生姓名",example = "芋艿")
+    @ApiModelProperty(value = "学生姓名", required = true, example = "张三")
     private String stuName;
-
-    @Schema(description = "服务岗位名称")
+    @ApiModelProperty(value = "项目名称", required = true, example = "智能餐厅管理系统")
     private String title;
-
-    @Schema(description = "岗位负责人")
+    @ApiModelProperty(value = "负责人", required = true, example = "李四")
     private String director;
-
-    @Schema(description = "岗位所在单位")
+    @ApiModelProperty(value = "负责单位", required = true, example = "北京大学")
     private String constitution;
-
-    @Schema(description = "岗位工作内容")
+    @ApiModelProperty(value = "内容", required = true, example = "hahahhaah")
     private String content;
-
-    @Schema(description = "在岗实践")
+    @ApiModelProperty(value = "时长", required = true, example = "10")
     private String time;
-
-    @Schema(description = "在岗期间成就")
+    @ApiModelProperty(value = "结果", required = true, example = "100")
     private String result;
-
-    @Schema(description = "评分")
-    private Integer score;
-
-    @Schema(description = "状态", example = "1")
-    private Integer status;
 
 }

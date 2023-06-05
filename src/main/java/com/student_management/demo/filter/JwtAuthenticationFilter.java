@@ -44,6 +44,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // 客户端提交请求时，必须在请求头的Authentication中添加JWT数据，这是当前服务器程序的规定，客户端必须遵守
         // 尝试获取JWT数据
         String token = request.getHeader("Authorization");
+        if(token != null && token.contains("Bearer")){
+            token = token.substring(7);
+        }
         System.out.println("从请求头中获取到的JWT=" + token);
         // 判断是否不存在jwt数据
         if (!StringUtils.hasText(token)) {

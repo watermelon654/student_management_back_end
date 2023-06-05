@@ -4,8 +4,11 @@ import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.practice.vo.PracticeImportReqVO;
 import com.student_management.demo.controller.practice.vo.PracticeImportRespVO;
 import com.student_management.demo.controller.practice.vo.PracticeRespVO;
+import com.student_management.demo.controller.service.vo.ServiceRespVO;
 import com.student_management.demo.convert.practice.PracticeConvert;
+import com.student_management.demo.convert.service.ServiceConvert;
 import com.student_management.demo.mapper.dataobject.practice.PracticeDO;
+import com.student_management.demo.mapper.dataobject.service.ServiceDO;
 import com.student_management.demo.service.practice.PracticeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,6 +45,14 @@ public class PracticeController {
     @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
     public CommonResult<List<PracticeRespVO>> getList(@RequestParam("ids") Collection<Long> ids) {
         List<PracticeDO> list = service.getList(ids);
+        return CommonResult.success(PracticeConvert.INSTANCE.convertList(list));
+    }
+
+
+    @GetMapping("/getAllList")
+    @ApiOperation("获得社会实践情况所有列表")
+    public CommonResult<List<PracticeRespVO>> getAllList() {
+        List<PracticeDO> list = service.getAllList();
         return CommonResult.success(PracticeConvert.INSTANCE.convertList(list));
     }
 

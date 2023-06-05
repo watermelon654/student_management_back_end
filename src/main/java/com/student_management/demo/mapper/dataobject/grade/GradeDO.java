@@ -48,9 +48,9 @@ public class GradeDO {
 //     */
 //    private String note;
 
-    /**
+/*    *//**
      * 打分
-     */
-    private Integer score;
+     *//*
+    private Integer score;*/
 
 }

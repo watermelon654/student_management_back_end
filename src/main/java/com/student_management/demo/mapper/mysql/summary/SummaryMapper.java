@@ -44,6 +44,13 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
         return selectList(wrapper);
     }
 
+    default List<SummaryDO> selectAllList() {
+        QueryWrapper<SummaryDO> wrapper = new QueryWrapper<>();
+        //查询条件
+//        wrapper.eq("status", status);
+        return selectList(wrapper);
+    }
+
     int updateGpaByStuNum(SummaryDO summary);
 
     int updateVolByStuNum(SummaryDO summary);

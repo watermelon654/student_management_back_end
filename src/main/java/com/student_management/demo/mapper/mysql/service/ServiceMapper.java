@@ -1,9 +1,12 @@
 package com.student_management.demo.mapper.mysql.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import com.student_management.demo.mapper.dataobject.service.ServiceDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Mapper
 @Repository
@@ -32,5 +35,10 @@ public interface ServiceMapper extends BaseMapper<ServiceDO>{
         wrapper.eq("stuId", stu_id);
         return selectOne(wrapper);
     }
-    int insertService(Long stuId,String stuNum,String stuName, String title,String director,String constitution,String content,String time,String result, int score,int status);
+    int insertService(Long stuId,String stuNum,String stuName, String title,String director,String constitution,String content,String time,String result);
+
+    default List<ServiceDO> selectAllList() {
+        QueryWrapper<ServiceDO> wrapper = new QueryWrapper<>();
+        return selectList(wrapper);
+    }
 }

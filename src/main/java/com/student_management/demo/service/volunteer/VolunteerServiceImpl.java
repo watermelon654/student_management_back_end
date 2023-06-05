@@ -99,12 +99,12 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     /**
-     * 根据学生id获取当前学生志愿服务时长信息
+     * 根据学生学号获取当前学生志愿服务时长信息
      *
-     * @param stuId
+     * @param stuNum
      * @return 当前学生志愿服务时长信息
      */
-    public VolunteerRespVO getInfoByStuId(Long stuId) {
-        return volunteerMapper.getInfoByStuId(stuId);
+    public VolunteerRespVO getInfoByStuNum(String stuNum) {
+        return volunteerMapper.getInfoByStuNum(stuNum);
     }
 }
