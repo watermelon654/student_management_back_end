@@ -33,10 +33,9 @@ public class BaseVO {
     @Schema(description = "项目成功")
     private String result;
 
-    @Schema(description = "评分")
-    private Integer score;
-
-    @Schema(description = "状态", example = "1")
-    private Integer status;
+    @Schema(description = "创建者id")
+    private Long createUserId;
+    @Schema(description = "更新者id")
+    private Long updateUserId;
 
 }

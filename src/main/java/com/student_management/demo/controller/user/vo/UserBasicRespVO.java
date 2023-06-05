@@ -9,5 +9,5 @@ import java.util.List;
 @AllArgsConstructor
 public class UserBasicRespVO {
     private String name;//姓名
-    private boolean role;
+    private String role;//true:学生，false：职工
 }

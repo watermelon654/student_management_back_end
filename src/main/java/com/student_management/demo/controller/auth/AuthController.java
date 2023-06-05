@@ -3,7 +3,7 @@ package com.student_management.demo.controller.auth;
 import com.student_management.demo.controller.auth.vo.AuthLoginRespVO;
 import com.student_management.demo.controller.auth.vo.AuthLoginReqVO;
 
-import com.student_management.demo.service.auth.AdminAuthService;
+import com.student_management.demo.service.auth.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +21,7 @@ import com.student_management.demo.common.CommonResult;
 public class AuthController {
 
     @Resource
-    private AdminAuthService authService;
+    private AuthService authService;
 
     @PostMapping("/login")
     @PermitAll

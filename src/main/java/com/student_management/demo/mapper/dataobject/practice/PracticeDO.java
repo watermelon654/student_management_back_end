@@ -41,4 +41,7 @@ public class PracticeDO {
 
 
     private String result;
+
+    private Long createUserId;
+    private Long updateUserId;
 }

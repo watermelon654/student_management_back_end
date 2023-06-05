@@ -5,6 +5,8 @@ import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface ScienceMapper extends BaseMapper<ScienceDO>{
@@ -33,4 +35,8 @@ public interface ScienceMapper extends BaseMapper<ScienceDO>{
         return selectOne(wrapper);
     }
 
+    default List<ScienceDO> selectAllList() {
+        QueryWrapper<ScienceDO> wrapper = new QueryWrapper<>();
+        return selectList(wrapper);
+    }
 }

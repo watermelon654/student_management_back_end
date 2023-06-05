@@ -33,4 +33,9 @@ public class ServiceImportReqVO {
     private String time;
     @ApiModelProperty(value = "结果", required = true, example = "100")
     private String result;
+
+    @ApiModelProperty(value = "创建者id", required = true, example = "1")
+    private Long createUserId;
+    @ApiModelProperty(value = "更新者id", required = true, example = "1")
+    private Long updateUserId;
 }

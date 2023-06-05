@@ -3,9 +3,11 @@ package com.student_management.demo.service.science;
 import cn.hutool.core.collection.CollUtil;
 import com.student_management.demo.controller.science.vo.ScienceImportReqVO;
 import com.student_management.demo.controller.science.vo.ScienceImportRespVO;
+import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
 import com.student_management.demo.convert.science.ScienceConvert;
 import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
+import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
 import com.student_management.demo.mapper.mysql.science.ScienceMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -66,5 +68,11 @@ public class ScienceServiceImpl implements ScienceService{
         System.out.println(scienceMapper.selectBatchIds(ids));
         return scienceMapper.selectBatchIds(ids);
     }
+
+    @Override
+    public List<ScienceDO> getAllList() {
+        return scienceMapper.selectAllList();
+    }
+
 
 }

@@ -10,6 +10,7 @@ import com.student_management.demo.convert.service.ServiceConvert;
 import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 import com.student_management.demo.mapper.dataobject.service.ServiceDO;
 import com.student_management.demo.service.service.ServiceService;
+import com.student_management.demo.service.user.UserBasicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/service/")
@@ -27,18 +29,39 @@ public class ServiceController {
     @Resource
     private ServiceService service;
 
+    @Resource
+    private UserBasicService userBasicService;
+
     @ApiOperation("骨干服务表上传接口")
     @PostMapping("/import")
-    // CommonResult<ServiceImportRespVO>
-    public CommonResult<ServiceImportRespVO> importServiceSheet(@RequestBody List<ServiceImportReqVO> userList) {
-//        console.log(reqVO)
-        System.out.println(userList);
-//        List<ServiceImportReqVO> userList = ExcelUtils.read(file,GradeImportExcelVO.class);
+    public CommonResult<ServiceImportRespVO> importScienceSheet(@RequestHeader("Authorization") String authHeader,@RequestBody List<ServiceImportReqVO> userList) {
+        String token = authHeader.substring(7);
+        Map<String,String> map = userBasicService.getCurrentUserInfo(token);
+
+        for (ServiceImportReqVO user : userList) {
+            user.setStuId(Long.parseLong(map.get("id")));
+            user.setStuName(map.get("name"));
+            user.setStuNum(map.get("num"));
+            user.setCreateUserId(Long.parseLong(map.get("id")));
+            user.setUpdateUserId(Long.parseLong(map.get("id")));
+        }
+
+//        List<ScienceImportReqVO> userList = ExcelUtils.read(file,GradeImportExcelVO.class);
 //        GradeImportRespVO respVO = service.importGradeList(userList);
 
         ServiceImportRespVO respVO = service.importRecord(userList);
         return CommonResult.success(respVO);
     }
+    // CommonResult<ServiceImportRespVO>
+//    public CommonResult<ServiceImportRespVO> importServiceSheet(@RequestBody List<ServiceImportReqVO> userList) {
+////        console.log(reqVO)
+//        System.out.println(userList);
+////        List<ServiceImportReqVO> userList = ExcelUtils.read(file,GradeImportExcelVO.class);
+////        GradeImportRespVO respVO = service.importGradeList(userList);
+//
+//        ServiceImportRespVO respVO = service.importRecord(userList);
+//        return CommonResult.success(respVO);
+//    }
 
     @GetMapping("/list")
     @ApiOperation("获得骨干服务岗位情况列表")
