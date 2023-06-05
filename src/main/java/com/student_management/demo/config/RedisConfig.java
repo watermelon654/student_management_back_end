@@ -25,14 +25,14 @@ public class RedisConfig {
     @Value("${spring.redis.port}")
     private int redisPort;
 
-//    @Value("${spring.redis.password}")
-//    private String redisPassword;
+    @Value("${spring.redis.password}")
+    private String redisPassword;
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         // 根据配置创建Redis连接工厂
         RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration(redisHost, redisPort);
-       // redisConfig.setPassword(RedisPassword.of(redisPassword));
+        redisConfig.setPassword(RedisPassword.of(redisPassword));
         return new JedisConnectionFactory(redisConfig);
     }
 

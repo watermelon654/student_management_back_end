@@ -7,6 +7,8 @@ import com.student_management.demo.utils.token.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -46,9 +48,15 @@ public class AuthServceImpl implements AuthService {
             String token = jwtTokenUtil.generateToken(authenticate,reqVO.getUsername());
             // 返回JWT数据
             return new AuthLoginRespVO(token);
-        } catch (AuthenticationException e) {
+        } catch (BadCredentialsException e) {
+            // 密码验证失败
             throw exception(AUTH_LOGIN_BAD_CREDENTIALS);
         }
+        //catch (AuthenticationException e) {
+        //    // 其他情况
+        //    e.printStackTrace();
+        //    throw exception(AUTHENTICATION_FAILED);
+        //}
     }
 
 

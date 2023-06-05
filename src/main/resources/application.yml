@@ -16,7 +16,7 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-   # password: 123456
+    password: 123456
 #    password: jK7-iT3.rV8!vQ7=eR7=sE7]rC3%e  #(如果有密码的话)
 #  数据库连接,连接到阿里云服务器上的数据库
   datasource:
