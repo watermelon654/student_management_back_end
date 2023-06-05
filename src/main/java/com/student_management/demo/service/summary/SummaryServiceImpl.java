@@ -107,14 +107,24 @@ public class SummaryServiceImpl implements SummaryService {
 
     }
 
+    /**
+     * 更新GPA打分并返回打分结果
+     *
+     * @param summary
+     * @return 打分结果，true表示打分成功，false表示打分失败
+     */
     @Override
-    public int updateGpaByStuNum(SummaryDO summary) {
-        return summaryMapper.updateGpaByStuNum(summary);
+    public boolean updateGpaByStuNum(SummaryDO summary) {
+        return summaryMapper.updateGpaByStuNum(summary) > 0;
     }
 
+    /**
+     * 更新志愿服务打分并返回打分结果
+     *
+     * @param summary
+     * @return 打分结果，true表示打分成功，false表示打分失败
+     */
     @Override
-    public int updateVolByStuNum(SummaryDO summary) {
-        return summaryMapper.updateVolByStuNum(summary);
-    }
+    public boolean updateVolByStuNum(SummaryDO summary) { return summaryMapper.updateVolByStuNum(summary) > 0; }
 
 }
