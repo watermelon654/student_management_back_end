@@ -31,10 +31,10 @@ public interface GradeService {
     boolean updateResult(GradeDO grade);
 
     /**
-     * 根据学生id获取当前学生志愿服务时长信息
+     * 根据学生学号获取当前学生GPA信息
      *
-     * @param stuId
-     * @return 当前学生志愿服务时长信息
+     * @param stuNum
+     * @return 当前学生GPA信息
      */
-    GradeRespVO getInfoByStuId(Long stuId);
+    GradeRespVO getInfoByStuNum(String stuNum);
 }

@@ -10,9 +10,9 @@
     </insert>
 
     <!--  查询当前学生学号、姓名、志愿服务时长  -->
-    <select id="getInfoByStuId" parameterType="java.lang.Long" resultType="com.student_management.demo.controller.volunteer.vo.VolunteerRespVO">
+    <select id="getInfoByStuNum" parameterType="java.lang.String" resultType="com.student_management.demo.controller.volunteer.vo.VolunteerRespVO">
         SELECT stuNum, stuName, time
         FROM volunteer
-        WHERE stuId = #{stuId}
+        WHERE stuNum = #{stuNum}
     </select>
 </mapper>
