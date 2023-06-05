@@ -19,4 +19,6 @@ public interface ScienceService {
      * @return 科研情况列表
      */
     List<ScienceDO> getList(Collection<Long> ids);
+
+    List<ScienceDO> getAllList();
 }
