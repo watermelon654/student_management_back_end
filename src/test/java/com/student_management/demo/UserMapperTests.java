@@ -21,7 +21,7 @@ public class UserMapperTests {
         Assertions.assertDoesNotThrow(() -> {
             // 执行查询
             UserPermissionDO admin = mapper.selectUserInfoByUserNum(username);
-            System.out.println("result >>> " + admin.getPermissions());
+            System.out.println("result >>> " + admin.getUrls());
             // 断言查询结果不为null
             Assertions.assertNotNull(admin);
         });

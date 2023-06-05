@@ -37,6 +37,7 @@ public class GradeController {
      * @throws IOException
      */
     @PostMapping("/import")
+    @PreAuthorize("hasAuthority('/api/grade/import')")
     public CommonResult<GradeImportRespVO> importGradeExcel(@RequestPart(value = "file") MultipartFile file) throws IOException {
             List<GradeImportExcelVO> userList = ExcelUtils.read(file,GradeImportExcelVO.class);
             GradeImportRespVO respVO = service.importGradeList(userList);
@@ -48,12 +49,14 @@ public class GradeController {
 
     @ApiOperation("选择全部学生")
     @PostMapping("/selectListAll")
+    @PreAuthorize("hasAuthority('/api/grade/selectListAll')")
     public CommonResult<GradeSelectListRespVO> selectListAll() {
         return CommonResult.success(service.selectAllStudents());
     }
 
     @PostMapping("/{stuNum}/update-score")
     @ApiOperation("根据学号更新评分接口")
+    @PreAuthorize("hasAuthority('/api/grade/{stuNum}/update-score')")
     public CommonResult<String> updateScoreByStuNum(
             @PathVariable("stuNum") String stuNum,
             @RequestBody GradeScoreReqVO reqVO
@@ -82,7 +85,7 @@ public class GradeController {
     }
 
     @GetMapping("/get-grade-info")
-    @PreAuthorize("hasAuthority('/user/profile/get')")
+
     @ApiOperation("根据token获取学生学号，之后获取学生GPA信息")
     public CommonResult<GradeRespVO> getInfoByStuNum(@RequestHeader("Authorization") String authHeader) {
         //return CommonResult.success(userBasicService.getBasicInfo(username));

@@ -1,13 +1,10 @@
 package com.student_management.demo.service.summary;
 
 import cn.hutool.core.collection.CollUtil;
-import com.student_management.demo.controller.summary.vo.SummaryBaseVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportRespVO;
 import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
-import com.student_management.demo.convert.grade.GradeConvert;
 import com.student_management.demo.convert.summary.SummaryConvert;
-import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;

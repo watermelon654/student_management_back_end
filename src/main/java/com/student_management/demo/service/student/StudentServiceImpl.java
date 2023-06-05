@@ -10,6 +10,7 @@ import com.student_management.demo.mapper.mysql.student.ClassMapper;
 import com.student_management.demo.mapper.mysql.student.MajorMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
 import com.student_management.demo.mapper.mysql.student.YearMapper;
+import com.student_management.demo.service.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -34,20 +35,23 @@ public class StudentServiceImpl implements StudentService{
     @Resource
     private ClassMapper classMapper;
 
+    @Resource
+    private RedisService redisService;
+
     /**
      * 导入学生信息
      * @param importStudent     导入学生信息列表
      * @return
      */
     @Override
-    public StudentImportRespVO importStudentList(List<StudentImportExcelReqVO> importStudent, String id) {
+    public StudentImportRespVO importStudentList(List<StudentImportExcelReqVO> importStudent, String num) {
         StudentImportRespVO respVO = StudentImportRespVO.builder().createsStudentNames(new ArrayList<>())
                 .updateStudentNames(new ArrayList<>()).failureStudentNames(new LinkedHashMap<>()).build();
         //列表为空
         if (CollUtil.isEmpty(importStudent)) {
             throw exception(USER_IMPORT_LIST_IS_EMPTY);
         }
-        Long operateId = Long.parseLong(id);
+        Long operateId = Long.parseLong(redisService.getValue("user_id_" + num));
 
         //将yearname，majorname，classname转为id
         List<StudentDO> studentDOList= transferNameToId(importStudent);

@@ -14,6 +14,7 @@ import com.student_management.demo.service.user.UserBasicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -34,6 +35,7 @@ public class ServiceController {
 
     @ApiOperation("骨干服务表上传接口")
     @PostMapping("/import")
+    @PreAuthorize("hasAuthority('/api/service/import')")
     public CommonResult<ServiceImportRespVO> importScienceSheet(@RequestHeader("Authorization") String authHeader,@RequestBody List<ServiceImportReqVO> userList) {
         String token = authHeader.substring(7);
         Map<String,String> map = userBasicService.getCurrentUserInfo(token);
@@ -65,6 +67,7 @@ public class ServiceController {
 
     @GetMapping("/list")
     @ApiOperation("获得骨干服务岗位情况列表")
+    @PreAuthorize("hasAuthority('/api/service/list')")
     @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
     public CommonResult<List<ServiceRespVO>> getList(@RequestParam("ids") Collection<Long> ids) {
         List<ServiceDO> list = service.getList(ids);
@@ -74,6 +77,7 @@ public class ServiceController {
 
     @GetMapping("/getAllList")
     @ApiOperation("获得骨干服务岗位情况所有列表")
+    @PreAuthorize("hasAuthority('/api/service/getAllList')")
     public CommonResult<List<ServiceRespVO>> getAllList() {
         List<ServiceDO> list = service.getAllList();
         return CommonResult.success(ServiceConvert.INSTANCE.convertList(list));

@@ -10,5 +10,5 @@ import java.util.List;
 @NoArgsConstructor
 public class UserPermissionDO extends UserDo{
     private List<Long> roles;
-    private List<String> permissions;
+    private List<String> urls;
 }
