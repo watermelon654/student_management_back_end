@@ -1,7 +1,5 @@
 package com.student_management.demo.filter;
 
-import com.alibaba.fastjson2.JSON;
-import com.student_management.demo.service.auth.UserGrantedAuthority;
 import com.student_management.demo.utils.token.JwtTokenUtil;
 import io.jsonwebtoken.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.student_management.demo.common.error.ErrorCodeConstants.*;
-import static com.student_management.demo.utils.exception.ServiceExceptionUtil.exception;
 
 /**
  * JWT过滤器：从请求头的Authorization中获取JWT中存入的用户信息
