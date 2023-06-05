@@ -39,4 +39,7 @@ public class ServiceDO {
     private String time;
 
     private String result;
+
+    private Long createUserId;
+    private Long updateUserId;
 }

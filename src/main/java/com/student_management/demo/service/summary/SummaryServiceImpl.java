@@ -87,6 +87,17 @@ public class SummaryServiceImpl implements SummaryService {
         return respVO;
     }
 
+    @Override
+    public SummarySelectListRespVO selectAllList() {
+        List<SummaryDO> listdo = summaryMapper.selectAllList();
+        if (listdo.size() == 0){
+            return null;
+        }
+        SummarySelectListRespVO respVO = new SummarySelectListRespVO();
+        respVO.setSummarylist(listdo);
+        return respVO;
+    }
+
     /**
      * 更新状态为false的表项
      * @param
@@ -116,5 +127,6 @@ public class SummaryServiceImpl implements SummaryService {
     public int updateVolByStuNum(SummaryDO summary) {
         return summaryMapper.updateVolByStuNum(summary);
     }
+
 
 }

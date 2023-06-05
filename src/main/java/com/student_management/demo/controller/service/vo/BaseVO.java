@@ -1,37 +1,41 @@
-package com.student_management.demo.controller.practice.vo;
+package com.student_management.demo.controller.service.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Accessors(chain = false)
-@ApiModel(description = "社会实践表导入请求")
-public class PracticeImportReqVO {
-    @ApiModelProperty(value = "学生ID", required = true, example = "1")
+public class BaseVO {
+
+    @Schema(description = "学生ID",example = "16153")
     private Long stuId;
-    @ApiModelProperty(value = "学生学号", required = true, example = "2200022123")
+
+    @Schema(description = "学生学号")
     private String stuNum;
-    @ApiModelProperty(value = "学生姓名", required = true, example = "张三")
+
+    @Schema(description = "学生姓名",example = "芋艿")
     private String stuName;
-    @ApiModelProperty(value = "项目名称", required = true, example = "智能餐厅管理系统")
+
+    @Schema(description = "服务岗位名称")
     private String title;
-    @ApiModelProperty(value = "负责人", required = true, example = "李四")
+
+    @Schema(description = "岗位负责人")
     private String director;
-    @ApiModelProperty(value = "负责单位", required = true, example = "北京大学")
+
+    @Schema(description = "岗位所在单位")
     private String constitution;
-    @ApiModelProperty(value = "内容", required = true, example = "hahahhaah")
+
+    @Schema(description = "岗位工作内容")
     private String content;
-    @ApiModelProperty(value = "时长", required = true, example = "10")
+
+    @Schema(description = "在岗实践")
     private String time;
-    @ApiModelProperty(value = "结果", required = true, example = "100")
+
+    @Schema(description = "在岗期间成就")
     private String result;
+    @Schema(description = "创建者id")
+    private Long createUserId;
+    @Schema(description = "更新者id")
+    private Long updateUserId;
+
 
 }
