@@ -33,4 +33,10 @@ public class BaseVO {
     @Schema(description = "项目结果")
     private String result;
 
+    @Schema(description = "创建者id")
+    private Long createUserId;
+    @Schema(description = "更新者id")
+    private Long updateUserId;
+
+
 }
