@@ -1,11 +1,14 @@
 package com.student_management.demo.service.volunteer;
 import cn.hutool.core.collection.CollUtil;
+import com.student_management.demo.controller.grade.vo.GradeBaseVO;
 import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
 import com.student_management.demo.controller.volunteer.vo.*;
 import com.student_management.demo.convert.volunteer.VolunteerConvert;
+import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
+import com.student_management.demo.mapper.mysql.summary.SummaryMapper;
 import com.student_management.demo.mapper.mysql.volunteer.VolunteerMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,9 @@ public class VolunteerServiceImpl implements VolunteerService {
 
     @Resource
     private StudentMapper studentMapper;
+
+    @Resource
+    private SummaryMapper summaryMapper;
 
 
     /**
@@ -68,12 +74,6 @@ public class VolunteerServiceImpl implements VolunteerService {
         return respVO;
     }
 
-//    @Override
-//    public List<VolunteerDO> getList(Collection<Long> ids) {
-//        System.out.println(volunteerMapper.selectBatchIds(ids));
-//        return volunteerMapper.selectBatchIds(ids);
-//    }
-
     /**
      * 获得全体学生志愿服务时长列表
      *
@@ -83,7 +83,7 @@ public class VolunteerServiceImpl implements VolunteerService {
     public VolunteerSelectListRespVO selectAllStudents() {
         List<VolunteerDO> listdo = volunteerMapper.selectAllStudents();
         VolunteerSelectListRespVO respVO = new VolunteerSelectListRespVO();
-        List<VolunteerBaseVO> listvo = VolunteerConvert.INSTANCE.convertList2(listdo);
+        List<VolunteerBaseVO> listvo = convertList(listdo);
         respVO.setVolunteerlist(listvo);
         return respVO;
     }
@@ -94,17 +94,41 @@ public class VolunteerServiceImpl implements VolunteerService {
      * @param volunteer
      * @return 打分结果，true表示打分成功，false表示打分失败
      */
-    public boolean updateResult(VolunteerDO volunteer) {
-        return volunteerMapper.updateByStuNum(volunteer) > 0;
-    }
+//    public boolean updateResult(VolunteerDO volunteer) {
+//        return volunteerMapper.updateByStuNum(volunteer) > 0;
+//    }
 
     /**
-     * 根据学生学号获取当前学生志愿服务时长信息
+     * 根据学生学号获取当前学生学生学号、姓名、志愿服务时长
      *
      * @param stuNum
-     * @return 当前学生志愿服务时长信息
+     * @return 当前学生学生学号、姓名、志愿服务时长
      */
     public VolunteerRespVO getInfoByStuNum(String stuNum) {
         return volunteerMapper.getInfoByStuNum(stuNum);
+    }
+
+    /**
+     * 将VolunteerDO复制给VolunteerBaseVO并添加score
+     *
+     * @param listdo
+     * @return listvo
+     */
+    public List<VolunteerBaseVO> convertList(List<VolunteerDO> listdo) {
+        List<VolunteerBaseVO> listvo = new ArrayList<>();
+        for (VolunteerDO volunteerDO : listdo) {
+            VolunteerBaseVO vo = new VolunteerBaseVO();
+            vo.setStuNum(volunteerDO.getStuNum());
+            vo.setStuName(volunteerDO.getStuName());
+            vo.setTime(volunteerDO.getTime());
+
+            // 从summary表中获取score数据
+            Integer score = summaryMapper.getVolScoreByStuNum(volunteerDO.getStuNum());
+            System.out.println("score:" + score);
+            vo.setScore(score);
+
+            listvo.add(vo);
+        }
+        return listvo;
     }
 }

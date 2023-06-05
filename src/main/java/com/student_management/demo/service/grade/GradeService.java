@@ -28,13 +28,21 @@ public interface GradeService {
      * @param grade
      * @return 打分结果，true表示打分成功，false表示打分失败
      */
-    boolean updateResult(GradeDO grade);
+    //boolean updateResult(GradeDO grade);
 
     /**
-     * 根据学生学号获取当前学生GPA信息
+     * 根据学生学号获取当前学生学号、姓名、GPA
      *
      * @param stuNum
-     * @return 当前学生GPA信息
+     * @return 当前学生学号、姓名、GPA
      */
     GradeRespVO getInfoByStuNum(String stuNum);
+
+    /**
+     * 将GradeDO复制给GradeBaseVO并添加score
+     *
+     * @param listdo
+     * @return listvo
+     */
+    List<GradeBaseVO> convertList(List<GradeDO> listdo);
 }

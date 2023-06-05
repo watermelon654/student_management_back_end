@@ -2,10 +2,8 @@ package com.student_management.demo.controller.volunteer;
 
 import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.grade.vo.GradeRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerImportExcelVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerImportRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerSelectListRespVO;
+import com.student_management.demo.controller.grade.vo.GradeScoreReqVO;
+import com.student_management.demo.controller.volunteer.vo.*;
 import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import com.student_management.demo.service.summary.SummaryService;
@@ -65,19 +63,14 @@ public class VolunteerController {
     @PreAuthorize("hasAuthority('/api/volunteer/{stuNum}/update-score')")
     public CommonResult<String> updateScoreByStuNum(
             @PathVariable("stuNum") String stuNum,
-            @RequestParam("score") Integer score
+            @RequestBody VolunteerScoreReqVO reqVO
     ) {
         try {
-            VolunteerDO volunteer = new VolunteerDO();
-            volunteer.setStuNum(stuNum);
-            volunteer.setScore(score);
-            boolean success = service.updateResult(volunteer);
-
+            SummaryDO summary = new SummaryDO();
+            summary.setStuNum(reqVO.getStuNum());
+            summary.setVol(reqVO.getScore());
+            boolean success = summaryService.updateVolByStuNum(summary);
             if (success) {
-                SummaryDO summary = new SummaryDO();
-                summary.setStuNum(stuNum);
-                summary.setVol(score);
-                summaryService.updateVolByStuNum(summary);
                 return CommonResult.success("评分更新成功");
             } else {
                 return CommonResult.error(404, "找不到指定的记录");

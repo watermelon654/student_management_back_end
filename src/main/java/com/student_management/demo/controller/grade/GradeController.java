@@ -1,13 +1,7 @@
 package com.student_management.demo.controller.grade;
 import com.student_management.demo.common.CommonResult;
-import com.student_management.demo.controller.grade.vo.GradeImportExcelVO;
-import com.student_management.demo.controller.grade.vo.GradeImportRespVO;
-import com.student_management.demo.controller.grade.vo.GradeRespVO;
-import com.student_management.demo.controller.grade.vo.GradeSelectListRespVO;
-import com.student_management.demo.controller.user.vo.UserBasicRespVO;
-import com.student_management.demo.mapper.dataobject.grade.GradeDO;
+import com.student_management.demo.controller.grade.vo.*;
 import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
-import com.student_management.demo.mapper.mysql.grade.GradeMapper;
 import com.student_management.demo.service.grade.GradeService;
 import com.student_management.demo.service.summary.SummaryService;
 import com.student_management.demo.utils.excel.ExcelUtils;
@@ -65,7 +59,7 @@ public class GradeController {
     @PreAuthorize("hasAuthority('/api/grade/{stuNum}/update-score')")
     public CommonResult<String> updateScoreByStuNum(
             @PathVariable("stuNum") String stuNum,
-            @RequestParam("score") Integer score
+            @RequestBody GradeScoreReqVO reqVO
     ) {
         try {
 //            GradeDO grade = new GradeDO();
@@ -74,14 +68,16 @@ public class GradeController {
 //            boolean success = service.updateResult(grade);
 //
 //            if (success) {
-                SummaryDO summary = new SummaryDO();
-                summary.setStuNum(stuNum);
-                summary.setGpa(score);
-                summaryService.updateGpaByStuNum(summary);
+                //Integer.parseInt(score);
+            SummaryDO summary = new SummaryDO();
+            summary.setStuNum(reqVO.getStuNum());
+            summary.setGpa(reqVO.getScore());
+            boolean success = summaryService.updateGpaByStuNum(summary);
+            if (success) {
                 return CommonResult.success("评分更新成功");
-            /*} else {
+            } else {
                 return CommonResult.error(404, "找不到指定的记录");
-            }*/
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return CommonResult.error(500, "评分更新失败");

@@ -2,6 +2,7 @@ package com.student_management.demo.mapper.mysql.summary;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.student_management.demo.controller.grade.vo.GradeRespVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -54,4 +55,21 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
     int updateGpaByStuNum(SummaryDO summary);
 
     int updateVolByStuNum(SummaryDO summary);
+
+    /**
+     * 根据学生学号获取当前学生GPA打分结果
+     *
+     * @param stuNum
+     * @return gpa score
+     */
+    Integer getGpaScoreByStuNum(String stuNum);
+
+    /**
+     * 根据学生学号获取当前学生GPA打分结果
+     *
+     * @param stuNum
+     * @return vol score
+     */
+    Integer getVolScoreByStuNum(String stuNum);
+
 }

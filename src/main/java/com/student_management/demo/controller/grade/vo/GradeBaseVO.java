@@ -28,4 +28,11 @@ public class GradeBaseVO {
 //    @Schema(description = "状态", example = "1")
 //    private Integer status;
 
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
 }
