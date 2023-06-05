@@ -38,9 +38,9 @@ public class StudentController {
     @PreAuthorize("hasAuthority('/api/stu/import')")
     public CommonResult<StudentImportRespVO> importStudentExcel(@RequestHeader("Authorization") String authHeader, @RequestPart(value = "file") MultipartFile file) throws IOException {
         String token = authHeader.substring(7);
-        String id = jwtTokenUtil.getUsernameFromToken(token);//学号/职工号
+        String num = jwtTokenUtil.getUsernameFromToken(token);//学号/职工号
         List<StudentImportExcelReqVO> studentList = ExcelUtils.read(file, StudentImportExcelReqVO.class);
-        return CommonResult.success(studentService.importStudentList(studentList, id));
+        return CommonResult.success(studentService.importStudentList(studentList, num));
     }
 
 
