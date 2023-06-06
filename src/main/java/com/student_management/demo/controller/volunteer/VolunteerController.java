@@ -58,11 +58,10 @@ public class VolunteerController {
         return CommonResult.success(service.selectAllStudents());
     }
 
-    @PostMapping("/{stuNum}/update-score")
+    @PostMapping("/update-score")
     @ApiOperation("根据学号更新评分接口")
-    @PreAuthorize("hasAuthority('/api/volunteer/{stuNum}/update-score')")
+    @PreAuthorize("hasAuthority('/api/volunteer/update-score')")
     public CommonResult<String> updateScoreByStuNum(
-            @PathVariable("stuNum") String stuNum,
             @RequestBody VolunteerScoreReqVO reqVO
     ) {
         try {

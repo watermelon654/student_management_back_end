@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/grade/")
-@Api(tags = "EasyExcel")
+@Api(tags = "GPA相关接口")
 public class GradeController {
     @Resource
     private GradeService service;
@@ -54,11 +54,10 @@ public class GradeController {
         return CommonResult.success(service.selectAllStudents());
     }
 
-    @PostMapping("/{stuNum}/update-score")
+    @PostMapping("/update-score")
     @ApiOperation("根据学号更新评分接口")
-    @PreAuthorize("hasAuthority('/api/grade/{stuNum}/update-score')")
+    @PreAuthorize("hasAuthority('/api/grade/update-score')")
     public CommonResult<String> updateScoreByStuNum(
-            @PathVariable("stuNum") String stuNum,
             @RequestBody GradeScoreReqVO reqVO
     ) {
         try {

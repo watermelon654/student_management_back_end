@@ -123,7 +123,7 @@ public class GradeServiceImpl implements GradeService{
             vo.setGpa(gradeDO.getGpa());
 
             // 从summary表中获取score数据
-            Integer score = summaryMapper.getGpaScoreByStuNum(gradeDO.getStuNum());
+            Integer score = gradeMapper.getGpaScoreByStuNum(gradeDO.getStuNum());
             System.out.println("score:" + score);
             vo.setScore(score);
 

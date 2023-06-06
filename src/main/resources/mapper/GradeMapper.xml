@@ -21,4 +21,11 @@
         WHERE stuNum = #{stuNum}
     </select>
 
+    <!--  根据学号查询当前学生GPA打分  -->
+    <select id="getGpaScoreByStuNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT gpa
+        FROM summary
+        WHERE stuNum = #{stuNum}
+    </select>
+
 </mapper>
