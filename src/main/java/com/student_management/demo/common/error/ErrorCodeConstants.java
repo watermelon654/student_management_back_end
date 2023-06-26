@@ -12,5 +12,6 @@ public interface ErrorCodeConstants {
     ErrorCode ERROR_TOKEN = new ErrorCode(1002003008, "解析JWT失败!");
 
     ErrorCode AUTHENTICATION_FAILED = new ErrorCode(1002003010,"用户登录失败，请检查后端报错!");
+    ErrorCode CAPTCHA_MISMATCH = new ErrorCode(1002003011,"用户登录失败，验证码错误!");
 
 }
