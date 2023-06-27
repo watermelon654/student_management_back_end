@@ -11,6 +11,7 @@ import com.student_management.demo.mapper.mysql.student.MajorMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
 import com.student_management.demo.mapper.mysql.student.YearMapper;
 import com.student_management.demo.service.redis.RedisService;
+import com.student_management.demo.service.summary.SummaryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,8 @@ public class StudentServiceImpl implements StudentService{
     private MajorMapper majorMapper;
     @Resource
     private ClassMapper classMapper;
-
+    @Resource
+    private SummaryService summaryService;
     @Resource
     private RedisService redisService;
 

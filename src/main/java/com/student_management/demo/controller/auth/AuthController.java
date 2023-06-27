@@ -53,8 +53,6 @@ public class AuthController {
     @Operation(summary = "使用账号密码登录")
     public CommonResult<AuthLoginRespVO> login( @RequestBody AuthLoginReqVO reqVO) {
         String storedCaptcha = redisService.getValue("captcha");
-        System.out.println("storeca:" +  storedCaptcha);
-        System.out.println("storeca:" +  reqVO.getCaptchaText());
         if (reqVO.getCaptchaText().equalsIgnoreCase(storedCaptcha)) {
             return CommonResult.success(authService.login(reqVO));
         } else {
@@ -70,8 +68,7 @@ public class AuthController {
         // 生成验证码文本
         String captchaText = defaultKaptcha.createText();
 
-        // 将验证码文本存储在会话中，以供后续验证
-        //request.getSession().setAttribute("captcha", captchaText);
+        // 将验证码文本存储在redis中，以供后续验证
         redisService.setValue("captcha", captchaText);
         // 生成验证码图片
         ByteArrayOutputStream out = null;
@@ -83,7 +80,6 @@ public class AuthController {
         // 对字节组Base64编码
         return CommonResult.success(Base64.getEncoder().encodeToString(out.toByteArray()));
     }
-
 
 
 }

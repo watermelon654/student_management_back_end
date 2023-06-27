@@ -32,4 +32,13 @@ public class UserBasicController {
         return CommonResult.success(userBasicService.getBasicInfo(username));
     }
 
+    @PostMapping("/profile/changePasswd")
+    @PreAuthorize("hasAuthority('/user/profile/get')")
+    public CommonResult<UserBasicRespVO> changeUserPasswd(@RequestHeader("Authorization") String authHeader, @RequestBody String newPasswd) {
+        System.out.println("=================changeUserPasswd=================");
+        String username = jwtTokenUtil.getUsernameFromToken(authHeader);//id,且学生和老师id不会重复
+        System.out.println(username);
+        return CommonResult.success(userBasicService.getBasicInfo(username));
+    }
+
 }
