@@ -20,6 +20,6 @@ public interface ErrorCodeConstants {
     ErrorCode ERROR_FILE_SIZE = new ErrorCode(1002003104,"文件大小超过限制!");
     ErrorCode UPLOAD_FILE_FAILED = new ErrorCode(1002003105,"上传文件失败!");
     ErrorCode ERROR_SUBJECT = new ErrorCode(1002003106,"文件科目传输错误!");
-
+    ErrorCode ERROR_SUBJECT_FILE = new ErrorCode(1002003107,"读取文件失败!");
 
 }

@@ -1,15 +1,19 @@
 package com.student_management.demo.service.file;
 
 import com.student_management.demo.common.CommonResult;
-import com.student_management.demo.service.redis.RedisService;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -75,8 +79,9 @@ public class FileServiceImpl implements FileService {
                 directory.mkdirs();
             }
             else if (dest.exists()){
-                // 检查文件是否已经存在，如果已经存在，直接覆盖
+                // 检查文件是否已经存在，如果已经存在，删除源文件并更新文件夹中subject文件的文件名为dead开头
                 dest.delete();
+                refreshSubjectFiles(subject, fileParentPath);
             }
             file.transferTo(dest);
 
@@ -85,6 +90,28 @@ public class FileServiceImpl implements FileService {
         } catch (IOException e) {
             e.printStackTrace();
             throw exception(UPLOAD_FILE_FAILED);
+        }
+    }
+
+    /**
+     * 更新文件夹中文件名
+     * @param subject
+     * @param parentPath
+     */
+    private void refreshSubjectFiles(String subject, String parentPath) {
+        File parentFolder = new File(parentPath);
+        File[] files = parentFolder.listFiles();//获取父目录下所有文件
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile() &&
+                        getFileExtension(file.getName()).equals("pdf") &&
+                        !file.getName().startsWith("dead") &&
+                        file.getName().contains(subject))
+                {
+                    file.renameTo(new File(parentPath+ File.separator +
+                            "dead" + file.getName()));
+                }
+            }
         }
     }
 
@@ -116,6 +143,7 @@ public class FileServiceImpl implements FileService {
         }
         return false;
     }
+
 
     private boolean startsWith(byte[] array, byte[] prefix) {
         if (array.length < prefix.length) {
@@ -153,6 +181,11 @@ public class FileServiceImpl implements FileService {
         return subjects.contains(subject);
     }
 
+    /**
+     * 获得文件扩展名
+     * @param fileName
+     * @return
+     */
     private String getFileExtension(String fileName) {
         if (StringUtils.hasText(fileName)) {
             int dotIndex = fileName.lastIndexOf(".");
@@ -161,5 +194,68 @@ public class FileServiceImpl implements FileService {
             }
         }
         return null;
+    }
+
+    /**
+     * 查找对应类别下文件
+     * @param parentPath
+     * @param subject
+     * @return
+     */
+    private File getSubjectFile(String parentPath, String subject) {
+        File parentFolder = new File(parentPath);
+        File[] files = parentFolder.listFiles();//获取父目录下所有文件
+        File targetPdf = null;
+        int count = 0;
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile() &&
+                        getFileExtension(file.getName()).equals("pdf") &&
+                        !file.getName().startsWith("dead") &&
+                        file.getName().contains(subject))
+                {
+                    count++;
+                    targetPdf = file;
+                }
+            }
+        }
+        // 证明文件多于1个或少于1个报错
+        if (count == 1) {
+            System.out.println("捕获到文件名为："+ targetPdf.getName());
+            return targetPdf;
+        } else {
+            System.out.println("读取文件数不唯一！count="+ count);
+            throw exception(ERROR_SUBJECT_FILE);
+        }
+
+    }
+
+    /**
+     * 预览pdf
+     * @param stuNum
+     * @param response
+     */
+    @Override
+    public void preview(String stuNum, String subject, HttpServletResponse response) {
+        try {
+            String fileParentPath = uploadPath + File.separator + stuNum;// 源文件目录
+            File targetPdf = getSubjectFile(fileParentPath, subject);// 目标文件
+
+            // 设置响应格式防止乱码
+            response.setContentType("application/pdf;charset=UTF-8");
+            response.setHeader("X-Frame-Options", "SAMEORIGIN");
+
+            // 读取文件
+            ServletOutputStream out = response.getOutputStream();
+            InputStream in = new FileInputStream(targetPdf);
+            int size = IOUtils.copy(in, out);
+            in.close();
+            out.close();
+            System.out.println("该文件大小为：" + size + "字节");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw exception(ERROR_SUBJECT_FILE);
+        }
     }
 }

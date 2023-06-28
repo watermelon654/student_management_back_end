@@ -16,7 +16,7 @@ public class UserMapperTests {
     @Test
     void testGetLoginInfoByUsernameSuccessfully() {
         // 测试数据
-        String username = "2200022001";
+        String username = "2200022002";
         // 断言不会抛出异常
         Assertions.assertDoesNotThrow(() -> {
             // 执行查询
