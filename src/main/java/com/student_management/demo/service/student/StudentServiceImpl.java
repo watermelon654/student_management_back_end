@@ -6,10 +6,12 @@ import com.student_management.demo.controller.student.vo.StudentImportRespVO;
 import com.student_management.demo.convert.student.StudentConvert;
 import com.student_management.demo.mapper.dataobject.student.StudentBasicDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
+import com.student_management.demo.mapper.dataobject.user.UserRoleDO;
 import com.student_management.demo.mapper.mysql.student.ClassMapper;
 import com.student_management.demo.mapper.mysql.student.MajorMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
 import com.student_management.demo.mapper.mysql.student.YearMapper;
+import com.student_management.demo.mapper.mysql.user.RoleMapper;
 import com.student_management.demo.service.redis.RedisService;
 import com.student_management.demo.service.summary.SummaryService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +41,8 @@ public class StudentServiceImpl implements StudentService{
     private SummaryService summaryService;
     @Resource
     private RedisService redisService;
-
+    @Resource
+    private RoleMapper roleMapper;
     /**
      * 导入学生信息
      * @param importStudent     导入学生信息列表
@@ -59,6 +62,7 @@ public class StudentServiceImpl implements StudentService{
         List<StudentDO> studentDOList= transferNameToId(importStudent);
         //对每一个表项检查
         studentDOList.forEach(student -> {
+            Long stuId;
             // 判断是否在学生信息表stu_info中，在进行插入
             StudentDO existStu = studentMapper.selectStudentByNum(student.getNum());
             if (existStu == null) {
@@ -69,12 +73,13 @@ public class StudentServiceImpl implements StudentService{
 
                 studentMapper.insert(student);
                 respVO.getCreatesStudentNames().add(student.getName());
-
+                stuId = studentMapper.selectStudentByNum(student.getNum()).getId();
             } else {
 
                 // 如果存在，更新学生表表中的记录;
                 // 保留 id
-                student.setId(existStu.getId());
+                stuId = existStu.getId();
+                student.setId(stuId);
 
                 // 使用 当前操作者id 作为 更新者id, 当前时间 为 更新时间
                 student.setUpdateUserId(operateId);
@@ -84,6 +89,9 @@ public class StudentServiceImpl implements StudentService{
                 respVO.getUpdateStudentNames().add(student.getName());
 
             }
+            // 补充用户角色表
+            UserRoleDO userRoleDO = new UserRoleDO(stuId, 1l);
+            roleMapper.insertUserRole(userRoleDO);
         });
         return respVO;
     }
