@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;;import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 @Service("UserBasicService")
 @Slf4j
@@ -30,10 +32,12 @@ public class UserBasicServiceImpl implements UserBasicService {
     private PasswordEncryptionService passwordEncryptionService;
 
     public UserBasicRespVO getBasicInfo(String num) {
+        Set roles = redisService.getList("user_roles_" + num);
         return new UserBasicRespVO(
                 num,
                 redisService.getValue("user_name_" + num),
-                redisService.getValue("user_role_" + num));
+                redisService.getValue("user_role_" + num),
+                roles.contains("8")?"true":"false");
     }
 
     /**

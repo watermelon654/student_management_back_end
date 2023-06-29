@@ -44,8 +44,7 @@ public class UserBasicController {
 
     @PostMapping("/profile/reset-password")
     @PreAuthorize("hasAuthority('/user/profile/reset-password')")
-    public CommonResult<?> resetPassword(@RequestParam("newPassword") String num,
-                                          Authentication authentication) {
+    public CommonResult<?> resetPassword(@RequestParam("num") String num) {
         return userBasicService.resetPasswd(num);
     }
 
