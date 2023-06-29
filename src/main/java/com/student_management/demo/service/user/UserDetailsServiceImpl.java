@@ -20,6 +20,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserMapper userMapper;
     @Autowired
     private RedisService redisService;
+
+    /**
+     * 用户基本信息存入redis
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("根据用户名查询尝试登录的管理员信息，用户名=" + username);

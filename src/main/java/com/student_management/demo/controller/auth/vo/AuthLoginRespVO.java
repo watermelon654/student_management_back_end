@@ -12,5 +12,7 @@ import java.util.List;
 public class AuthLoginRespVO {
     @Schema(description = "访问令牌", required = true, example = "happy")
     private String token;
+    @Schema(description = "首次登录", required = true, example = "true")
+    private String initial;//true:第一次登录
 
 }
