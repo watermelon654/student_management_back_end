@@ -102,7 +102,7 @@ public class UserBasicServiceImpl implements UserBasicService {
             map.put("num", username);
             map.put("passwd", encryptedPassword);
             map.put("updateTime",new Timestamp(System.currentTimeMillis()));
-            map.put("initial",false);
+            map.put("initial",true);
             userMapper.updateUserPasswdByStuNum(map);
             userMapper.updateUserPasswdByStaffNum(map);
         } else {
