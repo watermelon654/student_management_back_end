@@ -17,7 +17,7 @@ import java.util.Collections;
 @EnableSwagger2
 @EnableWebMvc
 public class SwaggerConfig {
-//    http://localhost:28080/swagger-ui/index.html
+//    http://localhost:18080/swagger-ui/index.html
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
