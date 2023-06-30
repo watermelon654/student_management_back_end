@@ -1,14 +1,9 @@
 package com.student_management.demo.service.grade;
 import cn.hutool.core.collection.CollUtil;
 import com.student_management.demo.controller.grade.vo.*;
-import com.student_management.demo.controller.volunteer.vo.VolunteerBaseVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerSelectListRespVO;
 import com.student_management.demo.convert.grade.GradeConvert;
-import com.student_management.demo.convert.volunteer.VolunteerConvert;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
-import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import com.student_management.demo.mapper.mysql.grade.GradeMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
 import com.student_management.demo.mapper.mysql.summary.SummaryMapper;
@@ -109,6 +104,17 @@ public class GradeServiceImpl implements GradeService{
     }
 
     /**
+     * 显示当前学生GPA打分结果
+     *
+     * @param gradeScore
+     * @return 打分结果
+     */
+    @Override
+    public boolean updateResult(GradeScoreReqVO gradeScore) {
+        return gradeMapper.updateGPAScore(gradeScore) > 0;
+    }
+
+    /**
      * 将GradeDO复制给GradeBaseVO并添加score
      *
      * @param listdo
@@ -131,4 +137,18 @@ public class GradeServiceImpl implements GradeService{
         }
         return listvo;
     }
+
+
+    /**
+     * 根据学生学号查询当前学生是否已在grade表中删除
+     *
+     * @param stuNum
+     * @return 学号，姓名，gpa
+     */
+    public Boolean isDeleted(String stuNum){
+        if (gradeMapper.isDeleted(stuNum) == 1 ){
+            return true;
+        }
+        return false;
+    };
 }

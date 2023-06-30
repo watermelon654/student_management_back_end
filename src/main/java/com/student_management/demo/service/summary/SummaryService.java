@@ -15,7 +15,5 @@ public interface SummaryService {
 
     SummarySelectListRespVO selectAllList();
 
-    boolean updateGpaByStuNum(SummaryDO summary);
-
     boolean updateVolByStuNum(SummaryDO summary);
 }

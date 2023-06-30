@@ -1,7 +1,6 @@
 package com.student_management.demo.controller.grade;
 import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.grade.vo.*;
-import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
 import com.student_management.demo.service.grade.GradeService;
 import com.student_management.demo.service.summary.SummaryService;
 import com.student_management.demo.utils.excel.ExcelUtils;
@@ -61,21 +60,27 @@ public class GradeController {
             @RequestBody GradeScoreReqVO reqVO
     ) {
         try {
-//            GradeDO grade = new GradeDO();
-//            grade.setStuNum(stuNum);
-//            grade.setScore(score);
-//            boolean success = service.updateResult(grade);
-//
-//            if (success) {
+            GradeScoreReqVO gradeScoreVO = new GradeScoreReqVO();
+
+            String stuNum = reqVO.getStuNum();
+            if (service.isDeleted(stuNum)) {
+               return CommonResult.error(404, "该学生的信息已删除，请联系学工添加该学生的信息");
+            }
+
+            gradeScoreVO.setStuNum(stuNum);
+            gradeScoreVO.setScore(reqVO.getScore());
+            boolean success = service.updateResult(gradeScoreVO);
+
+            //if (success) {
                 //Integer.parseInt(score);
-            SummaryDO summary = new SummaryDO();
+            /*SummaryDO summary = new SummaryDO();
             summary.setStuNum(reqVO.getStuNum());
             summary.setGpa(reqVO.getScore());
-            boolean success = summaryService.updateGpaByStuNum(summary);
+            boolean success = summaryService.updateGpaByStuNum(summary);*/
             if (success) {
                 return CommonResult.success("评分更新成功");
             } else {
-                return CommonResult.error(404, "找不到指定的记录");
+                return CommonResult.error(404, "在学生成绩表中找不到指定的记录，请联系学工添加该学生的信息");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,9 +95,9 @@ public class GradeController {
         //return CommonResult.success(userBasicService.getBasicInfo(username));
         try {
             String stuNum = jwtTokenUtil.getUsernameFromToken(authHeader);//id,且学生和老师id不会重复
-            System.out.println("/get-grade-info:stuNum:" + stuNum);
+            //System.out.println("/get-grade-info:stuNum:" + stuNum);
             GradeRespVO info = service.getInfoByStuNum(stuNum);
-            System.out.println(info);
+            //System.out.println(info);
             return CommonResult.success(info);
         } catch (Exception e) {
             e.printStackTrace();

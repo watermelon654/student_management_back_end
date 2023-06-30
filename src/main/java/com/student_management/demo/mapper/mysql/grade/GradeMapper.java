@@ -2,9 +2,8 @@ package com.student_management.demo.mapper.mysql.grade;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.student_management.demo.controller.grade.vo.GradeRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
+import com.student_management.demo.controller.grade.vo.GradeScoreReqVO;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
-import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -39,22 +38,33 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
     }
 
     /**
-     * 查看全部学生GPA
+     * 查看所有未删除学生的GPA
      *
-     * @return 全部学生列表
+     * @return 未删除学生列表
      */
     default List<GradeDO> selectAllStudents() {
+//        QueryWrapper<GradeDO> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("isDel", 0);
+//        return selectList(queryWrapper);
         return selectList(null);
     }
 
+
     /**
-     * 打分结果
+     * 根据学生学号更新当前学生GPA打分
      *
-     * @param grade
+     * @param gradeScore
      * @return 打分结果，大于0表示打分成功，等于0表示打分失败
      */
-    int updateByStuNum(GradeDO grade);
+    int updateGPAScore(GradeScoreReqVO gradeScore);
 
+    /**
+     * 根据学生学号查询当前学生是否已在grade表中删除
+     *
+     * @param stuNum
+     * @return 学号，姓名，gpa
+     */
+    int isDeleted(String stuNum);
 
     /**
      * 根据学生学号获取当前学生GPA信息
