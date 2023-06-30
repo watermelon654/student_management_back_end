@@ -204,11 +204,19 @@ public class FileServiceImpl implements FileService {
      */
     private File getSubjectFile(String parentPath, String subject) {
         File parentFolder = new File(parentPath);
+        System.out.println("parentPath = "+parentPath);
+        if (subject.contains("=")) {
+            // 提取等号前面的子串
+            subject = subject.split("=")[0];
+        }
+        System.out.println("subject = " + subject);
+
         File[] files = parentFolder.listFiles();//获取父目录下所有文件
         File targetPdf = null;
         int count = 0;
         if (files != null) {
             for (File file : files) {
+                System.out.println("file name = "+file.getName());
                 if (file.isFile() &&
                         getFileExtension(file.getName()).equals("pdf") &&
                         !file.getName().startsWith("dead") &&
@@ -217,6 +225,25 @@ public class FileServiceImpl implements FileService {
                     count++;
                     targetPdf = file;
                 }
+//                if (file.isFile()) {
+//                    System.out.println("is file");
+//                    // 判断文件是否是一个文件
+//                    count++; // 如果是文件，则计数器加1
+//                    if (getFileExtension(file.getName()).equals("pdf")) {
+//                        // 判断文件扩展名是否为pdf
+//                        System.out.println("扩展名为pdf");
+//                        if (!file.getName().startsWith("dead")) {
+//                            // 判断文件名是否不以"dead"开头
+//                            System.out.println("不以dead开头");
+//                            if (file.getName().contains(subject)) {
+//                                // 判断文件名是否包含特定的subject
+//                                System.out.println("subject = " + subject);
+////                                targetPdf = file;
+//                            }
+//                        }
+//                    }
+//                }
+
             }
         }
         // 证明文件多于1个或少于1个报错
@@ -240,7 +267,7 @@ public class FileServiceImpl implements FileService {
         try {
             String fileParentPath = uploadPath + File.separator + stuNum;// 源文件目录
             File targetPdf = getSubjectFile(fileParentPath, subject);// 目标文件
-
+            System.out.println("fileParentPath = "+fileParentPath);
             // 设置响应格式防止乱码
             response.setContentType("application/pdf;charset=UTF-8");
             response.setHeader("X-Frame-Options", "SAMEORIGIN");

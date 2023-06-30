@@ -14,7 +14,7 @@ jwt:
     expiration: 6048000
 file:
 #  windows本地，文件在项目根目录的files文件夹下
-  upload-path: .\files
+  upload-path: D:\files
   allowed-types: pdf
   max-size: 10485760   # 10MB
 spring:
