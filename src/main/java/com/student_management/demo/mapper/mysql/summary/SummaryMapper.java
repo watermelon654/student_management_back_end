@@ -2,7 +2,6 @@ package com.student_management.demo.mapper.mysql.summary;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.student_management.demo.controller.grade.vo.GradeRespVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +21,7 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
     default SummaryDO selectSummaryByStuNum(String stu_num) {
         QueryWrapper<SummaryDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stuNum", stu_num);
+        wrapper.eq("stuNum", stu_num).eq("isDel", 0);
         return selectOne(wrapper);
     }
 
@@ -34,21 +33,22 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
     default SummaryDO selectSummaryByStuId(Long stu_id) {
         QueryWrapper<SummaryDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stuId", stu_id);
+        wrapper.eq("stuId", stu_id).eq("isDel", 0);
         return selectOne(wrapper);
     }
 
     default List<SummaryDO> selectListByStatus(boolean status) {
         QueryWrapper<SummaryDO> wrapper = new QueryWrapper<>();
-        //查询条件
-        wrapper.eq("status", status);
+        //查询条件: status值为status，isdel值为0
+        wrapper.eq("status", status).eq("isDel", 0);
+
         return selectList(wrapper);
     }
 
     default List<SummaryDO> selectAllList() {
         QueryWrapper<SummaryDO> wrapper = new QueryWrapper<>();
         //查询条件
-//        wrapper.eq("status", status);
+        wrapper.eq("isDel", 0);
         return selectList(wrapper);
     }
 
@@ -72,5 +72,12 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
      */
     Integer getVolScoreByStuNum(String stuNum);
 
-
+    /**
+     * 删除选定学生记录
+     *
+     * @param stuNum
+     * @return gpa score
+     */
+    void updateIsDelTo1(List<String> stuNum);
+    void refreshUpdateTime(List<String> stuNum);
 }

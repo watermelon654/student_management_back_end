@@ -1,6 +1,5 @@
 package com.student_management.demo;
 
-import com.student_management.demo.mapper.dataobject.user.UserDo;
 import com.student_management.demo.mapper.dataobject.user.UserPermissionDO;
 import com.student_management.demo.mapper.mysql.user.UserMapper;
 import org.junit.jupiter.api.Assertions;
@@ -22,10 +21,11 @@ public class UserMapperTests {
     void testGetLoginInfoByUsernameSuccessfully() {
         // 测试数据
         String username = "2200022002";
+        String username1 = "1100022007";
         // 断言不会抛出异常
         Assertions.assertDoesNotThrow(() -> {
             // 执行查询
-            UserPermissionDO admin = mapper.selectUserInfoByUserNum(username);
+            UserPermissionDO admin = mapper.selectUserInfoByUserNum(username1);
             System.out.println("result >>> " + admin.getUrls());
             // 断言查询结果不为null
             Assertions.assertNotNull(admin);
@@ -35,7 +35,8 @@ public class UserMapperTests {
     @Test
     void testGetLoginInfoByUsernameFailBecauseNotFound() {
         // 测试数据
-        String username = "2200022001";
+        String username = "22000220099";
+
         // 断言不会抛出异常
         Assertions.assertDoesNotThrow(() -> {
             // 执行查询
