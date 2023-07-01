@@ -1,8 +1,8 @@
 package com.student_management.demo.mapper.mysql.grade;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.student_management.demo.controller.grade.vo.GradeRespVO;
-import com.student_management.demo.controller.grade.vo.GradeScoreReqVO;
+import com.student_management.demo.controller.grade.vo.Student.StudentGradeRespVO;
+import com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -12,6 +12,11 @@ import java.util.List;
 @Mapper
 @Repository
 public interface GradeMapper extends BaseMapper<GradeDO>{
+
+    //--------------------------------------
+    //评委端
+
+    int isDeleted(String stuNum);
 
     /**
      * 按照学号查询GPA
@@ -38,9 +43,9 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
     }
 
     /**
-     * 查看所有未删除学生的GPA
+     * 查看所有未删除学生的GradeDO
      *
-     * @return 未删除学生列表
+     * @return 所有未删除学生的GradeDO:学号，姓名，gpa，创建时间，更新时间
      */
     default List<GradeDO> selectAllStudents() {
         QueryWrapper<GradeDO> queryWrapper = new QueryWrapper<>();
@@ -49,30 +54,20 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
 //        return selectList(null);
     }
 
+    Integer getGpaScoreByStuNum(String stuNum);
 
-    /**
-     * 根据学生学号更新当前学生GPA打分
-     *
-     * @param gradeScore
-     * @return 打分结果，大于0表示打分成功，等于0表示打分失败
-     */
     int updateGPAScore(GradeScoreReqVO gradeScore);
 
-    /**
-     * 根据学生学号查询当前学生是否已在grade表中删除
-     *
-     * @param stuNum
-     * @return isDel
-     */
-    int isDeleted(String stuNum);
+
+    //--------------------------------------
+    //学生端
 
     /**
      * 根据学生学号获取当前学生GPA信息
      *
      * @param stuNum
-     * @return 学号，姓名，gpa
+     * @return 当前学生StudentGradeRespVO:学号，姓名，gpa
      */
-    GradeRespVO getInfoByStuNum(String stuNum);
+    StudentGradeRespVO getInfoByStuNum(String stuNum);
 
-    Integer getGpaScoreByStuNum(String stuNum);
 }

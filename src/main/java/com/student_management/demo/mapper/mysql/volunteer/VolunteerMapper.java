@@ -1,10 +1,8 @@
 package com.student_management.demo.mapper.mysql.volunteer;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.student_management.demo.controller.grade.vo.GradeScoreReqVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerScoreReqVO;
-import com.student_management.demo.mapper.dataobject.grade.GradeDO;
+import com.student_management.demo.controller.volunteer.vo.Student.StudentVolunteerRespVO;
+import com.student_management.demo.controller.volunteer.vo.Judge.VolunteerScoreReqVO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -14,6 +12,11 @@ import java.util.List;
 @Mapper
 @Repository
 public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
+
+    //--------------------------------------
+    //评委端
+
+    int isDeleted(String stuNum);
 
     /**
      * 按照学号查询志愿服务时长
@@ -39,6 +42,8 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
 //        return selectList(null);
     }
 
+    Integer getVolScoreByStuNum(String stuNum);
+
     /**
      * 根据学生学号更新当前学生志愿服务时长打分
      *
@@ -47,21 +52,15 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
      */
     int updateVolunteerScore(VolunteerScoreReqVO volunteerScore);
 
-    /**
-     * 根据学生学号查询当前学生是否已在volunteer表中删除
-     *
-     * @param stuNum
-     * @return isDel
-     */
-    int isDeleted(String stuNum);
+
+    //--------------------------------------
+    //学生端
 
     /**
      * 根据学生学号获取当前学生志愿服务时长信息
      *
      * @param stuNum
-     * @return 学号，姓名，志愿服务时长
+     * @return 当前学生StudentVolunteerRespVO：学号，姓名，志愿服务时长
      */
-    VolunteerRespVO getInfoByStuNum(String stuNum);
-
-    Integer getVolScoreByStuNum(String stuNum);
+    StudentVolunteerRespVO getInfoByStuNum(String stuNum);
 }

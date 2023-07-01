@@ -1,6 +1,10 @@
 package com.student_management.demo.controller.grade;
 import com.student_management.demo.common.CommonResult;
-import com.student_management.demo.controller.grade.vo.*;
+import com.student_management.demo.controller.grade.vo.Judge.GradeImportExcelVO;
+import com.student_management.demo.controller.grade.vo.Judge.GradeImportRespVO;
+import com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO;
+import com.student_management.demo.controller.grade.vo.Judge.GradeSelectListRespVO;
+import com.student_management.demo.controller.grade.vo.Student.StudentGradeRespVO;
 import com.student_management.demo.service.grade.GradeService;
 import com.student_management.demo.service.summary.SummaryService;
 import com.student_management.demo.utils.excel.ExcelUtils;
@@ -24,11 +28,11 @@ public class GradeController {
     @Resource
     private GradeService service;
 
-    @Resource
-    private SummaryService summaryService;
-
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+    //--------------------------------------
+    //评委端
 
     /**
      * 上传GPA excel表格
@@ -38,7 +42,7 @@ public class GradeController {
     @PostMapping("/import")
     @PreAuthorize("hasAuthority('/api/grade/import')")
     public CommonResult<GradeImportRespVO> importGradeExcel(@RequestPart(value = "file") MultipartFile file) throws IOException {
-            List<GradeImportExcelVO> userList = ExcelUtils.read(file,GradeImportExcelVO.class);
+            List<GradeImportExcelVO> userList = ExcelUtils.read(file, GradeImportExcelVO.class);
             GradeImportRespVO respVO = service.importGradeList(userList);
             // 检查上传文件是否为空文件
             if (respVO.isEmpty())
@@ -71,12 +75,6 @@ public class GradeController {
             gradeScoreVO.setScore(reqVO.getScore());
             boolean success = service.updateResult(gradeScoreVO);
 
-            //if (success) {
-                //Integer.parseInt(score);
-            /*SummaryDO summary = new SummaryDO();
-            summary.setStuNum(reqVO.getStuNum());
-            summary.setGpa(reqVO.getScore());
-            boolean success = summaryService.updateGpaByStuNum(summary);*/
             if (success) {
                 return CommonResult.success("评分更新成功");
             } else {
@@ -88,16 +86,16 @@ public class GradeController {
         }
     }
 
+    //--------------------------------------
+    //学生端
+
     @GetMapping("/get-grade-info")
     @PreAuthorize("hasAuthority('/api/grade/get-grade-info')")
     @ApiOperation("根据token获取学生学号，之后获取学生GPA信息")
-    public CommonResult<GradeRespVO> getInfoByStuNum(@RequestHeader("Authorization") String authHeader) {
-        //return CommonResult.success(userBasicService.getBasicInfo(username));
+    public CommonResult<StudentGradeRespVO> getInfoByStuNum(@RequestHeader("Authorization") String authHeader) {
         try {
             String stuNum = jwtTokenUtil.getUsernameFromToken(authHeader);//id,且学生和老师id不会重复
-            //System.out.println("/get-grade-info:stuNum:" + stuNum);
-            GradeRespVO info = service.getInfoByStuNum(stuNum);
-            //System.out.println(info);
+            StudentGradeRespVO info = service.getInfoByStuNum(stuNum);
             return CommonResult.success(info);
         } catch (Exception e) {
             e.printStackTrace();
