@@ -28,10 +28,10 @@ public interface VolunteerService {
     /**
      * 打分结果
      *
-     * @param volunteer
+     * @param volunteerScore
      * @return 打分结果，true表示打分成功，false表示打分失败
      */
-    //boolean updateResult(VolunteerDO volunteer);
+    boolean updateResult(VolunteerScoreReqVO volunteerScore);
 
     /**
      * 根据学生学号获取当前学生志愿服务时长信息
@@ -49,4 +49,11 @@ public interface VolunteerService {
      */
     List<VolunteerBaseVO> convertList(List<VolunteerDO> listdo);
 
+    /**
+     * 根据学生学号查询当前学生是否已在volunteer表中删除
+     *
+     * @param stuNum
+     * @return 查询结果，true表示已删除
+     */
+    Boolean isDeleted(String stuNum);
 }

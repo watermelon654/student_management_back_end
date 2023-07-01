@@ -115,13 +115,4 @@ public class SummaryServiceImpl implements SummaryService {
 
     }
 
-    /**
-     * 更新志愿服务打分并返回打分结果
-     *
-     * @param summary
-     * @return 打分结果，true表示打分成功，false表示打分失败
-     */
-    @Override
-    public boolean updateVolByStuNum(SummaryDO summary) { return summaryMapper.updateVolByStuNum(summary) > 0; }
-
 }

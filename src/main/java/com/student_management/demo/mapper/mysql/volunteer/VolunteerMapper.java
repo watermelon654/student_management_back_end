@@ -1,7 +1,10 @@
 package com.student_management.demo.mapper.mysql.volunteer;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.student_management.demo.controller.grade.vo.GradeScoreReqVO;
 import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
+import com.student_management.demo.controller.volunteer.vo.VolunteerScoreReqVO;
+import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -25,33 +28,32 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
     }
 
     /**
-     * 按照学生id查询志愿服务时长
-     * @param stu_id
-     * @return
-     */
-    default VolunteerDO selectVolunteerByStuId(Long stu_id) {
-        QueryWrapper<VolunteerDO> wrapper = new QueryWrapper<>();
-        //查询条件
-        wrapper.eq("stuId", stu_id);
-        return selectOne(wrapper);
-    }
-
-    /**
-     * 查看全部学生志愿服务时长
+     * 查看所有未删除学生的志愿服务时长
      *
-     * @return 全部学生列表
+     * @return 未删除学生列表
      */
     default List<VolunteerDO> selectAllStudents() {
-        return selectList(null);
+        QueryWrapper<VolunteerDO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("isDel", 0);
+        return selectList(queryWrapper);
+//        return selectList(null);
     }
 
     /**
-     * 打分结果
+     * 根据学生学号更新当前学生志愿服务时长打分
      *
-     * @param volunteer
+     * @param volunteerScore
      * @return 打分结果，大于0表示打分成功，等于0表示打分失败
      */
-    int updateByStuNum(VolunteerDO volunteer);
+    int updateVolunteerScore(VolunteerScoreReqVO volunteerScore);
+
+    /**
+     * 根据学生学号查询当前学生是否已在volunteer表中删除
+     *
+     * @param stuNum
+     * @return isDel
+     */
+    int isDeleted(String stuNum);
 
     /**
      * 根据学生学号获取当前学生志愿服务时长信息

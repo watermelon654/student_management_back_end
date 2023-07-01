@@ -14,6 +14,4 @@ public interface SummaryService {
     SummarySelectListRespVO selectListByStatus(boolean status);
 
     SummarySelectListRespVO selectAllList();
-
-    boolean updateVolByStuNum(SummaryDO summary);
 }

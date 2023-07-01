@@ -65,14 +65,20 @@ public class VolunteerController {
             @RequestBody VolunteerScoreReqVO reqVO
     ) {
         try {
-            SummaryDO summary = new SummaryDO();
-            summary.setStuNum(reqVO.getStuNum());
-            summary.setVol(reqVO.getScore());
-            boolean success = summaryService.updateVolByStuNum(summary);
+            VolunteerScoreReqVO volunteerScoreVO = new VolunteerScoreReqVO();
+
+            String stuNum = reqVO.getStuNum();
+            if (service.isDeleted(stuNum)) {
+                return CommonResult.error(404, "该学生的信息已删除，请联系学工添加该学生的信息");
+            }
+
+            volunteerScoreVO.setStuNum(stuNum);
+            volunteerScoreVO.setScore(reqVO.getScore());
+            boolean success = service.updateResult(volunteerScoreVO);
             if (success) {
                 return CommonResult.success("评分更新成功");
             } else {
-                return CommonResult.error(404, "找不到指定的记录");
+                return CommonResult.error(404, "在学生成绩表中找不到指定的记录，请联系学工添加该学生的信息");
             }
         } catch (Exception e) {
             e.printStackTrace();

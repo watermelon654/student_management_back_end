@@ -49,7 +49,7 @@ public interface GradeService {
      * 根据学生学号查询当前学生是否已在grade表中删除
      *
      * @param stuNum
-     * @return 学号，姓名，gpa
+     * @return 查询结果，true表示已删除
      */
     Boolean isDeleted(String stuNum);
 }

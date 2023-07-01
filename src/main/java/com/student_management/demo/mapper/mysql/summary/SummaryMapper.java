@@ -52,25 +52,4 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
         return selectList(wrapper);
     }
 
-    int updateGpaByStuNum(SummaryDO summary);
-
-    int updateVolByStuNum(SummaryDO summary);
-
-    /**
-     * 根据学生学号获取当前学生GPA打分结果
-     *
-     * @param stuNum
-     * @return gpa score
-     */
-    Integer getGpaScoreByStuNum(String stuNum);
-
-    /**
-     * 根据学生学号获取当前学生Vol打分结果
-     *
-     * @param stuNum
-     * @return vol score
-     */
-    Integer getVolScoreByStuNum(String stuNum);
-
-
 }

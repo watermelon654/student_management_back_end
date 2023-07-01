@@ -1,6 +1,7 @@
 package com.student_management.demo.service.volunteer;
 import cn.hutool.core.collection.CollUtil;
 import com.student_management.demo.controller.grade.vo.GradeBaseVO;
+import com.student_management.demo.controller.grade.vo.GradeScoreReqVO;
 import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
 import com.student_management.demo.controller.volunteer.vo.*;
 import com.student_management.demo.convert.volunteer.VolunteerConvert;
@@ -89,14 +90,15 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     /**
-     * 打分结果
+     * 显示当前学生志愿服务时长打分结果
      *
-     * @param volunteer
+     * @param volunteerScore
      * @return 打分结果，true表示打分成功，false表示打分失败
      */
-//    public boolean updateResult(VolunteerDO volunteer) {
-//        return volunteerMapper.updateByStuNum(volunteer) > 0;
-//    }
+    @Override
+    public boolean updateResult(VolunteerScoreReqVO volunteerScore) {
+        return volunteerMapper.updateVolunteerScore(volunteerScore) > 0;
+    }
 
     /**
      * 根据学生学号获取当前学生学生学号、姓名、志愿服务时长
@@ -131,4 +133,17 @@ public class VolunteerServiceImpl implements VolunteerService {
         }
         return listvo;
     }
+
+    /**
+     * 根据学生学号查询当前学生是否已在volunteer表中删除
+     *
+     * @param stuNum
+     * @return 查询结果，true表示已删除
+     */
+    public Boolean isDeleted(String stuNum){
+        if (volunteerMapper.isDeleted(stuNum) == 1 ){
+            return true;
+        }
+        return false;
+    };
 }

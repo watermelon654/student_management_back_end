@@ -43,10 +43,10 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
      * @return 未删除学生列表
      */
     default List<GradeDO> selectAllStudents() {
-//        QueryWrapper<GradeDO> queryWrapper = new QueryWrapper<>();
-//        queryWrapper.eq("isDel", 0);
-//        return selectList(queryWrapper);
-        return selectList(null);
+        QueryWrapper<GradeDO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("isDel", 0);
+        return selectList(queryWrapper);
+//        return selectList(null);
     }
 
 
@@ -62,7 +62,7 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
      * 根据学生学号查询当前学生是否已在grade表中删除
      *
      * @param stuNum
-     * @return 学号，姓名，gpa
+     * @return isDel
      */
     int isDeleted(String stuNum);
 

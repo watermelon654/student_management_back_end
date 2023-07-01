@@ -3,20 +3,6 @@
 
 <mapper namespace="com.student_management.demo.mapper.mysql.grade.GradeMapper">
     <!--  评委部分  -->
-    <!--  更新当前学生gpa打分：更新summary表的gpa字段-->
-    <update id="updateGPAScore" parameterType="com.student_management.demo.controller.grade.vo.GradeScoreReqVO">
-        UPDATE summary
-        SET gpa = #{score}
-        WHERE stuNum = #{stuNum}
-    </update>
-
-    <!--  查询当前学生学号、姓名、GPA  -->
-    <select id="getInfoByStuNum" parameterType="java.lang.String" resultType="com.student_management.demo.controller.grade.vo.GradeRespVO">
-        SELECT stuNum, stuName, gpa
-        FROM grade
-        WHERE stuNum = #{stuNum}
-    </select>
-
     <!--  根据学号查询当前学生是否已在grade表中删除  -->
     <select id="isDeleted" parameterType="java.lang.String" resultType="Integer">
         SELECT isDel
@@ -24,11 +10,26 @@
         WHERE stuNum = #{stuNum}
     </select>
 
-    <!--  学生部分  -->
     <!--  根据学号查询当前学生GPA打分  -->
     <select id="getGpaScoreByStuNum" parameterType="java.lang.String" resultType="Integer">
         SELECT gpa
         FROM summary
+        WHERE stuNum = #{stuNum}
+    </select>
+
+    <!--  更新当前学生gpa打分：更新summary表的gpa字段-->
+    <update id="updateGPAScore" parameterType="com.student_management.demo.controller.grade.vo.GradeScoreReqVO">
+        UPDATE summary
+        SET gpa = #{score}
+        WHERE stuNum = #{stuNum}
+    </update>
+
+
+    <!--  学生部分  -->
+    <!--  查询当前学生学号、姓名、GPA  -->
+    <select id="getInfoByStuNum" parameterType="java.lang.String" resultType="com.student_management.demo.controller.grade.vo.GradeRespVO">
+        SELECT stuNum, stuName, gpa
+        FROM grade
         WHERE stuNum = #{stuNum}
     </select>
 
