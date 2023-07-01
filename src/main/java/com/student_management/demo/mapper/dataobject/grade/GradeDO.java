@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 @Data
 @TableName(value="grade")//数据库表名
 public class GradeDO {
@@ -35,5 +37,16 @@ public class GradeDO {
      */
     private float gpa;
 
+//    private int createUserId;
+
+    /**
+     * 创建时间
+     */
+    private String createTime;
+
+    /**
+     * 更新时间
+     */
+    private String updateTime;
 
 }

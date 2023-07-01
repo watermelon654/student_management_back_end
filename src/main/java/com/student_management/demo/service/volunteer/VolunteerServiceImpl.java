@@ -1,11 +1,8 @@
 package com.student_management.demo.service.volunteer;
 import cn.hutool.core.collection.CollUtil;
-import com.student_management.demo.controller.grade.vo.GradeBaseVO;
-import com.student_management.demo.controller.grade.vo.GradeScoreReqVO;
-import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
-import com.student_management.demo.controller.volunteer.vo.*;
+import com.student_management.demo.controller.volunteer.vo.Judge.*;
+import com.student_management.demo.controller.volunteer.vo.Student.StudentVolunteerRespVO;
 import com.student_management.demo.convert.volunteer.VolunteerConvert;
-import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -29,9 +25,21 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Resource
     private StudentMapper studentMapper;
 
-    @Resource
-    private SummaryMapper summaryMapper;
+    //--------------------------------------
+    //评委端
 
+    /**
+     * 根据学生学号查询当前学生是否已在volunteer表中删除
+     *
+     * @param stuNum
+     * @return 查询结果，true表示已删除
+     */
+    public Boolean isDeleted(String stuNum){
+        if (volunteerMapper.isDeleted(stuNum) == 1 ){
+            return true;
+        }
+        return false;
+    };
 
     /**
      * 批量导入服务时长，如果已经存在则强制更新
@@ -76,17 +84,43 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     /**
-     * 获得全体学生志愿服务时长列表
+     * 获得未删除学生志愿服务时长列表
      *
-     * @return 全体学生志愿服务时长列表
+     * @return 全体未删除学生志愿服务时长列表
      */
     @Override
     public VolunteerSelectListRespVO selectAllStudents() {
         List<VolunteerDO> listdo = volunteerMapper.selectAllStudents();
         VolunteerSelectListRespVO respVO = new VolunteerSelectListRespVO();
-        List<VolunteerBaseVO> listvo = convertList(listdo);
+        List<JudgeVolunteerRespVO> listvo = convertList(listdo);
         respVO.setVolunteerlist(listvo);
         return respVO;
+    }
+
+    /**
+     * 将VolunteerDO复制给JudgeVolunteerRespVO并添加score
+     *
+     * @param listdo
+     * @return listvo
+     */
+    public List<JudgeVolunteerRespVO> convertList(List<VolunteerDO> listdo) {
+        List<JudgeVolunteerRespVO> listvo = new ArrayList<>();
+        for (VolunteerDO volunteerDO : listdo) {
+            JudgeVolunteerRespVO vo = new JudgeVolunteerRespVO();
+            vo.setStuNum(volunteerDO.getStuNum());
+            vo.setStuName(volunteerDO.getStuName());
+            vo.setTime(volunteerDO.getTime());
+            vo.setCreateTime(volunteerDO.getCreateTime());
+            vo.setUpdateTime(volunteerDO.getUpdateTime());
+
+            // 从summary表中获取score数据
+            Integer score = volunteerMapper.getVolScoreByStuNum(volunteerDO.getStuNum());
+            System.out.println("score:" + score);
+            vo.setScore(score);
+
+            listvo.add(vo);
+        }
+        return listvo;
     }
 
     /**
@@ -100,50 +134,17 @@ public class VolunteerServiceImpl implements VolunteerService {
         return volunteerMapper.updateVolunteerScore(volunteerScore) > 0;
     }
 
+
+    //--------------------------------------
+    //学生端
+
     /**
      * 根据学生学号获取当前学生学生学号、姓名、志愿服务时长
      *
      * @param stuNum
-     * @return 当前学生学生学号、姓名、志愿服务时长
+     * @return 当前StudentVolunteerRespVO:学生学生学号、姓名、志愿服务时长
      */
-    public VolunteerRespVO getInfoByStuNum(String stuNum) {
+    public StudentVolunteerRespVO getInfoByStuNum(String stuNum) {
         return volunteerMapper.getInfoByStuNum(stuNum);
     }
-
-    /**
-     * 将VolunteerDO复制给VolunteerBaseVO并添加score
-     *
-     * @param listdo
-     * @return listvo
-     */
-    public List<VolunteerBaseVO> convertList(List<VolunteerDO> listdo) {
-        List<VolunteerBaseVO> listvo = new ArrayList<>();
-        for (VolunteerDO volunteerDO : listdo) {
-            VolunteerBaseVO vo = new VolunteerBaseVO();
-            vo.setStuNum(volunteerDO.getStuNum());
-            vo.setStuName(volunteerDO.getStuName());
-            vo.setTime(volunteerDO.getTime());
-
-            // 从summary表中获取score数据
-            Integer score = volunteerMapper.getVolScoreByStuNum(volunteerDO.getStuNum());
-            System.out.println("score:" + score);
-            vo.setScore(score);
-
-            listvo.add(vo);
-        }
-        return listvo;
-    }
-
-    /**
-     * 根据学生学号查询当前学生是否已在volunteer表中删除
-     *
-     * @param stuNum
-     * @return 查询结果，true表示已删除
-     */
-    public Boolean isDeleted(String stuNum){
-        if (volunteerMapper.isDeleted(stuNum) == 1 ){
-            return true;
-        }
-        return false;
-    };
 }

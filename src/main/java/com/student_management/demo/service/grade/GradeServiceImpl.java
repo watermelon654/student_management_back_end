@@ -1,12 +1,12 @@
 package com.student_management.demo.service.grade;
 import cn.hutool.core.collection.CollUtil;
-import com.student_management.demo.controller.grade.vo.*;
+import com.student_management.demo.controller.grade.vo.Judge.*;
+import com.student_management.demo.controller.grade.vo.Student.StudentGradeRespVO;
 import com.student_management.demo.convert.grade.GradeConvert;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.mysql.grade.GradeMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
-import com.student_management.demo.mapper.mysql.summary.SummaryMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +22,22 @@ public class GradeServiceImpl implements GradeService{
 
     @Resource
     private StudentMapper studentMapper;
+
+    //--------------------------------------
+    //评委端
+
+    /**
+     * 根据学生学号查询当前学生是否已在grade表中删除
+     *
+     * @param stuNum
+     * @return 查询结果，true表示已删除
+     */
+    public Boolean isDeleted(String stuNum){
+        if (gradeMapper.isDeleted(stuNum) == 1 ){
+            return true;
+        }
+        return false;
+    }
 
     /**
      * 批量导入GPA，如果已经存在则强制更新
@@ -66,27 +82,42 @@ public class GradeServiceImpl implements GradeService{
     }
 
     /**
-     * 获得全体学生GPA
+     * 获得未删除学生的GPA
      *
-     * @return 全体学生GPA
+     * @return 全体未删除学生的GPA
      */
     @Override
     public GradeSelectListRespVO selectAllStudents() {
         List<GradeDO> listdo = gradeMapper.selectAllStudents();
         GradeSelectListRespVO respVO = new GradeSelectListRespVO();
-        List<GradeBaseVO> listvo = convertList(listdo);
+        List<JudgeGradeRespVO> listvo = convertList(listdo);
         respVO.setGradelist(listvo);
         return respVO;
     }
 
     /**
-     * 根据学生学号获取当前学生学号、姓名、GPA
+     * 将GradeDO复制给JudgeGradeRespVO并添加score
      *
-     * @param stuNum
-     * @return 当前学号、姓名、GPA
+     * @param listdo
+     * @return listvo
      */
-    public GradeRespVO getInfoByStuNum(String stuNum) {
-        return gradeMapper.getInfoByStuNum(stuNum);
+    public List<JudgeGradeRespVO> convertList(List<GradeDO> listdo) {
+        List<JudgeGradeRespVO> listvo = new ArrayList<>();
+        for (GradeDO gradeDO : listdo) {
+            JudgeGradeRespVO vo = new JudgeGradeRespVO();
+            vo.setStuNum(gradeDO.getStuNum());
+            vo.setStuName(gradeDO.getStuName());
+            vo.setGpa(gradeDO.getGpa());
+            vo.setCreateTime(gradeDO.getCreateTime());
+            vo.setUpdateTime(gradeDO.getUpdateTime());
+
+            // 从summary表中获取score数据
+            Integer score = gradeMapper.getGpaScoreByStuNum(gradeDO.getStuNum());
+            vo.setScore(score);
+
+            listvo.add(vo);
+        }
+        return listvo;
     }
 
     /**
@@ -100,41 +131,17 @@ public class GradeServiceImpl implements GradeService{
         return gradeMapper.updateGPAScore(gradeScore) > 0;
     }
 
-    /**
-     * 将GradeDO复制给GradeBaseVO并添加score
-     *
-     * @param listdo
-     * @return listvo
-     */
-    public List<GradeBaseVO> convertList(List<GradeDO> listdo) {
-        List<GradeBaseVO> listvo = new ArrayList<>();
-        for (GradeDO gradeDO : listdo) {
-            GradeBaseVO vo = new GradeBaseVO();
-            vo.setStuNum(gradeDO.getStuNum());
-            vo.setStuName(gradeDO.getStuName());
-            vo.setGpa(gradeDO.getGpa());
 
-            // 从summary表中获取score数据
-            Integer score = gradeMapper.getGpaScoreByStuNum(gradeDO.getStuNum());
-            System.out.println("score:" + score);
-            vo.setScore(score);
-
-            listvo.add(vo);
-        }
-        return listvo;
-    }
-
+    //--------------------------------------
+    //学生端
 
     /**
-     * 根据学生学号查询当前学生是否已在grade表中删除
+     * 根据学生学号获取当前学生学号、姓名、GPA
      *
      * @param stuNum
-     * @return 查询结果，true表示已删除
+     * @return 当前学号、姓名、GPA
      */
-    public Boolean isDeleted(String stuNum){
-        if (gradeMapper.isDeleted(stuNum) == 1 ){
-            return true;
-        }
-        return false;
-    };
+    public StudentGradeRespVO getInfoByStuNum(String stuNum) {
+        return gradeMapper.getInfoByStuNum(stuNum);
+    }
 }

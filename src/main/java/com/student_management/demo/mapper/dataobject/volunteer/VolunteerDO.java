@@ -34,4 +34,14 @@ public class VolunteerDO {
      * 志愿服务时长
      */
     private int time;
+
+    /**
+     * 创建时间
+     */
+    private String createTime;
+
+    /**
+     * 更新时间
+     */
+    private String updateTime;
 }
