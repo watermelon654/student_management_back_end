@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
@@ -33,6 +34,9 @@ public class VolunteerController {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+    //--------------------------------------
+    //评委端
 
     /**
      * 上传志愿服务 excel表格
@@ -86,15 +90,18 @@ public class VolunteerController {
         }
     }
 
+
+    //--------------------------------------
+    //学生端
+
     @GetMapping("/get-volunteer-info")
     @PreAuthorize("hasAuthority('/api/volunteer/get-volunteer-info')")
     @ApiOperation("根据token获取学生学号，之后获取学生志愿服务时长信息")
-    public CommonResult<StudentVolunteerRespVO> getInfoByStuNum(@RequestHeader("Authorization") String authHeader) {
+    public CommonResult<StudentVolunteerRespVO> getInfoByStuNum(HttpServletRequest request) {
         try {
-            String stuNum = jwtTokenUtil.getUsernameFromToken(authHeader);//id,且学生和老师id不会重复
-            System.out.println("/get-volunteer-info:stuNum:" + stuNum);
+            String token = request.getHeader("Authorization");
+            String stuNum = jwtTokenUtil.getUsernameFromToken(token);
             StudentVolunteerRespVO info = service.getInfoByStuNum(stuNum);
-            System.out.println(info);
             return CommonResult.success(info);
         } catch (Exception e) {
             e.printStackTrace();

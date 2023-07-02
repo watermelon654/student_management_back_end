@@ -24,7 +24,7 @@ public interface GradeService {
      * @param importGrade     导入GPA列表
      * @return 导入结果
      */
-    GradeImportRespVO importGradeList(List<GradeImportExcelVO> importGrade);
+    GradeImportRespVO importGradeList(List<GradeImportExcelVO> importGrade, String judgeNum);
 
     /**
      * 获得全体未删除学生的GPA
@@ -48,6 +48,8 @@ public interface GradeService {
      * @return 打分结果，true表示打分成功，false表示打分失败
      */
     boolean updateResult(GradeScoreReqVO gradeScore);
+
+//    public boolean showDeleteResult(String judgeNum, String stuNum);
 
 
     //--------------------------------------

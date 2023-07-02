@@ -37,16 +37,24 @@ public class GradeDO {
      */
     private float gpa;
 
-//    private int createUserId;
-
     /**
      * 创建时间
      */
-    private String createTime;
+    private Timestamp createTime;
 
     /**
      * 更新时间
      */
-    private String updateTime;
+    private Timestamp updateTime;
+
+    /**
+     * 创建者UserId
+     */
+    private long createUserId;
+
+    /**
+     * 更新者UserId
+     */
+    private long updateUserId;
 
 }

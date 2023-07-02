@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Data
 public class JudgeVolunteerRespVO {
@@ -26,9 +27,9 @@ public class JudgeVolunteerRespVO {
     private Integer score;
 
     @Schema(description = "创建时间")
-    private String createTime;
+    private Timestamp createTime;
 
     @Schema(description = "更新时间")
-    private String updateTime;
+    private Timestamp updateTime;
 
 }

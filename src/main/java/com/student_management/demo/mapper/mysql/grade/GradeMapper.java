@@ -1,6 +1,7 @@
 package com.student_management.demo.mapper.mysql.grade;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.student_management.demo.controller.grade.vo.Judge.GradeExcelUpdateVO;
 import com.student_management.demo.controller.grade.vo.Student.StudentGradeRespVO;
 import com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
@@ -16,7 +17,7 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
     //--------------------------------------
     //评委端
 
-    int isDeleted(String stuNum);
+    Integer isDeleted(String stuNum);
 
     /**
      * 按照学号查询GPA
@@ -42,6 +43,10 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
         return selectOne(wrapper);
     }
 
+    GradeDO selectStudentById(Long id);
+
+    int updateGradeUpdateInfo(GradeExcelUpdateVO gradeExcelUpdateVO);
+
     /**
      * 查看所有未删除学生的GradeDO
      *
@@ -56,9 +61,20 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
 
     Integer getGpaScoreByStuNum(String stuNum);
 
+    Integer deleteByStuNum(String stuNum);
+
+    /**
+     * 更新当前学生gpa打分和updateUserId
+     *
+     * @return 更新操作受影响的行数，如果更新成功，返回的值会大于0，否则返回0
+     */
     int updateGPAScore(GradeScoreReqVO gradeScore);
 
+    int updateGradeUpdateInfo(GradeScoreReqVO gradeScore);
 
+    int updateSummaryUpdateInfo(GradeScoreReqVO gradeScore);
+
+    int createStuUpdateInfo(long id, String stuNum);
     //--------------------------------------
     //学生端
 

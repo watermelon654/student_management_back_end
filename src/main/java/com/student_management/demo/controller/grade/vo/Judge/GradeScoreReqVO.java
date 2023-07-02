@@ -13,4 +13,9 @@ public class GradeScoreReqVO {
      * 打分
      */
     private Integer score;
+
+    /**
+     * 更新者职工号
+     */
+    private String judgeNum;
 }

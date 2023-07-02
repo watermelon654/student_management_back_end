@@ -7,10 +7,12 @@ import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.mysql.grade.GradeMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
+import com.student_management.demo.service.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,6 +25,8 @@ public class GradeServiceImpl implements GradeService{
     @Resource
     private StudentMapper studentMapper;
 
+    @Resource
+    private RedisService redisService;
     //--------------------------------------
     //评委端
 
@@ -45,7 +49,7 @@ public class GradeServiceImpl implements GradeService{
      * @param importGrade     导入GPA列表
      * @return 导入结果
      */
-    public GradeImportRespVO importGradeList(List<GradeImportExcelVO> importGrade) {
+    public GradeImportRespVO importGradeList(List<GradeImportExcelVO> importGrade, String judgeNum) {
         GradeImportRespVO respVO = GradeImportRespVO.builder().createGradenames(new ArrayList<>())
                 .updateGradenames(new ArrayList<>()).failureGradenames(new LinkedHashMap<>()).build();
         //列表为空
@@ -53,13 +57,17 @@ public class GradeServiceImpl implements GradeService{
             respVO.setEmpty(true);
             return respVO;
         }
+        //获取评委id
+        Long operateId = Long.parseLong(redisService.getValue("user_id_" + judgeNum));
         //对每一个表项检查
         importGrade.forEach(grade -> {
+            Long stuId;
             // 判断是否在学生信息表stu_info中，在进行插入
             StudentDO existStu = studentMapper.selectStudentByNum(grade.getStuNum());
             if (existStu == null) {
                 // 如果学生表中不存在，在学生表中插入记录
                 studentMapper.insertStudentBasicInfo(grade.getStuName(),grade.getStuNum());
+                gradeMapper.createStuUpdateInfo(operateId,grade.getStuNum());
             }
             // 获取stu_id，判断是否在学生成绩表grade中，在进行插入
             existStu = studentMapper.selectStudentByNum(grade.getStuNum());
@@ -68,15 +76,33 @@ public class GradeServiceImpl implements GradeService{
                 // 如果在成绩表中不存在，在成绩表插入记录
                 GradeDO createGrade = GradeConvert.INSTANCE.convert(grade);
                 createGrade.setStuId(existStu.getId());
+                // 使用当前操作者的用户id作为创建和更新id
+                createGrade.setCreateUserId(operateId);
+                createGrade.setUpdateUserId(operateId);
                 gradeMapper.insert(createGrade);
                 respVO.getCreateGradenames().add(grade.getStuName());
                 return;
             }
+
             // 如果存在，更新成绩表中的记录
             GradeDO updateGrade = GradeConvert.INSTANCE.convert(grade);
-            updateGrade.setId(existGrade.getId());
-            gradeMapper.updateById(updateGrade);
-            respVO.getUpdateGradenames().add(grade.getStuName());
+//            updateGrade.setId(existGrade.getId());
+
+            // 检查字段是否发生变化，并只更新有变化的字段
+            if (updateGrade.getGpa() != existGrade.getGpa()) {
+                GradeExcelUpdateVO gradeExcelUpdateVO = new GradeExcelUpdateVO();
+                gradeExcelUpdateVO.setStuId(existGrade.getId());
+                gradeExcelUpdateVO.setId(operateId);
+                gradeExcelUpdateVO.setGpa(grade.getGpa());
+                gradeMapper.updateGradeUpdateInfo(gradeExcelUpdateVO);
+            }
+
+//            // 使用 当前操作者id 作为 更新者id, 当前时间 为 更新时间
+//            updateGrade.setUpdateUserId(operateId);
+//            updateGrade.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+
+//            gradeMapper.updateById(updateGrade);
+//            respVO.getUpdateGradenames().add(grade.getStuName());
         });
         return respVO;
     }
@@ -128,10 +154,32 @@ public class GradeServiceImpl implements GradeService{
      */
     @Override
     public boolean updateResult(GradeScoreReqVO gradeScore) {
-        return gradeMapper.updateGPAScore(gradeScore) > 0;
+        boolean result = false;
+        if (gradeMapper.updateGPAScore(gradeScore) > 0 &&
+                gradeMapper.updateGradeUpdateInfo(gradeScore) > 0 &&
+                gradeMapper.updateSummaryUpdateInfo(gradeScore) > 0) {
+            result = true;
+        }
+        return result;
     }
 
-
+/*    *//**
+     * 显示当前删除结果
+     *
+     * @param
+     * @return 删除结果
+     *//*
+    public boolean showDeleteResult(String judgeNum, String stuNum) {
+        boolean result = false;
+        GradeScoreReqVO gradeScore = new GradeScoreReqVO();
+        gradeScore.setJudgeNum(judgeNum);
+        gradeScore.setStuNum(judgeNum);
+        if (gradeMapper.deleteByStuNum(stuNum) > 0 &&
+                gradeMapper.updateGradeUpdateInfo(gradeScore) > 0){
+            result = true;
+        }
+        return result;
+    }*/
     //--------------------------------------
     //学生端
 

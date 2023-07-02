@@ -10,6 +10,31 @@
         WHERE stuNum = #{stuNum}
     </select>
 
+    <select id="selectStudentById" parameterType="java.lang.Long" resultType="com.student_management.demo.mapper.dataobject.grade.GradeDO">
+        SELECT * FROM grade WHERE id = #{id}
+    </select>
+
+    <!-- 上传时更新grade表（已存在）的updateUserId和updateTime字段 -->
+    <update id="updateGradeUpdateInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeExcelUpdateVO">
+        UPDATE grade
+        <set>
+            gpa = #{gpa},
+            updateUserId = #{id},
+            updateTime = NOW()
+        </set>
+        WHERE id = #{stuId}
+    </update>
+
+    <!-- 上传时更新stu_info表的CreateUserId和updateUserId字段 -->
+    <update id="createStuUpdateInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">
+        UPDATE stu_info
+        <set>
+            CreateUserId = #{id},
+            updateUserId = #{id}
+        </set>
+        WHERE num = #{stuNum}
+    </update>
+
     <!--  根据学号查询当前学生GPA打分：查询summary表的gpa字段  -->
     <select id="getGpaScoreByStuNum" parameterType="java.lang.String" resultType="Integer">
         SELECT gpa
@@ -17,10 +42,37 @@
         WHERE stuNum = #{stuNum}
     </select>
 
+<!--    &lt;!&ndash;  根据学号删除学生&ndash;&gt;
+    <update id="deleteByStuNum" parameterType="java.lang.String">
+        UPDATE grade
+        SET isDel = 1
+        WHERE stuNum = #{stuNum}
+    </update>-->
+
     <!--  根据学号更新当前学生gpa打分：更新summary表的gpa字段-->
     <update id="updateGPAScore" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">
         UPDATE summary
         SET gpa = #{score}
+        WHERE stuNum = #{stuNum}
+    </update>
+
+    <!-- 打分时同时根据评委职工号更新grade表的updateUserId和updateTime字段 -->
+    <update id="updateGradeUpdateInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">
+        UPDATE grade
+        <set>
+            updateUserId = (SELECT id FROM staff_info WHERE num = #{judgeNum}),
+            updateTime = NOW()
+        </set>
+        WHERE stuNum = #{stuNum}
+    </update>
+
+    <!-- 打分时同时根据评委职工号更新summary表的updateUserId和updateTime字段 -->
+    <update id="updateSummaryUpdateInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">
+        UPDATE summary
+        <set>
+            updateUserId = (SELECT id FROM staff_info WHERE num = #{judgeNum}),
+            updateTime = NOW()
+        </set>
         WHERE stuNum = #{stuNum}
     </update>
 
