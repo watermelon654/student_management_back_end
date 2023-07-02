@@ -35,8 +35,12 @@ public interface ScienceMapper extends BaseMapper<ScienceDO>{
         return selectOne(wrapper);
     }
 
+    /**
+     * 查询未删除的Science列表
+     */
     default List<ScienceDO> selectAllList() {
         QueryWrapper<ScienceDO> wrapper = new QueryWrapper<>();
+        wrapper.eq("isDel", 0);
         return selectList(wrapper);
     }
 }

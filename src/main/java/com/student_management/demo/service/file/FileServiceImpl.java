@@ -204,7 +204,6 @@ public class FileServiceImpl implements FileService {
      */
     private File getSubjectFile(String parentPath, String subject) {
         File parentFolder = new File(parentPath);
-        System.out.println("parentPath = "+parentPath);
         if (subject.contains("=")) {
             // 提取等号前面的子串
             subject = subject.split("=")[0];

@@ -36,8 +36,12 @@ public interface PersonalMapper extends BaseMapper<PersonalDO> {
         return selectOne(wrapper);
     }
 
+    /**
+     * 查询未删除的Personal列表
+     */
     default List<PersonalDO> selectAllList() {
         QueryWrapper<PersonalDO> wrapper = new QueryWrapper<>();
+        wrapper.eq("isDel", 0);
         return selectList(wrapper);
     }
 }
