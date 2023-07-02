@@ -37,6 +37,8 @@ public interface PracticeMapper extends BaseMapper<PracticeDO>{
 
     default List<PracticeDO> selectAllList() {
         QueryWrapper<PracticeDO> wrapper = new QueryWrapper<>();
+         wrapper.inSql("stuId", "SELECT id FROM stu_info WHERE isDel = 0");
+        wrapper.eq("isDel", 0);
         return selectList(wrapper);
     }
 }
