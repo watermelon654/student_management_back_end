@@ -2,29 +2,86 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.student_management.demo.mapper.mysql.grade.GradeMapper">
-    <!--example-->
-    <!--  插入成绩表项  -->
-    <!--<insert id="insert" parameterType="com.student_management.demo.mapper.dataobject.grade.GradeDO">-->
-    <!--    INSERT INTO grade (stu_id, stu_num, stu_name, gpa, status, note) VALUES (#{stu_id}, #{stu_num},# {stu_name}, #{gpa}, #{status}, #{note})-->
-    <!--</insert>-->
-    <!--  更新当前学生打分：更新grade表的score字段-->
-    <insert id="updateByStuNum" parameterType="com.student_management.demo.mapper.dataobject.grade.GradeDO">
-        UPDATE grade
-        SET score = #{score}
-        WHERE stuNum = #{stuNum}
-    </insert>
-
-    <!--  查询当前学生学号、姓名、GPA  -->
-    <select id="getInfoByStuNum" parameterType="java.lang.String" resultType="com.student_management.demo.controller.grade.vo.GradeRespVO">
-        SELECT stuNum, stuName, gpa
+    <!--  评委端  -->
+    <!--  根据学号查询当前学生在grade表中的isDel值  -->
+    <select id="isDeleted" parameterType="java.lang.String" resultType="Integer">
+        SELECT isDel
         FROM grade
         WHERE stuNum = #{stuNum}
     </select>
 
-    <!--  根据学号查询当前学生GPA打分  -->
-    <select id="getGpaScoreByStuNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+    <select id="selectStudentById" parameterType="java.lang.Long" resultType="com.student_management.demo.mapper.dataobject.grade.GradeDO">
+        SELECT * FROM grade WHERE id = #{id}
+    </select>
+
+    <!-- 上传时更新grade表（已存在）的updateUserId和updateTime字段 -->
+    <update id="updateGradeUploadInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeExcelUpdateVO">
+        UPDATE grade
+        <set>
+            gpa = #{gpa},
+            updateUserId = #{id},
+            updateTime = NOW()
+        </set>
+        WHERE id = #{stuId}
+    </update>
+
+    <!-- 上传时更新stu_info表的CreateUserId和updateUserId字段 -->
+    <update id="createStuUpdateInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">
+        UPDATE stu_info
+        <set>
+            CreateUserId = #{id},
+            updateUserId = #{id}
+        </set>
+        WHERE num = #{stuNum}
+    </update>
+
+    <!--  根据学号查询当前学生GPA打分：查询summary表的gpa字段  -->
+    <select id="getGpaScoreByStuNum" parameterType="java.lang.String" resultType="Integer">
         SELECT gpa
         FROM summary
+        WHERE stuNum = #{stuNum}
+    </select>
+
+<!--    &lt;!&ndash;  根据学号删除学生&ndash;&gt;
+    <update id="deleteByStuNum" parameterType="java.lang.String">
+        UPDATE grade
+        SET isDel = 1
+        WHERE stuNum = #{stuNum}
+    </update>-->
+
+    <!--  根据学号更新当前学生gpa打分：更新summary表的gpa字段-->
+    <update id="updateGPAScore" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">
+        UPDATE summary
+        SET gpa = #{score}
+        WHERE stuNum = #{stuNum}
+    </update>
+
+    <!-- 打分时同时根据评委职工号更新grade表的updateUserId和updateTime字段 -->
+    <update id="updateGradeUpdateInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">
+        UPDATE grade
+        <set>
+            updateUserId = (SELECT id FROM staff_info WHERE num = #{judgeNum}),
+            updateTime = NOW()
+        </set>
+        WHERE stuNum = #{stuNum}
+    </update>
+
+    <!-- 打分时同时根据评委职工号更新summary表的updateUserId和updateTime字段 -->
+    <update id="updateSummaryUpdateInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">
+        UPDATE summary
+        <set>
+            updateUserId = (SELECT id FROM staff_info WHERE num = #{judgeNum}),
+            updateTime = NOW()
+        </set>
+        WHERE stuNum = #{stuNum}
+    </update>
+
+
+    <!--  学生端  -->
+    <!--  根据学号查询当前学生学号、姓名、GPA  -->
+    <select id="getInfoByStuNum" parameterType="java.lang.String" resultType="com.student_management.demo.controller.grade.vo.Student.StudentGradeRespVO">
+        SELECT stuNum, stuName, gpa
+        FROM grade
         WHERE stuNum = #{stuNum}
     </select>
 

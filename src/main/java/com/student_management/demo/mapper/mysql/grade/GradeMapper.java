@@ -1,10 +1,10 @@
 package com.student_management.demo.mapper.mysql.grade;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.student_management.demo.controller.grade.vo.GradeRespVO;
-import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
+import com.student_management.demo.controller.grade.vo.Judge.GradeExcelUpdateVO;
+import com.student_management.demo.controller.grade.vo.Student.StudentGradeRespVO;
+import com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO;
 import com.student_management.demo.mapper.dataobject.grade.GradeDO;
-import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +13,11 @@ import java.util.List;
 @Mapper
 @Repository
 public interface GradeMapper extends BaseMapper<GradeDO>{
+
+    //--------------------------------------
+    //评委端
+
+    Integer isDeleted(String stuNum);
 
     /**
      * 按照学号查询GPA
@@ -38,31 +43,49 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
         return selectOne(wrapper);
     }
 
+    GradeDO selectStudentById(Long id);
+
+
     /**
-     * 查看全部学生GPA
+     * 查看所有未删除学生的GradeDO
      *
-     * @return 全部学生列表
+     * @return 所有未删除学生的GradeDO:学号，姓名，gpa，创建时间，更新时间
      */
     default List<GradeDO> selectAllStudents() {
-        return selectList(null);
+        QueryWrapper<GradeDO> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("isDel", 0);
+        return selectList(queryWrapper);
+//        return selectList(null);
     }
 
-    /**
-     * 打分结果
-     *
-     * @param grade
-     * @return 打分结果，大于0表示打分成功，等于0表示打分失败
-     */
-    int updateByStuNum(GradeDO grade);
+    Integer getGpaScoreByStuNum(String stuNum);
 
+    Integer deleteByStuNum(String stuNum);
+
+    /**
+     * 更新当前学生gpa打分和updateUserId
+     *
+     * @return 更新操作受影响的行数，如果更新成功，返回的值会大于0，否则返回0
+     */
+    int updateGPAScore(GradeScoreReqVO gradeScore);
+
+    int updateGradeUpdateInfo(GradeScoreReqVO gradeScore);
+
+    int updateSummaryUpdateInfo(GradeScoreReqVO gradeScore);
+
+    int createStuUpdateInfo(long id, String stuNum);
+
+    int updateGradeUploadInfo(GradeExcelUpdateVO gradeExcelUpdateVO);
+
+    //--------------------------------------
+    //学生端
 
     /**
      * 根据学生学号获取当前学生GPA信息
      *
      * @param stuNum
-     * @return 学号，姓名，gpa
+     * @return 当前学生StudentGradeRespVO:学号，姓名，gpa
      */
-    GradeRespVO getInfoByStuNum(String stuNum);
+    StudentGradeRespVO getInfoByStuNum(String stuNum);
 
-    Integer getGpaScoreByStuNum(String stuNum);
 }

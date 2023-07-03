@@ -13,11 +13,4 @@ public interface SummaryService {
 
     SummarySelectListRespVO selectAllList();
 
-    boolean updateGpaByStuNum(SummaryDO summary);
-
-    boolean updateVolByStuNum(SummaryDO summary);
-
-    void importInitialRecord(Long stuId, String num, String name);
-
-    CommonResult<?> deleteList(List<SummaryDeleteReqVO> reqVOs);
 }
