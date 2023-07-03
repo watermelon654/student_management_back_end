@@ -1,9 +1,11 @@
 package com.student_management.demo.service.student;
 
+import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.grade.vo.GradeImportExcelVO;
 import com.student_management.demo.controller.grade.vo.GradeImportRespVO;
 import com.student_management.demo.controller.student.vo.StudentImportExcelReqVO;
 import com.student_management.demo.controller.student.vo.StudentImportRespVO;
+import com.student_management.demo.controller.student.vo.StudentsInfoDeletedReqVO;
 import com.student_management.demo.mapper.dataobject.student.StudentBasicDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 
@@ -19,4 +21,7 @@ public interface StudentService {
     StudentImportRespVO importStudentList(List<StudentImportExcelReqVO> importGrade, String id);
 
     List<StudentBasicDO> selectALLList();
+
+
+    CommonResult<?> deleteInfo(List<StudentsInfoDeletedReqVO> reqVOs);
 }

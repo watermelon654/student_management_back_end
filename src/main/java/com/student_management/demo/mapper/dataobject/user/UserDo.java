@@ -3,6 +3,8 @@ package com.student_management.demo.mapper.dataobject.user;
 import com.student_management.demo.utils.enu.SexEnum;
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 @Data
 public class UserDo {
     /**
@@ -26,5 +28,13 @@ public class UserDo {
     private String passwd;
 
     private boolean isDel;
+
+    /**
+     * 更新时间
+     */
+
+    private Timestamp updateTime;
+
+    private boolean initial;
 }
 

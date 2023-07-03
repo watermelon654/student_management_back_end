@@ -4,6 +4,7 @@ package com.student_management.demo.controller.student;
 import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.student.vo.StudentImportExcelReqVO;
 import com.student_management.demo.controller.student.vo.StudentImportRespVO;
+import com.student_management.demo.controller.student.vo.StudentsInfoDeletedReqVO;
 import com.student_management.demo.mapper.dataobject.student.StudentBasicDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.service.student.StudentService;
@@ -55,6 +56,11 @@ public class StudentController {
         return CommonResult.success(studentService.selectALLList());
     }
 
+    @PostMapping("/deleteInfo")
+    @PreAuthorize("hasAuthority('/api/stu/deleteInfo')")
+    public CommonResult<?> deleteInfo(@RequestBody List<StudentsInfoDeletedReqVO> reqVOs) {
+        return studentService.deleteInfo(reqVOs);
+    }
 
 
 
