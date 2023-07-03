@@ -17,11 +17,11 @@ public interface ServiceMapper extends BaseMapper<ServiceDO>{
      * @param stu_num
      * @return
      */
-    default ServiceDO selectServiceByStuNum(String stu_num) {
+     default List<ServiceDO> selectServiceByStuNum(String stu_num) {
         QueryWrapper<ServiceDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stuNum", stu_num);
-        return selectOne(wrapper);
+        wrapper.eq("stuNum", stu_num).eq("isDel", 0);
+        return selectList(wrapper);
     }
 
     /**
