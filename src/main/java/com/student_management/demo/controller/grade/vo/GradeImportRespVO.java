@@ -1,4 +1,4 @@
-package com.student_management.demo.controller.grade.vo.Judge;
+package com.student_management.demo.controller.grade.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;

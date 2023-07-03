@@ -1,6 +1,7 @@
-package com.student_management.demo.controller.volunteer.vo.Judge;
+package com.student_management.demo.controller.grade.vo;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,14 +10,14 @@ import lombok.experimental.Accessors;
 
 
 /**
- * 服务时长 Excel 导入 VO
+ * GPA Excel 导入 VO
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = false) // 设置 chain = false，避免用户导入有问题
-public class VolunteerImportExcelVO {
+public class GradeImportExcelVO {
 
     @ExcelProperty("学号")
     private String stuNum;
@@ -24,8 +25,8 @@ public class VolunteerImportExcelVO {
     @ExcelProperty("姓名")
     private String stuName;
 
-    @ExcelProperty("服务时长")
-    private int time;
+    @ExcelProperty("GPA")
+    private float gpa;
 
     /**
      * id
