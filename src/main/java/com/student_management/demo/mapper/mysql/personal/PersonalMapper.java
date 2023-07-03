@@ -20,10 +20,15 @@ public interface PersonalMapper extends BaseMapper<PersonalDO> {
     default PersonalDO selectPersonalByStuNum(String stu_num) {
         QueryWrapper<PersonalDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stuNum", stu_num);
+        wrapper.eq("stuNum", stu_num).eq("isDel",0);
         return selectOne(wrapper);
     }
-
+    default List<PersonalDO> selectPersonalListByStuNum(String stu_num) {
+        QueryWrapper<PersonalDO> wrapper = new QueryWrapper<>();
+        //查询条件
+        wrapper.eq("stuNum", stu_num).eq("isDel",0);
+        return selectList(wrapper);
+    }
     /**
      * 按照学生id查询Personal
      * @param stu_id
