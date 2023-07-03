@@ -1,8 +1,6 @@
 package com.student_management.demo.service.summary;
 
 import cn.hutool.core.collection.CollUtil;
-import com.student_management.demo.common.CommonResult;
-import com.student_management.demo.controller.summary.vo.SummaryDeleteReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportRespVO;
 import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
@@ -81,7 +79,6 @@ public class SummaryServiceImpl implements SummaryService {
         if (listdo.size() == 0){
             return null;
         }
-        System.out.println(listdo);
         SummarySelectListRespVO respVO = new SummarySelectListRespVO();
         respVO.setSummarylist(listdo);
         return respVO;
@@ -137,35 +134,6 @@ public class SummaryServiceImpl implements SummaryService {
      */
     @Override
     public boolean updateVolByStuNum(SummaryDO summary) { return summaryMapper.updateVolByStuNum(summary) > 0; }
-
-    /**
-     * 新插入的学生信息更新到成绩表中
-     * @param stuId
-     * @param num
-     * @param name
-     */
-    @Override
-    public void importInitialRecord(Long stuId, String num, String name) {
-        SummaryDO initial = new SummaryDO(stuId, num, name);
-        summaryMapper.insert(initial);
-    }
-
-    @Override
-    public CommonResult<?> deleteList(List<SummaryDeleteReqVO> reqVOs) {
-        try {
-            List<String> nums = new ArrayList<>();
-            for (SummaryDeleteReqVO reqVO: reqVOs) {
-                nums.add(reqVO.getNum());
-            }
-            summaryMapper.updateAllGradeAsNull(nums);
-            summaryMapper.refreshUpdateTime(nums);
-            return CommonResult.success("删除成功！");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return CommonResult.error(500,"删除失败！");
-        }
-
-    }
 
 
 }

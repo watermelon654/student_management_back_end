@@ -6,7 +6,6 @@ import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +65,4 @@ public interface StudentMapper extends BaseMapper<StudentDO> {
      */
     String selectClassNameById(Long id);
 
-    void updateIsDel(List<String> nums);
-    void refreshUpdateTime(List<String> nums);
 }

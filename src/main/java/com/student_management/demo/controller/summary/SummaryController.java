@@ -1,7 +1,6 @@
 package com.student_management.demo.controller.summary;
 
 import com.student_management.demo.common.CommonResult;
-import com.student_management.demo.controller.summary.vo.SummaryDeleteReqVO;
 import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
 import io.swagger.annotations.Api;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,7 +36,6 @@ public class SummaryController {
     @PostMapping("/selectList")
     @PreAuthorize("hasAuthority('/api/summary/selectList')")
     public CommonResult<SummarySelectListRespVO> selectList(@RequestParam Integer flag) {
-            System.out.println("调用selectList");
             return flag == 0 ?
                     CommonResult.success(service.selectListByStatus(false)) :
                     CommonResult.success(service.selectListByStatus(true));
@@ -50,12 +48,6 @@ public class SummaryController {
         return CommonResult.success(service.selectAllList());
     }
 
-    @ApiOperation("删除指定学生的成绩记录")
-    @PostMapping("/deleteSummary")
-    @PreAuthorize("hasAuthority('/api/summary/deleteSummary')")
-    public CommonResult<?> deleteList(@RequestBody List<SummaryDeleteReqVO> reqVOs) {
-        return service.deleteList(reqVOs);
-    }
 
 
 }

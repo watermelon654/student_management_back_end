@@ -64,9 +64,4 @@ public class SummaryDO {
      */
     private Timestamp updateTime;
 
-    public SummaryDO(Long stuId, String num, String name) {
-        this.setStuNum(num);
-        this.setStuName(name);
-        this.setStuId(stuId);
-    }
 }
