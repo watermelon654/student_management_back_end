@@ -1,11 +1,7 @@
 package com.student_management.demo.mapper.mysql.volunteer;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.student_management.demo.controller.grade.vo.Judge.GradeExcelUpdateVO;
-import com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO;
-import com.student_management.demo.controller.volunteer.vo.Judge.VolunteerExcelUpdateVO;
-import com.student_management.demo.controller.volunteer.vo.Student.StudentVolunteerRespVO;
-import com.student_management.demo.controller.volunteer.vo.Judge.VolunteerScoreReqVO;
+import com.student_management.demo.controller.volunteer.vo.VolunteerRespVO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -15,11 +11,6 @@ import java.util.List;
 @Mapper
 @Repository
 public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
-
-    //--------------------------------------
-    //评委端
-
-    int isDeleted(String stuNum);
 
     /**
      * 按照学号查询志愿服务时长
@@ -34,43 +25,41 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
     }
 
     /**
-     * 查看所有未删除学生的志愿服务时长
-     *
-     * @return 未删除学生列表
+     * 按照学生id查询志愿服务时长
+     * @param stu_id
+     * @return
      */
-    default List<VolunteerDO> selectAllStudents() {
-        QueryWrapper<VolunteerDO> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("isDel", 0);
-        return selectList(queryWrapper);
-//        return selectList(null);
+    default VolunteerDO selectVolunteerByStuId(Long stu_id) {
+        QueryWrapper<VolunteerDO> wrapper = new QueryWrapper<>();
+        //查询条件
+        wrapper.eq("stuId", stu_id);
+        return selectOne(wrapper);
     }
 
-    Integer getVolScoreByStuNum(String stuNum);
+    /**
+     * 查看全部学生志愿服务时长
+     *
+     * @return 全部学生列表
+     */
+    default List<VolunteerDO> selectAllStudents() {
+        return selectList(null);
+    }
 
     /**
-     * 根据学生学号更新当前学生志愿服务时长打分
+     * 打分结果
      *
-     * @param volunteerScore
+     * @param volunteer
      * @return 打分结果，大于0表示打分成功，等于0表示打分失败
      */
-    int updateVolunteerScore(VolunteerScoreReqVO volunteerScore);
-
-    int createStuUpdateInfo(long id, String stuNum);
-
-    int updateVolunteerUploadInfo(VolunteerExcelUpdateVO volunteerExcelUpdateVO);
-
-    int updateVolunteerUpdateInfo(VolunteerScoreReqVO volunteerScore);
-
-    int updateSummaryUpdateInfo(VolunteerScoreReqVO volunteerScore);
-
-    //--------------------------------------
-    //学生端
+    int updateByStuNum(VolunteerDO volunteer);
 
     /**
      * 根据学生学号获取当前学生志愿服务时长信息
      *
      * @param stuNum
-     * @return 当前学生StudentVolunteerRespVO：学号，姓名，志愿服务时长
+     * @return 学号，姓名，志愿服务时长
      */
-    StudentVolunteerRespVO getInfoByStuNum(String stuNum);
+    VolunteerRespVO getInfoByStuNum(String stuNum);
+
+    Integer getVolScoreByStuNum(String stuNum);
 }

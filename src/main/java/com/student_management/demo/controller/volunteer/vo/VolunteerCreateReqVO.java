@@ -1,4 +1,4 @@
-package com.student_management.demo.controller.volunteer.vo.Judge;
+package com.student_management.demo.controller.volunteer.vo;
 
 import lombok.Data;
 

@@ -118,4 +118,54 @@ public class SummaryServiceImpl implements SummaryService {
 
     }
 
+    /**
+     * 更新GPA打分并返回打分结果
+     *
+     * @param summary
+     * @return 打分结果，true表示打分成功，false表示打分失败
+     */
+    @Override
+    public boolean updateGpaByStuNum(SummaryDO summary) {
+        return summaryMapper.updateGpaByStuNum(summary) > 0;
+    }
+
+    /**
+     * 更新志愿服务打分并返回打分结果
+     *
+     * @param summary
+     * @return 打分结果，true表示打分成功，false表示打分失败
+     */
+    @Override
+    public boolean updateVolByStuNum(SummaryDO summary) { return summaryMapper.updateVolByStuNum(summary) > 0; }
+
+    /**
+     * 新插入的学生信息更新到成绩表中
+     * @param stuId
+     * @param num
+     * @param name
+     */
+    @Override
+    public void importInitialRecord(Long stuId, String num, String name) {
+        SummaryDO initial = new SummaryDO(stuId, num, name);
+        summaryMapper.insert(initial);
+    }
+
+    @Override
+    public CommonResult<?> deleteList(List<SummaryDeleteReqVO> reqVOs) {
+        try {
+            List<String> nums = new ArrayList<>();
+            for (SummaryDeleteReqVO reqVO: reqVOs) {
+                nums.add(reqVO.getNum());
+            }
+            summaryMapper.updateAllGradeAsNull(nums);
+            summaryMapper.refreshUpdateTime(nums);
+            return CommonResult.success("删除成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return CommonResult.error(500,"删除失败！");
+        }
+
+    }
+
+
 }
