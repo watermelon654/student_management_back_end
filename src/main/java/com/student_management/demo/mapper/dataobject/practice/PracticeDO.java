@@ -44,4 +44,6 @@ public class PracticeDO {
 
     private Long createUserId;
     private Long updateUserId;
+
+      private Long isDel;
 }

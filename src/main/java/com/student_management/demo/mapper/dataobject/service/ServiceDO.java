@@ -42,4 +42,5 @@ public class ServiceDO {
 
     private Long createUserId;
     private Long updateUserId;
+      private Long isDel;
 }

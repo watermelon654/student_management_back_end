@@ -38,6 +38,8 @@ public interface ServiceMapper extends BaseMapper<ServiceDO>{
 
     default List<ServiceDO> selectAllList() {
         QueryWrapper<ServiceDO> wrapper = new QueryWrapper<>();
+         wrapper.inSql("stuId", "SELECT id FROM stu_info WHERE isDel = 0");
+        wrapper.eq("isDel", 0);
         return selectList(wrapper);
     }
 }
