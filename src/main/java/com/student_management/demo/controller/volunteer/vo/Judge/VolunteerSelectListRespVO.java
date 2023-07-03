@@ -1,7 +1,7 @@
-package com.student_management.demo.controller.volunteer.vo;
+package com.student_management.demo.controller.volunteer.vo.Judge;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.student_management.demo.controller.summary.vo.SummaryBaseVO;
+import com.student_management.demo.controller.volunteer.vo.Judge.JudgeVolunteerRespVO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,5 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 @TableName(value="volunteer")//数据库表名
 public class VolunteerSelectListRespVO {
-    private List<VolunteerBaseVO> volunteerlist;
+    private List<JudgeVolunteerRespVO> volunteerlist;
 }
