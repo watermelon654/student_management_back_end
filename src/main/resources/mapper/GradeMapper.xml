@@ -15,7 +15,7 @@
     </select>
 
     <!-- 上传时更新grade表（已存在）的updateUserId和updateTime字段 -->
-    <update id="updateGradeUpdateInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeExcelUpdateVO">
+    <update id="updateGradeUploadInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeExcelUpdateVO">
         UPDATE grade
         <set>
             gpa = #{gpa},

@@ -29,9 +29,6 @@ public class VolunteerController {
     @Resource
     private VolunteerService service;
 
-    @Resource
-    private SummaryService summaryService;
-
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
@@ -46,9 +43,13 @@ public class VolunteerController {
     @PostMapping("/import")
     @ApiOperation("志愿服务时长上传接口")
     @PreAuthorize("hasAuthority('/api/volunteer/import')")
-    public CommonResult<VolunteerImportRespVO> importUserExcel(@RequestPart(value = "file") MultipartFile file) throws IOException {
+    public CommonResult<VolunteerImportRespVO> importUserExcel(@RequestPart(value = "file") MultipartFile file, HttpServletRequest request) throws IOException {
+        // 从http请求获取token，然后获得评委职工号
+        String token = request.getHeader("Authorization");
+        String judgeNum = jwtTokenUtil.getUsernameFromToken(token);
+
         List<VolunteerImportExcelVO> userList = ExcelUtils.read(file, VolunteerImportExcelVO.class);
-        VolunteerImportRespVO respVO = service.importVolunteerList(userList);
+        VolunteerImportRespVO respVO = service.importVolunteerList(userList, judgeNum);
         // 检查上传文件是否为空文件
         if (respVO.isEmpty())
             return CommonResult.error(500, "文件内容为空！");
@@ -66,19 +67,22 @@ public class VolunteerController {
     @ApiOperation("根据学号更新评分接口")
     @PreAuthorize("hasAuthority('/api/volunteer/update-score')")
     public CommonResult<String> updateScoreByStuNum(
-            @RequestBody VolunteerScoreReqVO reqVO
+            @RequestBody VolunteerScoreReqVO reqVO,
+            HttpServletRequest request
     ) {
         try {
-            VolunteerScoreReqVO volunteerScoreVO = new VolunteerScoreReqVO();
-
             String stuNum = reqVO.getStuNum();
             if (service.isDeleted(stuNum)) {
                 return CommonResult.error(404, "该学生的信息已删除，请联系学工添加该学生的信息");
             }
 
-            volunteerScoreVO.setStuNum(stuNum);
-            volunteerScoreVO.setScore(reqVO.getScore());
-            boolean success = service.updateResult(volunteerScoreVO);
+            // 从http请求获取token，然后获得评委职工号
+            String token = request.getHeader("Authorization");
+            String judgeNum = jwtTokenUtil.getUsernameFromToken(token);
+            reqVO.setJudgeNum(judgeNum);
+
+            boolean success = service.updateResult(reqVO);
+
             if (success) {
                 return CommonResult.success("评分更新成功");
             } else {

@@ -1,6 +1,9 @@
 package com.student_management.demo.mapper.mysql.volunteer;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.student_management.demo.controller.grade.vo.Judge.GradeExcelUpdateVO;
+import com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO;
+import com.student_management.demo.controller.volunteer.vo.Judge.VolunteerExcelUpdateVO;
 import com.student_management.demo.controller.volunteer.vo.Student.StudentVolunteerRespVO;
 import com.student_management.demo.controller.volunteer.vo.Judge.VolunteerScoreReqVO;
 import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
@@ -52,6 +55,13 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
      */
     int updateVolunteerScore(VolunteerScoreReqVO volunteerScore);
 
+    int createStuUpdateInfo(long id, String stuNum);
+
+    int updateVolunteerUploadInfo(VolunteerExcelUpdateVO volunteerExcelUpdateVO);
+
+    int updateVolunteerUpdateInfo(VolunteerScoreReqVO volunteerScore);
+
+    int updateSummaryUpdateInfo(VolunteerScoreReqVO volunteerScore);
 
     //--------------------------------------
     //学生端

@@ -86,7 +86,6 @@ public class GradeServiceImpl implements GradeService{
 
             // 如果存在，更新成绩表中的记录
             GradeDO updateGrade = GradeConvert.INSTANCE.convert(grade);
-//            updateGrade.setId(existGrade.getId());
 
             // 检查字段是否发生变化，并只更新有变化的字段
             if (updateGrade.getGpa() != existGrade.getGpa()) {
@@ -94,14 +93,10 @@ public class GradeServiceImpl implements GradeService{
                 gradeExcelUpdateVO.setStuId(existGrade.getId());
                 gradeExcelUpdateVO.setId(operateId);
                 gradeExcelUpdateVO.setGpa(grade.getGpa());
-                gradeMapper.updateGradeUpdateInfo(gradeExcelUpdateVO);
+                gradeMapper.updateGradeUploadInfo(gradeExcelUpdateVO);
             }
 
-//            // 使用 当前操作者id 作为 更新者id, 当前时间 为 更新时间
-//            updateGrade.setUpdateUserId(operateId);
-//            updateGrade.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 
-//            gradeMapper.updateById(updateGrade);
 //            respVO.getUpdateGradenames().add(grade.getStuName());
         });
         return respVO;

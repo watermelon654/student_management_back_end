@@ -1,5 +1,6 @@
 package com.student_management.demo.service.volunteer;
 import cn.hutool.core.collection.CollUtil;
+import com.student_management.demo.controller.grade.vo.Judge.GradeExcelUpdateVO;
 import com.student_management.demo.controller.volunteer.vo.Judge.*;
 import com.student_management.demo.controller.volunteer.vo.Student.StudentVolunteerRespVO;
 import com.student_management.demo.convert.volunteer.VolunteerConvert;
@@ -8,6 +9,7 @@ import com.student_management.demo.mapper.dataobject.volunteer.VolunteerDO;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
 import com.student_management.demo.mapper.mysql.summary.SummaryMapper;
 import com.student_management.demo.mapper.mysql.volunteer.VolunteerMapper;
+import com.student_management.demo.service.redis.RedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,9 @@ public class VolunteerServiceImpl implements VolunteerService {
 
     @Resource
     private StudentMapper studentMapper;
+
+    @Resource
+    private RedisService redisService;
 
     //--------------------------------------
     //评委端
@@ -47,7 +52,7 @@ public class VolunteerServiceImpl implements VolunteerService {
      * @param importVolunteer     导入服务时长列表
      * @return 导入结果
      */
-    public VolunteerImportRespVO importVolunteerList(List<VolunteerImportExcelVO> importVolunteer) {
+    public VolunteerImportRespVO importVolunteerList(List<VolunteerImportExcelVO> importVolunteer, String judgeNum) {
         VolunteerImportRespVO respVO = VolunteerImportRespVO.builder().createVolunteernames(new ArrayList<>())
                 .updateVolunteernames(new ArrayList<>()).failureVolunteernames(new LinkedHashMap<>()).build();
         //列表为空
@@ -55,6 +60,8 @@ public class VolunteerServiceImpl implements VolunteerService {
             respVO.setEmpty(true);
             return respVO;
         }
+        //获取评委id
+        Long operateId = Long.parseLong(redisService.getValue("user_id_" + judgeNum));
         //对每一个表项检查
         importVolunteer.forEach(volunteer -> {
             // 判断是否在学生信息表stu_info中，在进行插入
@@ -62,6 +69,7 @@ public class VolunteerServiceImpl implements VolunteerService {
             if (existStu == null) {
                 // 如果学生表中不存在，在学生表中插入记录
                 studentMapper.insertStudentBasicInfo(volunteer.getStuName(),volunteer.getStuNum());
+                volunteerMapper.createStuUpdateInfo(operateId,volunteer.getStuNum());
             }
             // 获取stu_id，判断是否在学生成绩表grade中，在进行插入
             existStu = studentMapper.selectStudentByNum(volunteer.getStuNum());
@@ -70,15 +78,26 @@ public class VolunteerServiceImpl implements VolunteerService {
                 // 如果在成绩表中不存在，在成绩表插入记录
                 VolunteerDO createVolunteer = VolunteerConvert.INSTANCE.convert(volunteer);
                 createVolunteer.setStuId(existStu.getId());
+                // 使用当前操作者的用户id作为创建和更新id
+                createVolunteer.setCreateUserId(operateId);
+                createVolunteer.setUpdateUserId(operateId);
                 volunteerMapper.insert(createVolunteer);
                 respVO.getCreateVolunteernames().add(volunteer.getStuName());
                 return;
             }
             // 如果存在，更新成绩表中的记录
             VolunteerDO updateVolunteer = VolunteerConvert.INSTANCE.convert(volunteer);
-            updateVolunteer.setId(existVolunteer.getId());
-            volunteerMapper.updateById(updateVolunteer);
-            respVO.getUpdateVolunteernames().add(volunteer.getStuName());
+            // 检查字段是否发生变化，并只更新有变化的字段
+            if (updateVolunteer.getTime() != existVolunteer.getTime()) {
+                VolunteerExcelUpdateVO volunteerExcelUpdateVO = new VolunteerExcelUpdateVO();
+                volunteerExcelUpdateVO.setStuId(existVolunteer.getId());
+                volunteerExcelUpdateVO.setId(operateId);
+                volunteerExcelUpdateVO.setTime(volunteer.getTime());
+                volunteerMapper.updateVolunteerUploadInfo(volunteerExcelUpdateVO);
+            }
+//            updateVolunteer.setId(existVolunteer.getId());
+//            volunteerMapper.updateById(updateVolunteer);
+//            respVO.getUpdateVolunteernames().add(volunteer.getStuName());
         });
         return respVO;
     }
@@ -130,7 +149,14 @@ public class VolunteerServiceImpl implements VolunteerService {
      */
     @Override
     public boolean updateResult(VolunteerScoreReqVO volunteerScore) {
-        return volunteerMapper.updateVolunteerScore(volunteerScore) > 0;
+//        return volunteerMapper.updateVolunteerScore(volunteerScore) > 0;
+        boolean result = false;
+        if (volunteerMapper.updateVolunteerScore(volunteerScore) > 0 &&
+                volunteerMapper.updateVolunteerUpdateInfo(volunteerScore) > 0 &&
+                volunteerMapper.updateSummaryUpdateInfo(volunteerScore) > 0) {
+            result = true;
+        }
+        return result;
     }
 
 

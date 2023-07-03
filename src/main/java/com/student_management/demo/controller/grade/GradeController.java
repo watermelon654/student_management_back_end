@@ -35,9 +35,6 @@ public class GradeController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @Resource
-    private RedisService redisService;
-
     //--------------------------------------
     //评委端
 

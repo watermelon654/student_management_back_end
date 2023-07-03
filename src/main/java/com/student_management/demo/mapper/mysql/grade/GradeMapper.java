@@ -45,7 +45,6 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
 
     GradeDO selectStudentById(Long id);
 
-    int updateGradeUpdateInfo(GradeExcelUpdateVO gradeExcelUpdateVO);
 
     /**
      * 查看所有未删除学生的GradeDO
@@ -75,6 +74,9 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
     int updateSummaryUpdateInfo(GradeScoreReqVO gradeScore);
 
     int createStuUpdateInfo(long id, String stuNum);
+
+    int updateGradeUploadInfo(GradeExcelUpdateVO gradeExcelUpdateVO);
+
     //--------------------------------------
     //学生端
 

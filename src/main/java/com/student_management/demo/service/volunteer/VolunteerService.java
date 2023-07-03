@@ -25,7 +25,7 @@ public interface VolunteerService {
      * @param importVolunteer     导入服务时长列表
      * @return 导入结果
      */
-    VolunteerImportRespVO importVolunteerList(List<VolunteerImportExcelVO> importVolunteer);
+    VolunteerImportRespVO importVolunteerList(List<VolunteerImportExcelVO> importVolunteer, String judgeNum);
 
     /**
      * 获得全体未删除学生志愿服务时长列表

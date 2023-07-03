@@ -10,6 +10,27 @@
         WHERE stuNum = #{stuNum}
     </select>
 
+    <!-- 上传时更新stu_info表的CreateUserId和updateUserId字段 -->
+    <update id="createStuUpdateInfo" parameterType="com.student_management.demo.controller.volunteer.vo.Judge.VolunteerScoreReqVO">
+        UPDATE stu_info
+        <set>
+            CreateUserId = #{id},
+            updateUserId = #{id}
+        </set>
+        WHERE num = #{stuNum}
+    </update>
+
+    <!-- 上传时更新volunteer表（已存在）的updateUserId和updateTime字段 -->
+    <update id="updateVolunteerUploadInfo" parameterType="com.student_management.demo.controller.volunteer.vo.Judge.VolunteerExcelUpdateVO">
+        UPDATE volunteer
+        <set>
+            time = #{time},
+            updateUserId = #{id},
+            updateTime = NOW()
+        </set>
+        WHERE id = #{stuId}
+    </update>
+
     <!--  根据学号查询当前学生志愿服务时长打分：查询summary表的vol字段  -->
     <select id="getVolScoreByStuNum" parameterType="java.lang.String" resultType="java.lang.Integer">
         SELECT vol
@@ -21,6 +42,26 @@
     <update id="updateVolunteerScore" parameterType="com.student_management.demo.controller.volunteer.vo.Judge.VolunteerScoreReqVO">
         UPDATE summary
         SET vol = #{score}
+        WHERE stuNum = #{stuNum}
+    </update>
+
+    <!-- 打分时同时根据评委职工号更新volunteer表的updateUserId和updateTime字段 -->
+    <update id="updateVolunteerUpdateInfo" parameterType="com.student_management.demo.controller.volunteer.vo.Judge.VolunteerScoreReqVO">
+        UPDATE volunteer
+        <set>
+            updateUserId = (SELECT id FROM staff_info WHERE num = #{judgeNum}),
+            updateTime = NOW()
+        </set>
+        WHERE stuNum = #{stuNum}
+    </update>
+
+    <!-- 打分时同时根据评委职工号更新summary表的updateUserId和updateTime字段 -->
+    <update id="updateSummaryUpdateInfo" parameterType="com.student_management.demo.controller.volunteer.vo.Judge.VolunteerScoreReqVO">
+        UPDATE summary
+        <set>
+            updateUserId = (SELECT id FROM staff_info WHERE num = #{judgeNum}),
+            updateTime = NOW()
+        </set>
         WHERE stuNum = #{stuNum}
     </update>
 
