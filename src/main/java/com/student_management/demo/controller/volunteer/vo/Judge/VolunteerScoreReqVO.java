@@ -1,4 +1,4 @@
-package com.student_management.demo.controller.volunteer.vo;
+package com.student_management.demo.controller.volunteer.vo.Judge;
 
 import lombok.Data;
 
@@ -13,4 +13,9 @@ public class VolunteerScoreReqVO {
      * 打分
      */
     private Integer score;
+
+    /**
+     * 更新者职工号
+     */
+    private String judgeNum;
 }
