@@ -78,6 +78,6 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
      * @param stuNum
      * @return gpa score
      */
-    void updateIsDelTo1(List<String> stuNum);
+    void updateAllGradeAsNull(List<String> stuNum);
     void refreshUpdateTime(List<String> stuNum);
 }

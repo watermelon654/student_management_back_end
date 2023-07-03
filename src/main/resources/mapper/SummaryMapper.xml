@@ -16,9 +16,9 @@
         WHERE stuNum = #{stuNum}
     </update>
 
-    <update id="updateIsDelTo1" parameterType="java.util.List" >
+    <update id="updateAllGradeAsNull" parameterType="java.util.List" >
         UPDATE summary
-        SET isDel = 1
+        SET gpa = null, vol = null, sci = null, ser = null, per = null, pra = null, status = 0
         WHERE stuNum IN
         <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
             #{item}

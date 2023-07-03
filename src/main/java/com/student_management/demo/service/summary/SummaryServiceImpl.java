@@ -2,7 +2,6 @@ package com.student_management.demo.service.summary;
 
 import cn.hutool.core.collection.CollUtil;
 import com.student_management.demo.common.CommonResult;
-import com.student_management.demo.controller.student.vo.StudentsInfoDeletedReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryDeleteReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportRespVO;
@@ -158,7 +157,7 @@ public class SummaryServiceImpl implements SummaryService {
             for (SummaryDeleteReqVO reqVO: reqVOs) {
                 nums.add(reqVO.getNum());
             }
-            summaryMapper.updateIsDelTo1(nums);
+            summaryMapper.updateAllGradeAsNull(nums);
             summaryMapper.refreshUpdateTime(nums);
             return CommonResult.success("删除成功！");
         } catch (Exception e) {
