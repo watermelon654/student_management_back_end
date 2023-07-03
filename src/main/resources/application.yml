@@ -13,11 +13,15 @@ jwt:
   refresh_token:
     expiration: 604800
 file:
-#  windows本地，文件在项目根目录的files文件夹下
-  upload-path: D:\files
+#  windows本地，文件在项目根目录的files文件夹下，请根据自己的项目路径修改
+  upload-path: D:\pku_lessons\agile_development\student_scholarship\student_management_back_end\files
   allowed-types: pdf
   max-size: 10485760   # 10MB
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      enabled: true
   redis:
     host: 127.0.0.1
     port: 6379

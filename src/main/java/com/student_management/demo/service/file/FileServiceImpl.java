@@ -224,25 +224,6 @@ public class FileServiceImpl implements FileService {
                     count++;
                     targetPdf = file;
                 }
-//                if (file.isFile()) {
-//                    System.out.println("is file");
-//                    // 判断文件是否是一个文件
-//                    count++; // 如果是文件，则计数器加1
-//                    if (getFileExtension(file.getName()).equals("pdf")) {
-//                        // 判断文件扩展名是否为pdf
-//                        System.out.println("扩展名为pdf");
-//                        if (!file.getName().startsWith("dead")) {
-//                            // 判断文件名是否不以"dead"开头
-//                            System.out.println("不以dead开头");
-//                            if (file.getName().contains(subject)) {
-//                                // 判断文件名是否包含特定的subject
-//                                System.out.println("subject = " + subject);
-////                                targetPdf = file;
-//                            }
-//                        }
-//                    }
-//                }
-
             }
         }
         // 证明文件多于1个或少于1个报错
