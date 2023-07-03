@@ -70,4 +70,13 @@ public class ScienceController {
         return CommonResult.success(ScienceConvert.INSTANCE.convertList(list));
     }
 
+    @GetMapping("/getMyList")
+    @ApiOperation("学生获得自己填写的科研情况所有列表")
+    @PreAuthorize("hasAuthority('/api/science/getMyList')")
+    public CommonResult<List<ScienceRespVO>> getMyList(String num) {
+        System.out.println("num = " + num);
+        List<ScienceDO> list = service.getMyList(num);
+        return CommonResult.success(ScienceConvert.INSTANCE.convertList(list));
+    }
+
 }

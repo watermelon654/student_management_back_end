@@ -73,4 +73,9 @@ public class PersonalServiceImpl implements PersonalService {
     public List<PersonalDO> getAllList() {
         return personalMapper.selectAllList();
     }
+
+    @Override
+    public List<PersonalDO> getMyList(String num) {
+        return personalMapper.selectPersonalListByStuNum(num);
+    }
 }

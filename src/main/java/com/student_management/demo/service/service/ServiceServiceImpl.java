@@ -91,6 +91,9 @@ public class ServiceServiceImpl implements ServiceService{
     public List<ServiceDO> getAllList() {
         return serviceMapper.selectAllList();
     }
-
+ @Override
+    public List<ServiceDO> getMyList(String num) {
+        return serviceMapper.selectServiceByStuNum(num);
+    }
 
 }

@@ -73,6 +73,9 @@ public class PracticeServiceImpl implements PracticeService{
     public List<PracticeDO> getAllList() {
         return practiceMapper.selectAllList();
     }
-
+ @Override
+    public List<PracticeDO> getMyList(String num) {
+        return practiceMapper.selectPracticeByStuNum(num);
+    }
 
 }

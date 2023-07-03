@@ -204,11 +204,18 @@ public class FileServiceImpl implements FileService {
      */
     private File getSubjectFile(String parentPath, String subject) {
         File parentFolder = new File(parentPath);
+        if (subject.contains("=")) {
+            // 提取等号前面的子串
+            subject = subject.split("=")[0];
+        }
+        System.out.println("subject = " + subject);
+
         File[] files = parentFolder.listFiles();//获取父目录下所有文件
         File targetPdf = null;
         int count = 0;
         if (files != null) {
             for (File file : files) {
+                System.out.println("file name = "+file.getName());
                 if (file.isFile() &&
                         getFileExtension(file.getName()).equals("pdf") &&
                         !file.getName().startsWith("dead") &&
@@ -240,7 +247,7 @@ public class FileServiceImpl implements FileService {
         try {
             String fileParentPath = uploadPath + File.separator + stuNum;// 源文件目录
             File targetPdf = getSubjectFile(fileParentPath, subject);// 目标文件
-
+            System.out.println("fileParentPath = "+fileParentPath);
             // 设置响应格式防止乱码
             response.setContentType("application/pdf;charset=UTF-8");
             response.setHeader("X-Frame-Options", "SAMEORIGIN");

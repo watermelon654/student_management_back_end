@@ -74,5 +74,8 @@ public class ScienceServiceImpl implements ScienceService{
         return scienceMapper.selectAllList();
     }
 
-
+    @Override
+    public List<ScienceDO> getMyList(String num) {
+        return scienceMapper.selectScienceByStuNum(num);
+    }
 }

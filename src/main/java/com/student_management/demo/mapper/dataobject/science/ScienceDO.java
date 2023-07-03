@@ -39,4 +39,6 @@ public class ScienceDO {
 
     private Long createUserId;
     private Long updateUserId;
+
+    private boolean isDel;
 }

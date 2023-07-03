@@ -4,12 +4,12 @@ import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.personal.vo.PersonalImportRespVO;
 import com.student_management.demo.controller.personal.vo.PersonalImportReqVO;
 import com.student_management.demo.controller.personal.vo.PersonalRespVO;
-import com.student_management.demo.controller.science.vo.ScienceImportReqVO;
-import com.student_management.demo.controller.science.vo.ScienceRespVO;
+
+
 import com.student_management.demo.convert.personal.PersonalConvert;
-import com.student_management.demo.convert.science.ScienceConvert;
+
 import com.student_management.demo.mapper.dataobject.personal.PersonalDO;
-import com.student_management.demo.mapper.dataobject.science.ScienceDO;
+
 import com.student_management.demo.service.personal.PersonalService;
 import com.student_management.demo.service.user.UserBasicService;
 import io.swagger.annotations.Api;
@@ -63,6 +63,14 @@ public class PersonalController {
     @PreAuthorize("hasAuthority('/api/personal/getAllList')")
     public CommonResult<List<PersonalRespVO>> getAllList() {
         List<PersonalDO> list = service.getAllList();
+        return CommonResult.success(PersonalConvert.INSTANCE.convertList(list));
+    }
+
+    @GetMapping("/getMyList")
+    @ApiOperation("学生获得自己填写的个人学年总结所列表")
+    @PreAuthorize("hasAuthority('/api/personal/getMyList')")
+    public CommonResult<List<PersonalRespVO>> getMyList(String num) {
+        List<PersonalDO> list = service.getMyList(num);
         return CommonResult.success(PersonalConvert.INSTANCE.convertList(list));
     }
 
