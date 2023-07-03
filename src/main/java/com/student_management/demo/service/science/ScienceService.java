@@ -21,4 +21,6 @@ public interface ScienceService {
     List<ScienceDO> getList(Collection<Long> ids);
 
     List<ScienceDO> getAllList();
+
+    List<ScienceDO> getMyList(String num);
 }

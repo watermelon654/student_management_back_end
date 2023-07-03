@@ -1,0 +1,138 @@
+
+2023-07-03 13:36:16 [restartedMain] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 18.0.2.1 on LAPTOP-DV4VCE2D with PID 83612 (D:\627\student_management_back_end-1\target\classes started by zy1024 in D:\627\student_management_back_end-1)
+2023-07-03 13:36:16 [restartedMain] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-07-03 13:36:16 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-03 13:36:16 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-03 13:36:20 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-03 13:36:20 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-03 13:36:20 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 78 ms. Found 0 Redis repository interfaces.
+2023-07-03 13:36:23 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 18080 (http)
+2023-07-03 13:36:23 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-03 13:36:23 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.73]
+2023-07-03 13:36:24 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-07-03 13:36:24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 7420 ms
+2023-07-03 13:36:25 [restartedMain] WARN  c.b.m.core.injector.AbstractMethod - [com.student_management.demo.mapper.mysql.personal.PersonalMapper.insert] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.Insert]
+2023-07-03 13:36:29 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@55d6fa9c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@654d68da, org.springframework.security.web.context.SecurityContextPersistenceFilter@31556696, org.springframework.security.web.header.HeaderWriterFilter@7d5b369c, org.springframework.web.filter.CorsFilter@500ed8a5, org.springframework.security.web.authentication.logout.LogoutFilter@1800695, com.student_management.demo.filter.JwtAuthenticationFilter@2f348074, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@55ba2d0f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@678c62d5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@150233c1, org.springframework.security.web.session.SessionManagementFilter@5aa498f7, org.springframework.security.web.access.ExceptionTranslationFilter@5fb788d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3471f469]
+2023-07-03 13:36:29 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-03 13:36:30 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 18080 (http) with context path ''
+2023-07-03 13:36:32 [restartedMain] INFO  c.s.demo.DemoApplication - Started DemoApplication in 17.353 seconds (JVM running for 21.803)
+2023-07-03 13:42:07 [http-nio-18080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-03 13:42:07 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-03 13:42:07 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 284 ms
+2023-07-03 13:42:33 [http-nio-18080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-07-03 13:42:34 [http-nio-18080-exec-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-07-03 13:50:08 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-07-03 13:50:08 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-07-03 13:50:25 [restartedMain] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 18.0.2.1 on LAPTOP-DV4VCE2D with PID 54380 (D:\627\student_management_back_end-1\target\classes started by zy1024 in D:\627\student_management_back_end-1)
+2023-07-03 13:50:25 [restartedMain] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-07-03 13:50:26 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-03 13:50:26 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-03 13:50:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-03 13:50:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-03 13:50:29 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 104 ms. Found 0 Redis repository interfaces.
+2023-07-03 13:50:33 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 18080 (http)
+2023-07-03 13:50:33 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-03 13:50:33 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.73]
+2023-07-03 13:50:34 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-07-03 13:50:34 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 8535 ms
+2023-07-03 13:50:36 [restartedMain] WARN  c.b.m.core.injector.AbstractMethod - [com.student_management.demo.mapper.mysql.personal.PersonalMapper.insert] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.Insert]
+2023-07-03 13:50:39 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4de2cbd3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1671782, org.springframework.security.web.context.SecurityContextPersistenceFilter@1be6bb5c, org.springframework.security.web.header.HeaderWriterFilter@1e0b030f, org.springframework.web.filter.CorsFilter@1c19b26a, org.springframework.security.web.authentication.logout.LogoutFilter@759010f9, com.student_management.demo.filter.JwtAuthenticationFilter@a9ef967, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2b25f6b4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@625a5ec6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7d81c18e, org.springframework.security.web.session.SessionManagementFilter@7118946b, org.springframework.security.web.access.ExceptionTranslationFilter@2e3c7171, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3a29e7b9]
+2023-07-03 13:50:40 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-03 13:50:41 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 18080 (http) with context path ''
+2023-07-03 13:50:44 [restartedMain] INFO  c.s.demo.DemoApplication - Started DemoApplication in 19.659 seconds (JVM running for 26.282)
+2023-07-03 13:50:46 [http-nio-18080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-03 13:50:46 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-03 13:50:46 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2023-07-03 13:51:56 [restartedMain] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 18.0.2.1 on LAPTOP-DV4VCE2D with PID 14516 (D:\627\student_management_back_end-1\target\classes started by zy1024 in D:\627\student_management_back_end-1)
+2023-07-03 13:51:56 [restartedMain] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-07-03 13:51:57 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-03 13:51:57 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-03 13:52:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-03 13:52:00 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-03 13:52:01 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 85 ms. Found 0 Redis repository interfaces.
+2023-07-03 13:52:03 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 18080 (http)
+2023-07-03 13:52:03 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-03 13:52:03 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.73]
+2023-07-03 13:52:04 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-07-03 13:52:04 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 7494 ms
+2023-07-03 13:52:05 [restartedMain] WARN  c.b.m.core.injector.AbstractMethod - [com.student_management.demo.mapper.mysql.personal.PersonalMapper.insert] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.Insert]
+2023-07-03 13:52:10 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@29ac9809, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@53901400, org.springframework.security.web.context.SecurityContextPersistenceFilter@66f0d0ba, org.springframework.security.web.header.HeaderWriterFilter@48ffcf15, org.springframework.web.filter.CorsFilter@1bd1e053, org.springframework.security.web.authentication.logout.LogoutFilter@5fe53011, com.student_management.demo.filter.JwtAuthenticationFilter@a9ef967, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a3f94e6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5e6bfab6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2618333d, org.springframework.security.web.session.SessionManagementFilter@70a2252e, org.springframework.security.web.access.ExceptionTranslationFilter@7118946b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@12ae955d]
+2023-07-03 13:52:10 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-03 13:52:11 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 18080 (http) with context path ''
+2023-07-03 13:52:13 [restartedMain] INFO  c.s.demo.DemoApplication - Started DemoApplication in 17.815 seconds (JVM running for 22.1)
+2023-07-03 13:52:35 [http-nio-18080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-03 13:52:35 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-03 13:52:35 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2023-07-03 13:53:40 [http-nio-18080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-07-03 13:53:42 [http-nio-18080-exec-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-07-03 14:17:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-07-03 14:17:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-07-03 14:17:29 [restartedMain] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 18.0.2.1 on LAPTOP-DV4VCE2D with PID 55408 (D:\627\student_management_back_end-1\target\classes started by zy1024 in D:\627\student_management_back_end-1)
+2023-07-03 14:17:29 [restartedMain] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-07-03 14:17:30 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-03 14:17:30 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-03 14:17:34 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-03 14:17:34 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-03 14:17:34 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 119 ms. Found 0 Redis repository interfaces.
+2023-07-03 14:17:37 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 18080 (http)
+2023-07-03 14:17:37 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-03 14:17:37 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.73]
+2023-07-03 14:17:38 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-07-03 14:17:38 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 8287 ms
+2023-07-03 14:17:39 [restartedMain] WARN  c.b.m.core.injector.AbstractMethod - [com.student_management.demo.mapper.mysql.personal.PersonalMapper.insert] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.Insert]
+2023-07-03 14:17:42 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@111622ab, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@55b15653, org.springframework.security.web.context.SecurityContextPersistenceFilter@77824a25, org.springframework.security.web.header.HeaderWriterFilter@548a2d0d, org.springframework.web.filter.CorsFilter@495426cc, org.springframework.security.web.authentication.logout.LogoutFilter@3079f3f3, com.student_management.demo.filter.JwtAuthenticationFilter@6744fd0d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@69c4a52d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@576388c2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@a3eae2d, org.springframework.security.web.session.SessionManagementFilter@6e38d425, org.springframework.security.web.access.ExceptionTranslationFilter@682b3391, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3537beb3]
+2023-07-03 14:17:42 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-03 14:17:43 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 18080 (http) with context path ''
+2023-07-03 14:17:45 [restartedMain] INFO  c.s.demo.DemoApplication - Started DemoApplication in 16.894 seconds (JVM running for 21.458)
+2023-07-03 14:17:58 [http-nio-18080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-03 14:17:58 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-03 14:17:58 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2023-07-03 14:17:59 [http-nio-18080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-07-03 14:17:59 [http-nio-18080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-07-03 14:42:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-07-03 14:42:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-07-03 14:42:46 [restartedMain] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 18.0.2.1 on LAPTOP-DV4VCE2D with PID 83132 (D:\627\student_management_back_end-1\target\classes started by zy1024 in D:\627\student_management_back_end-1)
+2023-07-03 14:42:46 [restartedMain] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-07-03 14:42:46 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-03 14:42:46 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-03 14:42:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-03 14:42:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-03 14:42:51 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 104 ms. Found 0 Redis repository interfaces.
+2023-07-03 14:42:55 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 18080 (http)
+2023-07-03 14:42:55 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-03 14:42:55 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.73]
+2023-07-03 14:42:56 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-07-03 14:42:56 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 9936 ms
+2023-07-03 14:42:58 [restartedMain] WARN  c.b.m.core.injector.AbstractMethod - [com.student_management.demo.mapper.mysql.personal.PersonalMapper.insert] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.Insert]
+2023-07-03 14:43:02 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@32110f92, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3471f469, org.springframework.security.web.context.SecurityContextPersistenceFilter@2e0e2cc5, org.springframework.security.web.header.HeaderWriterFilter@30c316f3, org.springframework.web.filter.CorsFilter@65857ac2, org.springframework.security.web.authentication.logout.LogoutFilter@5a73b078, com.student_management.demo.filter.JwtAuthenticationFilter@7f2bef8b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6df03671, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4f48336b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1af54bcf, org.springframework.security.web.session.SessionManagementFilter@6a819571, org.springframework.security.web.access.ExceptionTranslationFilter@713eaeac, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@f821167]
+2023-07-03 14:43:03 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-03 14:43:04 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 18080 (http) with context path ''
+2023-07-03 14:43:06 [restartedMain] INFO  c.s.demo.DemoApplication - Started DemoApplication in 22.102 seconds (JVM running for 27.674)
+2023-07-03 14:43:18 [http-nio-18080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-03 14:43:18 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-03 14:43:18 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2023-07-03 14:45:27 [restartedMain] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 18.0.2.1 on LAPTOP-DV4VCE2D with PID 65792 (D:\627\student_management_back_end-1\target\classes started by zy1024 in D:\627\student_management_back_end-1)
+2023-07-03 14:45:27 [restartedMain] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-07-03 14:45:27 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-03 14:45:27 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-03 14:45:30 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-07-03 14:45:30 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-07-03 14:45:30 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 80 ms. Found 0 Redis repository interfaces.
+2023-07-03 14:45:33 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 18080 (http)
+2023-07-03 14:45:33 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-07-03 14:45:33 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.73]
+2023-07-03 14:45:34 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-07-03 14:45:34 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 7311 ms
+2023-07-03 14:45:35 [restartedMain] WARN  c.b.m.core.injector.AbstractMethod - [com.student_management.demo.mapper.mysql.personal.PersonalMapper.insert] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.Insert]
+2023-07-03 14:45:37 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@53901400, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1bd1e053, org.springframework.security.web.context.SecurityContextPersistenceFilter@79a021f, org.springframework.security.web.header.HeaderWriterFilter@1be6bb5c, org.springframework.web.filter.CorsFilter@2618333d, org.springframework.security.web.authentication.logout.LogoutFilter@73a402f, com.student_management.demo.filter.JwtAuthenticationFilter@3144e78e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@303bec52, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a9ec763, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6bb98b27, org.springframework.security.web.session.SessionManagementFilter@331fcee4, org.springframework.security.web.access.ExceptionTranslationFilter@4068b40a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@20d7267d]
+2023-07-03 14:45:37 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-07-03 14:45:38 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 18080 (http) with context path ''
+2023-07-03 14:45:39 [restartedMain] INFO  c.s.demo.DemoApplication - Started DemoApplication in 13.251 seconds (JVM running for 16.707)
+2023-07-03 14:45:53 [http-nio-18080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-03 14:45:53 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-07-03 14:45:53 [http-nio-18080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2023-07-03 14:48:13 [http-nio-18080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-07-03 14:48:16 [http-nio-18080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-07-03 15:07:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-07-03 15:07:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+

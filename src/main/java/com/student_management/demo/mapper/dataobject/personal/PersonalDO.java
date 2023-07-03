@@ -36,4 +36,6 @@ public class PersonalDO {
     private String society;
     private String self;
 
+    private boolean isDel;
+
 }
