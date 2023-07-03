@@ -2,19 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.student_management.demo.mapper.mysql.summary.SummaryMapper">
-    <!--  更新当前学生gpa打分：更新summary表的gpa字段-->
-    <update id="updateGpaByStuNum" parameterType="com.student_management.demo.mapper.dataobject.summary.SummaryDO">
-        UPDATE summary
-        SET gpa = #{gpa}
-        WHERE stuNum = #{stuNum}
-    </update>
-
-    <!--  更新当前学生志愿服务打分：更新summary表的gpa字段-->
-    <update id="updateVolByStuNum" parameterType="com.student_management.demo.mapper.dataobject.summary.SummaryDO">
-        UPDATE summary
-        SET vol = #{vol}
-        WHERE stuNum = #{stuNum}
-    </update>
 
     <update id="updateAllGradeAsNull" parameterType="java.util.List" >
         UPDATE summary
