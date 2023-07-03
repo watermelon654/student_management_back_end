@@ -79,6 +79,13 @@ public class PracticeController {
         List<PracticeDO> list = service.getAllList();
         return CommonResult.success(PracticeConvert.INSTANCE.convertList(list));
     }
-
+ @GetMapping("/getMyList")
+    @ApiOperation("学生获得自己填写的社会实践情况所有列表")
+    @PreAuthorize("hasAuthority('/api/practice/getMyList')")
+    public CommonResult<List<PracticeRespVO>> getMyList(String num) {
+        System.out.println("num = " + num);
+        List<PracticeDO> list = service.getMyList(num);
+        return CommonResult.success(PracticeConvert.INSTANCE.convertList(list));
+    }
 
 }
