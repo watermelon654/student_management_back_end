@@ -1,8 +1,10 @@
 package com.student_management.demo.service.student;
 
 import cn.hutool.core.collection.CollUtil;
+import com.student_management.demo.common.CommonResult;
 import com.student_management.demo.controller.student.vo.StudentImportExcelReqVO;
 import com.student_management.demo.controller.student.vo.StudentImportRespVO;
+import com.student_management.demo.controller.student.vo.StudentsInfoDeletedReqVO;
 import com.student_management.demo.convert.student.StudentConvert;
 import com.student_management.demo.mapper.dataobject.student.StudentBasicDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
@@ -11,6 +13,7 @@ import com.student_management.demo.mapper.mysql.student.ClassMapper;
 import com.student_management.demo.mapper.mysql.student.MajorMapper;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
 import com.student_management.demo.mapper.mysql.student.YearMapper;
+import com.student_management.demo.mapper.mysql.summary.SummaryMapper;
 import com.student_management.demo.mapper.mysql.user.RoleMapper;
 import com.student_management.demo.service.redis.RedisService;
 import com.student_management.demo.service.summary.SummaryService;
@@ -39,6 +42,8 @@ public class StudentServiceImpl implements StudentService{
     private ClassMapper classMapper;
     @Resource
     private SummaryService summaryService;
+    @Resource
+    private SummaryMapper summaryMapper;
     @Resource
     private RedisService redisService;
     @Resource
@@ -74,6 +79,9 @@ public class StudentServiceImpl implements StudentService{
                 studentMapper.insert(student);
                 respVO.getCreatesStudentNames().add(student.getName());
                 stuId = studentMapper.selectStudentByNum(student.getNum()).getId();
+
+                //补充summary表中信息
+                summaryService.importInitialRecord(stuId, student.getNum(), student.getName());
             } else {
 
                 // 如果存在，更新学生表表中的记录;
@@ -87,6 +95,11 @@ public class StudentServiceImpl implements StudentService{
 
                 studentMapper.updateById(student);
                 respVO.getUpdateStudentNames().add(student.getName());
+
+                // 检查summary表中是否有记录，如果没有，补充
+                if (summaryMapper.selectSummaryByStuId(stuId) == null) {
+                    summaryService.importInitialRecord(stuId, student.getNum(), student.getName());
+                }
 
             }
             // 补充用户角色表
@@ -138,6 +151,26 @@ public class StudentServiceImpl implements StudentService{
             basicDOs.add(sbdo);
         }
         return basicDOs;
+    }
+
+    @Override
+    public CommonResult<?> deleteInfo(List<StudentsInfoDeletedReqVO> reqVOs) {
+        try {
+            //获取list中的num
+            List<String> nums = new ArrayList<>();
+            for (StudentsInfoDeletedReqVO reqVO: reqVOs) {
+                nums.add(reqVO.getNum());
+            }
+            //删除学生信息
+            studentMapper.updateIsDel(nums);
+            //更新时间
+            studentMapper.refreshUpdateTime(nums);
+            return CommonResult.success("删除成功!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return CommonResult.error(500, "删除失败!");
+        }
+
     }
 
 }

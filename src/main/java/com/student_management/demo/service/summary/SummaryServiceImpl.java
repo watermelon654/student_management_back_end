@@ -1,6 +1,8 @@
 package com.student_management.demo.service.summary;
 
 import cn.hutool.core.collection.CollUtil;
+import com.student_management.demo.common.CommonResult;
+import com.student_management.demo.controller.summary.vo.SummaryDeleteReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportRespVO;
 import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
@@ -79,6 +81,7 @@ public class SummaryServiceImpl implements SummaryService {
         if (listdo.size() == 0){
             return null;
         }
+        System.out.println(listdo);
         SummarySelectListRespVO respVO = new SummarySelectListRespVO();
         respVO.setSummarylist(listdo);
         return respVO;
