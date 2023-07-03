@@ -17,4 +17,5 @@ public interface PracticeService {
     List<PracticeDO> getList(Collection<Long> ids);
 
     List<PracticeDO> getAllList();
+    List<PracticeDO> getMyList(String num);
 }

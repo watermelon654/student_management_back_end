@@ -1,3 +1,4 @@
+
 2023-07-03 13:36:16 [restartedMain] INFO  c.s.demo.DemoApplication - Starting DemoApplication using Java 18.0.2.1 on LAPTOP-DV4VCE2D with PID 83612 (D:\627\student_management_back_end-1\target\classes started by zy1024 in D:\627\student_management_back_end-1)
 2023-07-03 13:36:16 [restartedMain] INFO  c.s.demo.DemoApplication - No active profile set, falling back to 1 default profile: "default"
 2023-07-03 13:36:16 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
@@ -134,3 +135,4 @@
 2023-07-03 14:48:16 [http-nio-18080-exec-6] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
 2023-07-03 15:07:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2023-07-03 15:07:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+

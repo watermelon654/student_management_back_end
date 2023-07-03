@@ -16,11 +16,11 @@ public interface PracticeMapper extends BaseMapper<PracticeDO>{
      * @param stu_num
      * @return
      */
-    default PracticeDO selectPracticeByStuNum(String stu_num) {
+      default List<PracticeDO> selectPracticeByStuNum(String stu_num) {
         QueryWrapper<PracticeDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stuNum", stu_num);
-        return selectOne(wrapper);
+        wrapper.eq("stuNum", stu_num).eq("isDel", 0);
+        return selectList(wrapper);
     }
 
     /**
@@ -37,6 +37,8 @@ public interface PracticeMapper extends BaseMapper<PracticeDO>{
 
     default List<PracticeDO> selectAllList() {
         QueryWrapper<PracticeDO> wrapper = new QueryWrapper<>();
+         wrapper.inSql("stuId", "SELECT id FROM stu_info WHERE isDel = 0");
+        wrapper.eq("isDel", 0);
         return selectList(wrapper);
     }
 }

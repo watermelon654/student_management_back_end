@@ -2,23 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.student_management.demo.mapper.mysql.user.UserMapper">
-    <select id="selectUserInitialByUserNum" parameterType="String" resultType="int" >
-        SELECT initial FROM stu_info WHERE num = #{num}
-        UNION
-        SELECT initial FROM staff_info WHERE num = #{num};
-    </select>
-    <update id="updateUserPasswdByStuNum" parameterType="java.util.HashMap" >
-        UPDATE `stu_info`
-        SET passwd = #{passwd},initial = #{initial},updateTime = #{updateTime}
-        WHERE num = #{num};
-
-    </update>
-    <update id="updateUserPasswdByStaffNum" parameterType="java.util.HashMap" >
-        UPDATE `staff_info`
-        SET passwd = #{passwd},initial = #{initial},updateTime = #{updateTime}
-        WHERE num = #{num};
-    </update>
-
     <select id="selectUserInfoByUserNum"  parameterType="String" resultMap="LoginInfoResultMap">
         SELECT a.id,a.num,a.name,a.passwd,a.isDel,b.roleId,d.path FROM stu_info a JOIN user_role b ON a.id = b.userId JOIN permission_role c ON b.roleId = c.roleId JOIN permission d ON c.permissionId =d.id
         WHERE a.num = #{num} AND d.type = 0

@@ -16,4 +16,5 @@ public interface ServiceService {
     List<ServiceDO> getList(Collection<Long> ids);
 
     List<ServiceDO> getAllList();
+    List<ServiceDO> getMyList(String num);
 }
