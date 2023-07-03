@@ -78,6 +78,13 @@ public class ServiceController {
         List<ServiceDO> list = service.getAllList();
         return CommonResult.success(ServiceConvert.INSTANCE.convertList(list));
     }
-
+@GetMapping("/getMyList")
+    @ApiOperation("学生获得自己填写的骨干服务情况所有列表")
+    @PreAuthorize("hasAuthority('/api/service/getMyList')")
+    public CommonResult<List<ServiceRespVO>> getMyList(String num) {
+        System.out.println("num = " + num);
+        List<ServiceDO> list = service.getMyList(num);
+        return CommonResult.success(ServiceConvert.INSTANCE.convertList(list));
+    }
 
 }
