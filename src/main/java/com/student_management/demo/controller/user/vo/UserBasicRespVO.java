@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class UserBasicRespVO {
+    private String num;//职工号
     private String name;//姓名
     private String role;//true:学生，false：职工
+    private String manager;//true:管理员，false：普通用户
 }

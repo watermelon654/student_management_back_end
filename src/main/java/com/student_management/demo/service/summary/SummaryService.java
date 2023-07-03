@@ -13,9 +13,9 @@ public interface SummaryService {
 
     SummarySelectListRespVO selectListByStatus(boolean status);
 
-    int updateGpaByStuNum(SummaryDO summary);
-
-    int updateVolByStuNum(SummaryDO summary);
-
     SummarySelectListRespVO selectAllList();
+
+    boolean updateGpaByStuNum(SummaryDO summary);
+
+    boolean updateVolByStuNum(SummaryDO summary);
 }

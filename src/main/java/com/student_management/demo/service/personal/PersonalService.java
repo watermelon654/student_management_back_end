@@ -3,6 +3,7 @@ package com.student_management.demo.service.personal;
 import com.student_management.demo.controller.personal.vo.PersonalImportReqVO;
 import com.student_management.demo.controller.personal.vo.PersonalImportRespVO;
 import com.student_management.demo.mapper.dataobject.personal.PersonalDO;
+import com.student_management.demo.mapper.dataobject.science.ScienceDO;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,4 +20,6 @@ public interface PersonalService {
     List<PersonalDO> getList(Collection<Long> ids);
 
     List<PersonalDO> getAllList();
+
+    List<PersonalDO> getMyList(String num);
 }

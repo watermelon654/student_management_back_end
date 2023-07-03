@@ -26,4 +26,11 @@ public class AuthLoginReqVO {
     @Pattern(regexp = "^[A-Za-z0-9]+$", message = "只能包含数字、大小写字母")
     private String password;
 
+    @Schema(description = "验证码", required = true, example = "abcd")
+    @NotEmpty(message = "验证码不能为空")
+    @Length(min = 4, max = 4, message = "验证码长度为4位字母或数字组合")
+    @Pattern(regexp = "^[A-Z0-9]+$", message = "验证码格式为字母或数字组合")
+    private String captchaText;
+
+
 }

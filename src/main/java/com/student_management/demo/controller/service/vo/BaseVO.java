@@ -32,11 +32,10 @@ public class BaseVO {
 
     @Schema(description = "在岗期间成就")
     private String result;
+    @Schema(description = "创建者id")
+    private Long createUserId;
+    @Schema(description = "更新者id")
+    private Long updateUserId;
 
-    @Schema(description = "评分")
-    private Integer score;
-
-    @Schema(description = "状态", example = "1")
-    private Integer status;
 
 }

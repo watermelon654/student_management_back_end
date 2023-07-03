@@ -54,10 +54,12 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
     int updateByStuNum(VolunteerDO volunteer);
 
     /**
-     * 根据学生id获取当前学生志愿服务时长信息
+     * 根据学生学号获取当前学生志愿服务时长信息
      *
-     * @param stuId
-     * @return 学号。姓名。志愿服务时长
+     * @param stuNum
+     * @return 学号，姓名，志愿服务时长
      */
-    VolunteerRespVO getInfoByStuId(Long stuId);
+    VolunteerRespVO getInfoByStuNum(String stuNum);
+
+    Integer getVolScoreByStuNum(String stuNum);
 }

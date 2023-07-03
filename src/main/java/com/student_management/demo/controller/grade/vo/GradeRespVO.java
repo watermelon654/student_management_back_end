@@ -8,7 +8,7 @@ public class GradeRespVO {
     /**
      * 学号
      */
-    private Long stuNum;
+    private String stuNum;
 
     /**
      * 姓名

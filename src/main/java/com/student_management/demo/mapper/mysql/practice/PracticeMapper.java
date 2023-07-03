@@ -5,12 +5,14 @@ import com.student_management.demo.mapper.dataobject.practice.PracticeDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface PracticeMapper extends BaseMapper<PracticeDO>{
 
     /**
-     * 按照学号查询Practise
+     * 按照学号查询Practice
      * @param stu_num
      * @return
      */
@@ -22,7 +24,7 @@ public interface PracticeMapper extends BaseMapper<PracticeDO>{
     }
 
     /**
-     * 按照学生id查询Practise
+     * 按照学生id查询Practice
      * @param stu_id
      * @return
      */
@@ -32,5 +34,9 @@ public interface PracticeMapper extends BaseMapper<PracticeDO>{
         wrapper.eq("stuId", stu_id);
         return selectOne(wrapper);
     }
-    int insertPractice(Long stuId,String stuNum,String stuName, String title,String director,String constitution,String content,String time,String result, int score,int status);
+
+    default List<PracticeDO> selectAllList() {
+        QueryWrapper<PracticeDO> wrapper = new QueryWrapper<>();
+        return selectList(wrapper);
+    }
 }

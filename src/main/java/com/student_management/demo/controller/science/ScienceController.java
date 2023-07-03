@@ -11,6 +11,7 @@ import com.student_management.demo.service.user.UserBasicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Parameter;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -29,6 +30,7 @@ public class ScienceController {
     @Resource
     private UserBasicService userBasicService;
     @ApiOperation("科研表上传接口")
+    @PreAuthorize("hasAuthority('/api/science/import')")
     @PostMapping("/import")
     // CommonResult<ScienceImportRespVO>
     public CommonResult<ScienceImportRespVO> importScienceSheet(@RequestHeader("Authorization") String authHeader,@RequestBody List<ScienceImportReqVO> userList) {
@@ -53,6 +55,7 @@ public class ScienceController {
 
     @GetMapping("/list")
     @ApiOperation("获得科研情况列表")
+    @PreAuthorize("hasAuthority('/api/science/list')")
     @Parameter(name = "ids", description = "编号列表", required = true, example = "1024,2048")
     public CommonResult<List<ScienceRespVO>> getList(@RequestParam("ids") Collection<Long> ids) {
         List<ScienceDO> list = service.getList(ids);
@@ -61,8 +64,18 @@ public class ScienceController {
 
     @GetMapping("/getAllList")
     @ApiOperation("获得科研情况所有列表")
+    @PreAuthorize("hasAuthority('/api/science/getAllList')")
     public CommonResult<List<ScienceRespVO>> getAllList() {
         List<ScienceDO> list = service.getAllList();
+        return CommonResult.success(ScienceConvert.INSTANCE.convertList(list));
+    }
+
+    @GetMapping("/getMyList")
+    @ApiOperation("学生获得自己填写的科研情况所有列表")
+    @PreAuthorize("hasAuthority('/api/science/getMyList')")
+    public CommonResult<List<ScienceRespVO>> getMyList(String num) {
+        System.out.println("num = " + num);
+        List<ScienceDO> list = service.getMyList(num);
         return CommonResult.success(ScienceConvert.INSTANCE.convertList(list));
     }
 

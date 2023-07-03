@@ -16,11 +16,11 @@ public interface ScienceMapper extends BaseMapper<ScienceDO>{
      * @param stu_num
      * @return
      */
-    default ScienceDO selectScienceByStuNum(String stu_num) {
+    default List<ScienceDO> selectScienceByStuNum(String stu_num) {
         QueryWrapper<ScienceDO> wrapper = new QueryWrapper<>();
         //查询条件
-        wrapper.eq("stuNum", stu_num);
-        return selectOne(wrapper);
+        wrapper.eq("stuNum", stu_num).eq("isDel", 0);
+        return selectList(wrapper);
     }
 
     /**
@@ -35,8 +35,14 @@ public interface ScienceMapper extends BaseMapper<ScienceDO>{
         return selectOne(wrapper);
     }
 
+
+
+    /**
+     * 查询未删除的Science列表
+     */
     default List<ScienceDO> selectAllList() {
         QueryWrapper<ScienceDO> wrapper = new QueryWrapper<>();
+        wrapper.eq("isDel", 0);
         return selectList(wrapper);
     }
 }

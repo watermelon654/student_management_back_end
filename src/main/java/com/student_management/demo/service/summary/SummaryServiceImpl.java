@@ -1,13 +1,10 @@
 package com.student_management.demo.service.summary;
 
 import cn.hutool.core.collection.CollUtil;
-import com.student_management.demo.controller.summary.vo.SummaryBaseVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportReqVO;
 import com.student_management.demo.controller.summary.vo.SummaryImportRespVO;
 import com.student_management.demo.controller.summary.vo.SummarySelectListRespVO;
-import com.student_management.demo.convert.grade.GradeConvert;
 import com.student_management.demo.convert.summary.SummaryConvert;
-import com.student_management.demo.mapper.dataobject.grade.GradeDO;
 import com.student_management.demo.mapper.dataobject.summary.SummaryDO;
 import com.student_management.demo.mapper.dataobject.student.StudentDO;
 import com.student_management.demo.mapper.mysql.student.StudentMapper;
@@ -118,15 +115,25 @@ public class SummaryServiceImpl implements SummaryService {
 
     }
 
+    /**
+     * 更新GPA打分并返回打分结果
+     *
+     * @param summary
+     * @return 打分结果，true表示打分成功，false表示打分失败
+     */
     @Override
-    public int updateGpaByStuNum(SummaryDO summary) {
-        return summaryMapper.updateGpaByStuNum(summary);
+    public boolean updateGpaByStuNum(SummaryDO summary) {
+        return summaryMapper.updateGpaByStuNum(summary) > 0;
     }
 
+    /**
+     * 更新志愿服务打分并返回打分结果
+     *
+     * @param summary
+     * @return 打分结果，true表示打分成功，false表示打分失败
+     */
     @Override
-    public int updateVolByStuNum(SummaryDO summary) {
-        return summaryMapper.updateVolByStuNum(summary);
-    }
+    public boolean updateVolByStuNum(SummaryDO summary) { return summaryMapper.updateVolByStuNum(summary) > 0; }
 
 
 }
