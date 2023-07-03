@@ -25,22 +25,4 @@
         WHERE a.id = #{id}
     </select>
 
-    <update id="updateIsDel" parameterType="java.util.List" >
-        UPDATE stu_info
-        SET isDel = 1
-        WHERE stu_info.num IN
-        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
-            #{item}
-        </foreach>
-    </update>
-
-    <update id="refreshUpdateTime" parameterType="java.util.List" >
-        UPDATE stu_info
-        SET updateTime = NOW()
-        WHERE stu_info.num IN
-        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
-            #{item}
-        </foreach>
-    </update>
-
 </mapper>

@@ -3,7 +3,6 @@ package com.student_management.demo.service.auth;
 
 import com.student_management.demo.controller.auth.vo.AuthLoginReqVO;
 import com.student_management.demo.controller.auth.vo.AuthLoginRespVO;
-import com.student_management.demo.mapper.mysql.user.UserMapper;
 import com.student_management.demo.utils.token.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-
 import static com.student_management.demo.common.error.ErrorCodeConstants.*;
 import static com.student_management.demo.utils.exception.ServiceExceptionUtil.exception;
 
@@ -28,8 +24,7 @@ public class AuthServceImpl implements AuthService {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private AuthenticationManager authenticationManager;
-    @Resource
-    private UserMapper userMapper;
+
 
     /**
      * 用户登录验证
@@ -51,10 +46,8 @@ public class AuthServceImpl implements AuthService {
             //JWT的组成部分:Header(头),Payload(载荷),Signature(签名)
             System.out.println("================generateToken================");
             String token = jwtTokenUtil.generateToken(authenticate,reqVO.getUsername());
-            // 获取首次登录状态
-            String initial = userMapper.selectUserInitialByUserNum(reqVO.getUsername()) == 1? "true" : "false";
             // 返回JWT数据
-            return new AuthLoginRespVO(token,initial);
+            return new AuthLoginRespVO(token);
         } catch (BadCredentialsException e) {
             // 密码验证失败
             throw exception(AUTH_LOGIN_BAD_CREDENTIALS);
