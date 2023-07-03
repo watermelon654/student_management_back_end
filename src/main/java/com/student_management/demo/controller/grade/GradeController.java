@@ -84,7 +84,7 @@ public class GradeController {
     }
 
     @GetMapping("/get-grade-info")
-
+    @PreAuthorize("hasAuthority('/api/grade/get-grade-info')")
     @ApiOperation("根据token获取学生学号，之后获取学生GPA信息")
     public CommonResult<GradeRespVO> getInfoByStuNum(@RequestHeader("Authorization") String authHeader) {
         //return CommonResult.success(userBasicService.getBasicInfo(username));

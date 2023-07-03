@@ -44,6 +44,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         String[] urls = {
                 "/login",
                 "/auth/login",
+                "/auth/captcha",
                 "/beforelogin",
                 "/doc.html",  // 从本行开始，以下是新增
                 "/**/*.js",

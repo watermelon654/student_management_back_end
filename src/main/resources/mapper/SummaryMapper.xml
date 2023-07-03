@@ -15,4 +15,22 @@
         SET vol = #{vol}
         WHERE stuNum = #{stuNum}
     </update>
+
+    <update id="updateAllGradeAsNull" parameterType="java.util.List" >
+        UPDATE summary
+        SET gpa = null, vol = null, sci = null, ser = null, per = null, pra = null, status = 0
+        WHERE stuNum IN
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="refreshUpdateTime" parameterType="java.util.List" >
+        UPDATE summary
+        SET updateTime = NOW()
+        WHERE stuNum IN
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
 </mapper>
