@@ -1,4 +1,4 @@
-package com.student_management.demo.controller.grade.vo;
+package com.student_management.demo.controller.grade.vo.Judge;
 
 import lombok.Data;
 
@@ -13,4 +13,9 @@ public class GradeScoreReqVO {
      * 打分
      */
     private Integer score;
+
+    /**
+     * 更新者职工号
+     */
+    private String judgeNum;
 }
