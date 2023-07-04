@@ -65,6 +65,7 @@ public class AuthController {
     @PermitAll
     @Operation(summary = "获得图片验证码")
     public CommonResult<?> showCaptcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("获取图片验证码");
         // 生成验证码文本
         String captchaText = defaultKaptcha.createText();
 
