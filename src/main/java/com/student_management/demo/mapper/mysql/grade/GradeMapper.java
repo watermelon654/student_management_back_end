@@ -19,6 +19,8 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
 
     Integer isDeleted(String stuNum);
 
+    Integer isDeletedInStuinfo(String stuNum);
+
     /**
      * 按照学号查询GPA
      * @param stu_num

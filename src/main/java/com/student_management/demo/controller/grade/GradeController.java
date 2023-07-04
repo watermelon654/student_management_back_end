@@ -97,7 +97,7 @@ public class GradeController {
         }
     }
 
-/*    @PostMapping("/deleteGrade")
+    @PostMapping("/deleteGrade")
     @ApiOperation("根据学号删除信息")
     @PreAuthorize("hasAuthority('/api/grade/deleteGrade')")
     public CommonResult<String> updateScoreByStuNum(
@@ -105,9 +105,9 @@ public class GradeController {
             HttpServletRequest request
     ) {
         try {
-//            if (service.isDeleted(stuNum)) {
-//                return CommonResult.error(404, "该学生的信息已删除");
-//            }
+            if (service.isDeleted(stuNum)) {
+                return CommonResult.error(404, "该学生的信息已删除");
+            }
 
             // 从http请求获取token，然后获得评委职工号
             String token = request.getHeader("Authorization");
@@ -123,7 +123,7 @@ public class GradeController {
             e.printStackTrace();
             return CommonResult.error(500, "删除学生信息失败");
         }
-    }*/
+    }
 
     //--------------------------------------
     //学生端

@@ -126,15 +126,18 @@ public class GradeServiceImpl implements GradeService{
         List<JudgeGradeRespVO> listvo = new ArrayList<>();
         for (GradeDO gradeDO : listdo) {
             JudgeGradeRespVO vo = new JudgeGradeRespVO();
-            vo.setStuNum(gradeDO.getStuNum());
+            String stuNum = gradeDO.getStuNum();
+            vo.setStuNum(stuNum);
             vo.setStuName(gradeDO.getStuName());
             vo.setGpa(gradeDO.getGpa());
             vo.setCreateTime(gradeDO.getCreateTime());
             vo.setUpdateTime(gradeDO.getUpdateTime());
-
-            // 从summary表中获取score数据
-            Integer score = gradeMapper.getGpaScoreByStuNum(gradeDO.getStuNum());
-            vo.setScore(score);
+            // 从stu_info表中获取isDel数据并设置
+            assert stuNum != null : "stuNum must not be null";
+            vo.setIsDel(gradeMapper.isDeletedInStuinfo(stuNum));
+            System.out.println("_______________" + gradeMapper.isDeletedInStuinfo(stuNum));
+            // 从summary表中获取score数据并设置
+            vo.setScore(gradeMapper.getGpaScoreByStuNum(stuNum));
 
             listvo.add(vo);
         }
@@ -158,12 +161,12 @@ public class GradeServiceImpl implements GradeService{
         return result;
     }
 
-/*    *//**
+    /**
      * 显示当前删除结果
      *
      * @param
      * @return 删除结果
-     *//*
+     */
     public boolean showDeleteResult(String judgeNum, String stuNum) {
         boolean result = false;
         GradeScoreReqVO gradeScore = new GradeScoreReqVO();
@@ -174,7 +177,7 @@ public class GradeServiceImpl implements GradeService{
             result = true;
         }
         return result;
-    }*/
+    }
     //--------------------------------------
     //学生端
 

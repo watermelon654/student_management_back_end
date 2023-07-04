@@ -7,7 +7,14 @@
     <select id="isDeleted" parameterType="java.lang.String" resultType="Integer">
         SELECT isDel
         FROM grade
-        WHERE stuNum = #{stuNum}
+        WHERE num = #{stuNum}
+    </select>
+
+    <!--  根据学号查询当前学生在grade表中的isDel值  -->
+    <select id="isDeletedInStuinfo" parameterType="java.lang.String" resultType="Integer">
+        SELECT isDel
+        FROM stu_info
+        WHERE num = #{stuNum}
     </select>
 
     <select id="selectStudentById" parameterType="java.lang.Long" resultType="com.student_management.demo.mapper.dataobject.grade.GradeDO">
@@ -42,12 +49,12 @@
         WHERE stuNum = #{stuNum}
     </select>
 
-    <!--    &lt;!&ndash;  根据学号删除学生&ndash;&gt;
+        <!--  根据学号删除学生-->
         <update id="deleteByStuNum" parameterType="java.lang.String">
             UPDATE grade
             SET isDel = 1
             WHERE stuNum = #{stuNum}
-        </update>-->
+        </update>
 
     <!--  根据学号更新当前学生gpa打分：更新summary表的gpa字段-->
     <update id="updateGPAScore" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">
