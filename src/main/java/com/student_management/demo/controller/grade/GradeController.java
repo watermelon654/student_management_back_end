@@ -45,7 +45,9 @@ public class GradeController {
      */
     @PostMapping("/import")
     @PreAuthorize("hasAuthority('/api/grade/import')")
-    public CommonResult<GradeImportRespVO> importGradeExcel(@RequestPart(value = "file") MultipartFile file, HttpServletRequest request) throws IOException {
+    public CommonResult<GradeImportRespVO> importGradeExcel(
+            @RequestPart(value = "file") MultipartFile file,
+            HttpServletRequest request) throws IOException {
         // 从http请求获取token，然后获得评委职工号
         String token = request.getHeader("Authorization");
         String judgeNum = jwtTokenUtil.getUsernameFromToken(token);
@@ -101,10 +103,14 @@ public class GradeController {
     @ApiOperation("根据学号删除信息")
     @PreAuthorize("hasAuthority('/api/grade/deleteGrade')")
     public CommonResult<String> updateScoreByStuNum(
-            String stuNum,
+            @RequestBody String stuNumData,
             HttpServletRequest request
     ) {
         try {
+            System.out.println("需提取的数字：" + stuNumData);
+            String stuNum = stuNumData.replace("{\"stuNumData\":\"", "").replaceAll("\"}", "");
+            System.out.println("提取的数字：" + stuNum);
+
             if (service.isDeleted(stuNum)) {
                 return CommonResult.error(404, "该学生的信息已删除");
             }
@@ -112,12 +118,12 @@ public class GradeController {
             // 从http请求获取token，然后获得评委职工号
             String token = request.getHeader("Authorization");
             String judgeNum = jwtTokenUtil.getUsernameFromToken(token);
-            System.out.println("+++++++++++++" + judgeNum + stuNum);
+
             boolean success = service.showDeleteResult(judgeNum, stuNum);
             if (success) {
-                return CommonResult.success("评分更新成功");
+                return CommonResult.success("删除成功");
             } else {
-                return CommonResult.error(404, "在学生成绩表中找不到指定的记录，请联系学工添加该学生的信息");
+                return CommonResult.error(404, "删除学生信息失败");
             }
         } catch (Exception e) {
             e.printStackTrace();

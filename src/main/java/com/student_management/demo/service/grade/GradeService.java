@@ -49,7 +49,7 @@ public interface GradeService {
      */
     boolean updateResult(GradeScoreReqVO gradeScore);
 
-    public boolean showDeleteResult(String judgeNum, String stuNum);
+    boolean showDeleteResult(String judgeNum, String stuNum);
 
 
     //--------------------------------------

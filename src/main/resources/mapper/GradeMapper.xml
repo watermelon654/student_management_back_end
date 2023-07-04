@@ -7,7 +7,7 @@
     <select id="isDeleted" parameterType="java.lang.String" resultType="Integer">
         SELECT isDel
         FROM grade
-        WHERE num = #{stuNum}
+        WHERE stuNum = #{stuNum}
     </select>
 
     <!--  根据学号查询当前学生在grade表中的isDel值  -->
@@ -49,12 +49,23 @@
         WHERE stuNum = #{stuNum}
     </select>
 
-        <!--  根据学号删除学生-->
-        <update id="deleteByStuNum" parameterType="java.lang.String">
-            UPDATE grade
-            SET isDel = 1
-            WHERE stuNum = #{stuNum}
-        </update>
+    <!--  根据学号删除学生-->
+    <update id="deleteByStuNum" parameterType="java.lang.String">
+        UPDATE grade
+        SET isDel = 1
+        WHERE stuNum = #{stuNum}
+    </update>
+
+<!--    updateDeleteInfo
+    &lt;!&ndash; 删除时同时根据评委职工号更新grade表的updateUserId和updateTime字段 &ndash;&gt;
+    <update id="updateDeleteInfo" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">
+        UPDATE grade
+        <set>
+            updateUserId = (SELECT id FROM staff_info WHERE num = #{judgeNum}),
+            updateTime = NOW()
+        </set>
+        WHERE stuNum = #{stuNum}
+    </update>-->
 
     <!--  根据学号更新当前学生gpa打分：更新summary表的gpa字段-->
     <update id="updateGPAScore" parameterType="com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO">

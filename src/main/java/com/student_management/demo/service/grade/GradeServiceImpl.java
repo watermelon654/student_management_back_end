@@ -37,9 +37,11 @@ public class GradeServiceImpl implements GradeService{
      * @return 查询结果，true表示已删除
      */
     public Boolean isDeleted(String stuNum){
-        if (gradeMapper.isDeleted(stuNum) == 1 ){
+        if (gradeMapper.isDeleted(stuNum) == null ){
+            return false;
+        } else if (gradeMapper.isDeleted(stuNum) == 1) {
             return true;
-        }
+        } else
         return false;
     }
 
@@ -169,13 +171,17 @@ public class GradeServiceImpl implements GradeService{
      */
     public boolean showDeleteResult(String judgeNum, String stuNum) {
         boolean result = false;
+        System.out.println("学号：" + stuNum);
         GradeScoreReqVO gradeScore = new GradeScoreReqVO();
         gradeScore.setJudgeNum(judgeNum);
-        gradeScore.setStuNum(judgeNum);
-        if (gradeMapper.deleteByStuNum(stuNum) > 0 &&
-                gradeMapper.updateGradeUpdateInfo(gradeScore) > 0){
-            result = true;
+        gradeScore.setStuNum(stuNum);
+        System.out.println(gradeScore);
+        if (gradeMapper.updateGradeUpdateInfo(gradeScore) > 0){
+            if (gradeMapper.deleteByStuNum(stuNum) > 0) {
+                result = true;
+            }
         }
+        System.out.println("gradeMapper.updateGradeUpdateInfo(gradeScore)" + gradeMapper.updateGradeUpdateInfo(gradeScore));
         return result;
     }
     //--------------------------------------

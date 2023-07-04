@@ -64,6 +64,8 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
 
     Integer deleteByStuNum(String stuNum);
 
+//    int updateDeleteInfo(GradeScoreReqVO gradeScore);
+
     /**
      * 更新当前学生gpa打分和updateUserId
      *
