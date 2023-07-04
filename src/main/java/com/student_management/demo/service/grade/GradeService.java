@@ -18,6 +18,8 @@ public interface GradeService {
      */
     Boolean isDeleted(String stuNum);
 
+    Boolean isDeletedInStuinfo(String stuNum);
+
     /**
      * 批量导入GPA
      *
@@ -49,7 +51,7 @@ public interface GradeService {
      */
     boolean updateResult(GradeScoreReqVO gradeScore);
 
-//    public boolean showDeleteResult(String judgeNum, String stuNum);
+    boolean showDeleteResult(String judgeNum, String stuNum);
 
 
     //--------------------------------------

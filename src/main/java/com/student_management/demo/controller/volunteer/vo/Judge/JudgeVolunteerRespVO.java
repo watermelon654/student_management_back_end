@@ -32,4 +32,7 @@ public class JudgeVolunteerRespVO {
     @Schema(description = "更新时间")
     private Timestamp updateTime;
 
+    @Schema(description = "是否删除")
+    private int isDel;
+
 }

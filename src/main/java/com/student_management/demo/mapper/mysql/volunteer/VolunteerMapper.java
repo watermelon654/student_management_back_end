@@ -21,6 +21,8 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
 
     int isDeleted(String stuNum);
 
+    Integer isDeletedInStuinfo(String stuNum);
+
     /**
      * 按照学号查询志愿服务时长
      * @param stu_num
@@ -46,6 +48,8 @@ public interface VolunteerMapper extends BaseMapper<VolunteerDO>{
     }
 
     Integer getVolScoreByStuNum(String stuNum);
+
+    Integer deleteByStuNum(String stuNum);
 
     /**
      * 根据学生学号更新当前学生志愿服务时长打分

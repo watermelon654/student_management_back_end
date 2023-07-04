@@ -32,6 +32,9 @@ public class JudgeGradeRespVO {
     @Schema(description = "更新时间")
     private Timestamp updateTime;
 
+    @Schema(description = "是否删除")
+    private int isDel;
+
     public Integer getScore() {
         return score;
     }

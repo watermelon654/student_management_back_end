@@ -1,6 +1,7 @@
 package com.student_management.demo.service.volunteer;
 import cn.hutool.core.collection.CollUtil;
 import com.student_management.demo.controller.grade.vo.Judge.GradeExcelUpdateVO;
+import com.student_management.demo.controller.grade.vo.Judge.GradeScoreReqVO;
 import com.student_management.demo.controller.volunteer.vo.Judge.*;
 import com.student_management.demo.controller.volunteer.vo.Student.StudentVolunteerRespVO;
 import com.student_management.demo.convert.volunteer.VolunteerConvert;
@@ -45,6 +46,21 @@ public class VolunteerServiceImpl implements VolunteerService {
         }
         return false;
     };
+
+    /**
+     * 根据学生学号查询当前学生是否已在stu_info表中删除
+     *
+     * @param stuNum
+     * @return 查询结果，true表示已删除
+     */
+    public Boolean isDeletedInStuinfo(String stuNum){
+        if (volunteerMapper.isDeletedInStuinfo(stuNum) == null ){
+            return false;
+        } else if (volunteerMapper.isDeletedInStuinfo(stuNum) == 1) {
+            return true;
+        } else
+            return false;
+    }
 
     /**
      * 批量导入服务时长，如果已经存在则强制更新
@@ -126,15 +142,16 @@ public class VolunteerServiceImpl implements VolunteerService {
         List<JudgeVolunteerRespVO> listvo = new ArrayList<>();
         for (VolunteerDO volunteerDO : listdo) {
             JudgeVolunteerRespVO vo = new JudgeVolunteerRespVO();
-            vo.setStuNum(volunteerDO.getStuNum());
+            String stuNum = volunteerDO.getStuNum();
+            vo.setStuNum(stuNum);
             vo.setStuName(volunteerDO.getStuName());
             vo.setTime(volunteerDO.getTime());
             vo.setCreateTime(volunteerDO.getCreateTime());
             vo.setUpdateTime(volunteerDO.getUpdateTime());
-
-            // 从summary表中获取score数据
-            Integer score = volunteerMapper.getVolScoreByStuNum(volunteerDO.getStuNum());
-            vo.setScore(score);
+            // 从stu_info表中获取isDel数据并设置
+            vo.setIsDel(volunteerMapper.isDeletedInStuinfo(stuNum));
+            // 从summary表中获取score数据并设置
+            vo.setScore(volunteerMapper.getVolScoreByStuNum(stuNum));
 
             listvo.add(vo);
         }
@@ -159,6 +176,20 @@ public class VolunteerServiceImpl implements VolunteerService {
         return result;
     }
 
+    public boolean showDeleteResult(String judgeNum, String stuNum) {
+        boolean result = false;
+        System.out.println("学号：" + stuNum);
+        VolunteerScoreReqVO volunteerScore = new VolunteerScoreReqVO();
+        volunteerScore.setJudgeNum(judgeNum);
+        volunteerScore.setStuNum(stuNum);
+        System.out.println(volunteerScore);
+        if (volunteerMapper.updateVolunteerUpdateInfo(volunteerScore) > 0){
+            if (volunteerMapper.deleteByStuNum(stuNum) > 0) {
+                result = true;
+            }
+        }
+        return result;
+    }
 
     //--------------------------------------
     //学生端

@@ -37,10 +37,27 @@ public class GradeServiceImpl implements GradeService{
      * @return 查询结果，true表示已删除
      */
     public Boolean isDeleted(String stuNum){
-        if (gradeMapper.isDeleted(stuNum) == 1 ){
+        if (gradeMapper.isDeleted(stuNum) == null ){
+            return false;
+        } else if (gradeMapper.isDeleted(stuNum) == 1) {
             return true;
-        }
+        } else
         return false;
+    }
+
+    /**
+     * 根据学生学号查询当前学生是否已在stu_info表中删除
+     *
+     * @param stuNum
+     * @return 查询结果，true表示已删除
+     */
+    public Boolean isDeletedInStuinfo(String stuNum){
+        if (gradeMapper.isDeletedInStuinfo(stuNum) == null ){
+            return false;
+        } else if (gradeMapper.isDeletedInStuinfo(stuNum) == 1) {
+            return true;
+        } else
+            return false;
     }
 
     /**
@@ -126,15 +143,16 @@ public class GradeServiceImpl implements GradeService{
         List<JudgeGradeRespVO> listvo = new ArrayList<>();
         for (GradeDO gradeDO : listdo) {
             JudgeGradeRespVO vo = new JudgeGradeRespVO();
-            vo.setStuNum(gradeDO.getStuNum());
+            String stuNum = gradeDO.getStuNum();
+            vo.setStuNum(stuNum);
             vo.setStuName(gradeDO.getStuName());
             vo.setGpa(gradeDO.getGpa());
             vo.setCreateTime(gradeDO.getCreateTime());
             vo.setUpdateTime(gradeDO.getUpdateTime());
-
-            // 从summary表中获取score数据
-            Integer score = gradeMapper.getGpaScoreByStuNum(gradeDO.getStuNum());
-            vo.setScore(score);
+            // 从stu_info表中获取isDel数据并设置
+            vo.setIsDel(gradeMapper.isDeletedInStuinfo(stuNum));
+            // 从summary表中获取score数据并设置
+            vo.setScore(gradeMapper.getGpaScoreByStuNum(stuNum));
 
             listvo.add(vo);
         }
@@ -158,23 +176,24 @@ public class GradeServiceImpl implements GradeService{
         return result;
     }
 
-/*    *//**
+    /**
      * 显示当前删除结果
      *
      * @param
      * @return 删除结果
-     *//*
+     */
     public boolean showDeleteResult(String judgeNum, String stuNum) {
         boolean result = false;
         GradeScoreReqVO gradeScore = new GradeScoreReqVO();
         gradeScore.setJudgeNum(judgeNum);
-        gradeScore.setStuNum(judgeNum);
-        if (gradeMapper.deleteByStuNum(stuNum) > 0 &&
-                gradeMapper.updateGradeUpdateInfo(gradeScore) > 0){
-            result = true;
+        gradeScore.setStuNum(stuNum);
+        if (gradeMapper.updateGradeUpdateInfo(gradeScore) > 0){
+            if (gradeMapper.deleteByStuNum(stuNum) > 0) {
+                result = true;
+            }
         }
         return result;
-    }*/
+    }
     //--------------------------------------
     //学生端
 

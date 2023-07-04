@@ -19,6 +19,8 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
 
     Integer isDeleted(String stuNum);
 
+    Integer isDeletedInStuinfo(String stuNum);
+
     /**
      * 按照学号查询GPA
      * @param stu_num
@@ -61,6 +63,8 @@ public interface GradeMapper extends BaseMapper<GradeDO>{
     Integer getGpaScoreByStuNum(String stuNum);
 
     Integer deleteByStuNum(String stuNum);
+
+//    int updateDeleteInfo(GradeScoreReqVO gradeScore);
 
     /**
      * 更新当前学生gpa打分和updateUserId
