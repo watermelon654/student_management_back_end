@@ -10,6 +10,13 @@
         WHERE stuNum = #{stuNum}
     </select>
 
+    <!--  根据学号查询当前学生在stu_info表中的isDel值  -->
+    <select id="isDeletedInStuinfo" parameterType="java.lang.String" resultType="Integer">
+        SELECT isDel
+        FROM stu_info
+        WHERE num = #{stuNum}
+    </select>
+
     <!-- 上传时更新stu_info表的CreateUserId和updateUserId字段 -->
     <update id="createStuUpdateInfo" parameterType="com.student_management.demo.controller.volunteer.vo.Judge.VolunteerScoreReqVO">
         UPDATE stu_info
@@ -37,6 +44,13 @@
         FROM summary
         WHERE stuNum = #{stuNum}
     </select>
+
+    <!--  根据学号删除学生-->
+    <update id="deleteByStuNum" parameterType="java.lang.String">
+        UPDATE volunteer
+        SET isDel = 1
+        WHERE stuNum = #{stuNum}
+    </update>
 
     <!--  根据学号更新当前学生志愿服务时长打分：更新summary表的vol字段-->
     <update id="updateVolunteerScore" parameterType="com.student_management.demo.controller.volunteer.vo.Judge.VolunteerScoreReqVO">

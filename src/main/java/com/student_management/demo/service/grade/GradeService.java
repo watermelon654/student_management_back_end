@@ -18,6 +18,8 @@ public interface GradeService {
      */
     Boolean isDeleted(String stuNum);
 
+    Boolean isDeletedInStuinfo(String stuNum);
+
     /**
      * 批量导入GPA
      *

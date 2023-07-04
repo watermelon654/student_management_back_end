@@ -78,7 +78,10 @@ public class GradeController {
     ) {
         try {
             if (service.isDeleted(reqVO.getStuNum())) {
-               return CommonResult.error(404, "该学生的信息已删除，请联系学工添加该学生的信息");
+               return CommonResult.error(404, "该学生的信息已不在成绩表中");
+            }
+            if (service.isDeletedInStuinfo(reqVO.getStuNum())) {
+                return CommonResult.error(404, "该学生的信息已不在学工表中，无法进行操作");
             }
 
             // 从http请求获取token，然后获得评委职工号
@@ -91,7 +94,7 @@ public class GradeController {
             if (success) {
                 return CommonResult.success("评分更新成功");
             } else {
-                return CommonResult.error(404, "在学生成绩表中找不到指定的记录，请联系学工添加该学生的信息");
+                return CommonResult.error(404, "评分更新失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,17 +105,15 @@ public class GradeController {
     @PostMapping("/deleteGrade")
     @ApiOperation("根据学号删除信息")
     @PreAuthorize("hasAuthority('/api/grade/deleteGrade')")
-    public CommonResult<String> updateScoreByStuNum(
+    public CommonResult<String> deleteByStuNum(
             @RequestBody String stuNumData,
             HttpServletRequest request
     ) {
         try {
-            System.out.println("需提取的数字：" + stuNumData);
             String stuNum = stuNumData.replace("{\"stuNumData\":\"", "").replaceAll("\"}", "");
-            System.out.println("提取的数字：" + stuNum);
 
             if (service.isDeleted(stuNum)) {
-                return CommonResult.error(404, "该学生的信息已删除");
+                return CommonResult.error(404, "该学生的信息已不在成绩表中");
             }
 
             // 从http请求获取token，然后获得评委职工号

@@ -19,6 +19,8 @@ public interface VolunteerService {
      */
     Boolean isDeleted(String stuNum);
 
+    Boolean isDeletedInStuinfo(String stuNum);
+
     /**
      * 批量导入志愿服务时长
      *
@@ -49,6 +51,8 @@ public interface VolunteerService {
      * @return 打分结果，true表示打分成功，false表示打分失败
      */
     boolean updateResult(VolunteerScoreReqVO volunteerScore);
+
+    boolean showDeleteResult(String judgeNum, String stuNum);
 
 
     //--------------------------------------

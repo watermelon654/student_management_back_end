@@ -46,6 +46,21 @@ public class GradeServiceImpl implements GradeService{
     }
 
     /**
+     * 根据学生学号查询当前学生是否已在stu_info表中删除
+     *
+     * @param stuNum
+     * @return 查询结果，true表示已删除
+     */
+    public Boolean isDeletedInStuinfo(String stuNum){
+        if (gradeMapper.isDeletedInStuinfo(stuNum) == null ){
+            return false;
+        } else if (gradeMapper.isDeletedInStuinfo(stuNum) == 1) {
+            return true;
+        } else
+            return false;
+    }
+
+    /**
      * 批量导入GPA，如果已经存在则强制更新
      *
      * @param importGrade     导入GPA列表
@@ -135,9 +150,7 @@ public class GradeServiceImpl implements GradeService{
             vo.setCreateTime(gradeDO.getCreateTime());
             vo.setUpdateTime(gradeDO.getUpdateTime());
             // 从stu_info表中获取isDel数据并设置
-            assert stuNum != null : "stuNum must not be null";
             vo.setIsDel(gradeMapper.isDeletedInStuinfo(stuNum));
-            System.out.println("_______________" + gradeMapper.isDeletedInStuinfo(stuNum));
             // 从summary表中获取score数据并设置
             vo.setScore(gradeMapper.getGpaScoreByStuNum(stuNum));
 
@@ -171,17 +184,14 @@ public class GradeServiceImpl implements GradeService{
      */
     public boolean showDeleteResult(String judgeNum, String stuNum) {
         boolean result = false;
-        System.out.println("学号：" + stuNum);
         GradeScoreReqVO gradeScore = new GradeScoreReqVO();
         gradeScore.setJudgeNum(judgeNum);
         gradeScore.setStuNum(stuNum);
-        System.out.println(gradeScore);
         if (gradeMapper.updateGradeUpdateInfo(gradeScore) > 0){
             if (gradeMapper.deleteByStuNum(stuNum) > 0) {
                 result = true;
             }
         }
-        System.out.println("gradeMapper.updateGradeUpdateInfo(gradeScore)" + gradeMapper.updateGradeUpdateInfo(gradeScore));
         return result;
     }
     //--------------------------------------
