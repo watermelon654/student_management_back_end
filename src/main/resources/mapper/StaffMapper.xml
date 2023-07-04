@@ -3,7 +3,7 @@
 
 <mapper namespace="com.student_management.demo.mapper.mysql.student.StudentMapper">
     <select id="selectStuffByNum" resultType="com.student_management.demo.mapper.dataobject.staff.StaffDO">
-        SELECT id, num, name, sex, email, passwd FROM stuff WHERE num = #{num}
+        SELECT id, num, name, sex, email, passwd FROM staff_info WHERE num = #{num}
     </select>
 
 

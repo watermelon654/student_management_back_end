@@ -3,7 +3,7 @@
 
 <mapper namespace="com.student_management.demo.mapper.mysql.student.ScienceMapper">
     <insert id="insert" parameterType="com.student_management.demo.mapper.dataobject.science.ScienceDO">
-        INSERT INTO Science(stu_id,stu_num,stu_name,title,director,constitution,level,time,result)
+        INSERT INTO science(stuId,stuNum,stuName,title,director,constitution,level,time,result)
         VALUES (#{stuId},#{stuNum},#{stuName},#{title},#{director},#{constitution},#{level},#{time},#{result})
     </insert>
 </mapper>
