@@ -165,6 +165,11 @@ public class StudentServiceImpl implements StudentService{
             studentMapper.updateIsDel(nums);
             //更新时间
             studentMapper.refreshUpdateTime(nums);
+
+            // 更新summary表
+            summaryMapper.updateIsDel(nums);
+            summaryMapper.refreshUpdateTime(nums);
+
             return CommonResult.success("删除成功!");
         } catch (Exception e) {
             e.printStackTrace();

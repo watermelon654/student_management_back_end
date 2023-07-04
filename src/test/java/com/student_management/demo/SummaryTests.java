@@ -16,7 +16,7 @@ public class SummaryTests {
 
     @Test
     void selectSummaryByStatusNotNull() {
-        List<SummaryDO> list =  summaryMapper.selectListByStatus(true);
+        List<SummaryDO> list =  summaryMapper.selectListByStatus(false);
         Assertions.assertDoesNotThrow(() -> {
             System.out.println("result >>> " + list);
             // 断言查询结果为非空
