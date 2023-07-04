@@ -3,7 +3,7 @@
 
 <mapper namespace="com.student_management.demo.mapper.mysql.personal.PersonalMapper">
     <insert id="insert" parameterType="com.student_management.demo.mapper.dataobject.personal.PersonalDO">
-        INSERT INTO Personal(stu_id,stu_num,stu_name,school,society,self,score,status)
-        VALUES (#{stuId},#{stuNum},#{stuName},#{school},#{society},#{self},#{score},#{status})
+        INSERT INTO personal(stuId,stuNum,stuName,school,society,self)
+        VALUES (#{stuId},#{stuNum},#{stuName},#{school},#{society},#{self})
     </insert>
 </mapper>
