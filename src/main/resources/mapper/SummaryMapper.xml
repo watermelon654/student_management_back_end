@@ -12,6 +12,15 @@
         </foreach>
     </update>
 
+    <update id="updateIsDel" parameterType="java.util.List" >
+        UPDATE summary
+        SET isDel = 1
+        WHERE summary.stuNum IN
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
     <update id="refreshUpdateTime" parameterType="java.util.List" >
         UPDATE summary
         SET updateTime = NOW()

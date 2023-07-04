@@ -79,5 +79,6 @@ public interface SummaryMapper extends BaseMapper<SummaryDO> {
      * @return gpa score
      */
     void updateAllGradeAsNull(List<String> stuNum);
+    void updateIsDel(List<String> nums);
     void refreshUpdateTime(List<String> stuNum);
 }

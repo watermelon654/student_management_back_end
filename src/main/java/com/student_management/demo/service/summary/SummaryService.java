@@ -20,4 +20,5 @@ public interface SummaryService {
     void importInitialRecord(Long stuId, String num, String name);
 
     CommonResult<?> deleteList(List<SummaryDeleteReqVO> reqVOs);
+
 }
